@@ -18,8 +18,7 @@ django
 fastapi
 starlette
 litestar
-uvicorn
-gunicorn
+granian
 
 # Utilities
 colorama

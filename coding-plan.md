@@ -209,7 +209,7 @@ code/
 
 ---
 
-## Phase 6: JSON & Serialization (`code/json_bench/`)
+## Phase 6: JSON & Serialization (`code/json_bench/`) ✓ COMPLETED
 
 ### Test Objects
 
@@ -241,19 +241,19 @@ complex_obj = {
 }
 ```
 
-### 6.1 `serialization.py`
+### 6.1 `serialization.py` ✓
 - `json.dumps()` - simple and complex
 - `orjson.dumps()` - simple and complex
 - `ujson.dumps()` - simple and complex
 - `msgspec.json.encode()` - simple and complex
 
-### 6.2 `deserialization.py`
+### 6.2 `deserialization.py` ✓
 - `json.loads()` - simple and complex
 - `orjson.loads()` - simple and complex
 - `ujson.loads()` - simple and complex
 - `msgspec.json.decode()` - simple and complex
 
-### 6.3 `pydantic_bench.py`
+### 6.3 `pydantic_bench.py` ✓
 - `model_dump_json()`
 - `model_validate_json()`
 - `model_dump()` (to dict)
@@ -261,22 +261,22 @@ complex_obj = {
 
 ---
 
-## Phase 7: Web Frameworks (`code/web_frameworks/`)
+## Phase 7: Web Frameworks (`code/web_frameworks/`) ✓ COMPLETED
 
-### 7.1 Framework Apps
+### 7.1 Framework Apps ✓
 Each returns the same JSON payload from a minimal endpoint:
 
-- `flask_app.py` - Flask with gunicorn
-- `django_app.py` - Django with gunicorn
-- `fastapi_app.py` - FastAPI sync endpoint with uvicorn
-- `starlette_app.py` - Starlette with uvicorn
-- `litestar_app.py` - Falcon with gunicorn
+- `flask_app.py` - Flask with gunicorn ✓
+- `django_app.py` - Django with gunicorn ✓
+- `fastapi_app.py` - FastAPI sync endpoint with uvicorn ✓
+- `starlette_app.py` - Starlette with uvicorn ✓
+- `litestar_app.py` - Litestar with uvicorn ✓
 
-### 7.2 `run_server.py`
+### 7.2 `run_server.py` ✓
 Helper script to start each server on configurable port.
 
-### 7.3 `benchmark_servers.sh`
-Shell script that:
+### 7.3 `benchmark_servers.py` ✓
+Python script that:
 1. Starts each server
 2. Runs `wrk` or `hey` benchmark
 3. Collects results
@@ -285,16 +285,16 @@ Shell script that:
 
 ---
 
-## Phase 8: File I/O (`code/file_io/`)
+## Phase 8: File I/O (`code/file_io/`) ✓ COMPLETED
 
-### 8.1 `basic_ops.py`
+### 8.1 `basic_ops.py` ✓
 - Open and close (no read)
 - Read 1KB file
 - Read 1MB file
 - Write 1KB file
 - Write 1MB file
 
-### 8.2 `pickle_vs_json.py`
+### 8.2 `pickle_vs_json.py` ✓
 - `pickle.dumps()` (complex obj)
 - `pickle.loads()` (complex obj)
 - `json.dumps()` (complex obj)
@@ -302,7 +302,7 @@ Shell script that:
 
 ---
 
-## Phase 9: Database (`code/database/`)
+## Phase 9: Database (`code/database/`) ✓ COMPLETED
 
 ### Test Object
 
@@ -330,67 +330,81 @@ user_data = {
 }
 ```
 
-### 9.1 `sqlite_bench.py`
-- Insert one object (JSON blob)
-- Select by primary key
-- Update one field
-- Delete
-- Select with `json_extract()`
+### 9.1 `sqlite_bench.py` ✓
+- Insert one object (JSON blob) ✓
+- Select by primary key ✓
+- Update one field ✓
+- Delete ✓
+- Select with `json_extract()` ✓
 
-### 9.2 `diskcache_bench.py`
-- `cache.set(key, obj)`
-- `cache.get(key)`
-- `cache.delete(key)`
-- Check key exists
+### 9.2 `diskcache_bench.py` ✓
+- `cache.set(key, obj)` ✓
+- `cache.get(key)` ✓
+- `cache.delete(key)` ✓
+- Check key exists ✓
 
-### 9.3 `mongodb_bench.py`
-- `insert_one()`
-- `find_one()` by `_id`
-- `find_one()` by nested field
-- `update_one()`
-- `delete_one()`
-- **Graceful skip** if MongoDB not running
-
----
-
-## Phase 10: Functions (`code/functions/`)
-
-### 10.1 `function_calls.py`
-- Empty function call
-- Function with 5 arguments
-- Method call on object
-- Lambda call
-- Built-in function (`len()`)
-
-### 10.2 `exceptions.py`
-- `try/except` (no exception raised)
-- `try/except` (exception raised)
-
-### 10.3 `type_checking.py`
-- `isinstance()`
-- `type() == type`
+### 9.3 `mongodb_bench.py` ✓
+- `insert_one()` ✓
+- `find_one()` by `_id` ✓
+- `find_one()` by nested field ✓
+- `update_one()` ✓
+- `delete_one()` ✓
+- **Graceful skip** if MongoDB not running ✓
 
 ---
 
-## Phase 11: Async (`code/async_bench/`)
+## Phase 10: Functions (`code/functions/`) ✓ COMPLETED
 
-### 11.1 `async_overhead.py`
-- `await` already-completed coroutine
-- Create coroutine object (no await)
-- `asyncio.sleep(0)`
-- `asyncio.gather()` on 10 completed coroutines
+### 10.1 `function_calls.py` ✓
+- Empty function call ✓
+- Function with 5 arguments ✓
+- Method call on object ✓
+- Lambda call ✓
+- Built-in function (`len()`) ✓
+
+### 10.2 `exceptions.py` ✓
+- `try/except` (no exception raised) ✓
+- `try/except` (exception raised) ✓
+
+### 10.3 `type_checking.py` ✓
+- `isinstance()` ✓
+- `type() == type` ✓
 
 ---
 
-## Phase 12: Runner (`code/run_all.py`)
+## Phase 11: Async (`code/async_bench/`) ✓ COMPLETED
+
+### 11.1 `async_overhead.py` ✓
+- `await` already-completed coroutine ✓
+- Create coroutine object (no await) ✓
+- `asyncio.sleep(0)` ✓
+- `asyncio.gather()` on 10 completed coroutines ✓
+
+---
+
+## Phase 11b: Import Times (`code/imports/`) ✓ COMPLETED
+
+### 11b.1 `import_times.py` ✓
+Benchmarks run in fresh subprocesses to avoid caching:
+- Built-in modules (sys, os, json, math, time) ✓
+- Standard library (pathlib, dataclasses, typing, asyncio, etc.) ✓
+- Local module (small .py file) ✓
+- Small external package (colorama, diskcache) ✓
+- Rust-based packages (pydantic, orjson, msgspec) ✓
+- Large packages (django, flask, fastapi, starlette, litestar) ✓
+- From import comparison ✓
+
+---
+
+## Phase 12: Runner (`code/run_all.py`) ✓ COMPLETED
 
 Main script that:
-1. Discovers and imports all benchmark modules
-2. Runs each benchmark category
-3. Collects results into unified JSON structure
-4. Displays colored summary table to terminal
-5. Saves results to `results.json`
-6. Optionally generates markdown for report update
+1. Discovers and imports all benchmark modules ✓
+2. Runs each benchmark category ✓
+3. Collects results into unified JSON structure ✓
+4. Displays colored summary table to terminal ✓
+5. Saves results to `results.json` ✓
+6. Optionally generates markdown for report update ✓
 
 ### Output Format
 

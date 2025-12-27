@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(/bin/ls:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(chmod:*)",
+      "Bash(cat:*)"
     ]
   }
 }
