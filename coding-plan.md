@@ -173,20 +173,20 @@ code/
 
 ---
 
-## Phase 4: Collection Access (`code/collections_bench/`)
+## Phase 4: Collection Access (`code/collections_bench/`) ✓ COMPLETED
 
-### 4.1 `access.py`
+### 4.1 `access.py` ✓
 - Dict lookup by key
 - Set membership (`in`)
 - List index access
 - List membership (`in`, 1000 items)
 
-### 4.2 `length.py`
+### 4.2 `length.py` ✓
 - `len()` on list (1000 items)
 - `len()` on dict (1000 items)
 - `len()` on set (1000 items)
 
-### 4.3 `iteration.py`
+### 4.3 `iteration.py` ✓
 - Iterate 1000-item list
 - Iterate 1000-item dict (keys)
 - Iterate `range(1000)`
@@ -194,15 +194,15 @@ code/
 
 ---
 
-## Phase 5: Attributes (`code/attributes/`)
+## Phase 5: Attributes (`code/attributes/`) ✓ COMPLETED
 
-### 5.1 `attribute_access.py`
+### 5.1 `attribute_access.py` ✓
 - Read from regular class
 - Write to regular class
 - Read from `__slots__` class
 - Write to `__slots__` class
 
-### 5.2 `other_ops.py`
+### 5.2 `other_ops.py` ✓
 - Read `@property`
 - `getattr(obj, 'attr')`
 - `hasattr(obj, 'attr')`

@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(/bin/ls:*)"
+      "Bash(/bin/ls:*)",
+      "Bash(python:*)"
     ]
   }
 }
