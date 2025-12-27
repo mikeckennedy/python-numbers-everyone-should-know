@@ -13,9 +13,9 @@
 
 ---
 
-## Phase 1: Setup & Infrastructure
+## Phase 1: Setup & Infrastructure ✓ COMPLETED
 
-### 1.1 Dependencies (`requirements.piptools`)
+### 1.1 Dependencies (`requirements.piptools`) ✓
 
 ```
 # JSON libraries
@@ -46,7 +46,7 @@ colorama
 # wrk or hey - install via homebrew
 ```
 
-### 1.2 Shared Utilities (`code/utils/benchmark.py`)
+### 1.2 Shared Utilities (`code/utils/benchmark.py`) ✓
 
 - Timing functions using `timeit` and `perf_counter_ns`
 - Memory measurement with `sys.getsizeof()` and `tracemalloc`
@@ -55,7 +55,7 @@ colorama
 - Graceful library import with skip functionality
 - Standard test objects (simple_obj, complex_obj, user_data)
 
-### 1.3 Folder Structure
+### 1.3 Folder Structure ✓
 
 ```
 code/
@@ -119,29 +119,29 @@ code/
 
 ---
 
-## Phase 2: Memory Benchmarks (`code/memory/`)
+## Phase 2: Memory Benchmarks (`code/memory/`) ✓ COMPLETED
 
-### 2.1 `empty_process.py`
+### 2.1 `empty_process.py` ✓
 - Measure memory of empty Python process
 - Use `tracemalloc` and/or `resource` module
 
-### 2.2 `strings.py`
+### 2.2 `strings.py` ✓
 - Empty string `""`
 - 1-char string `"a"`
-- 100-char string
+- 10, 100, 1000-char strings
 
-### 2.3 `numbers.py`
+### 2.3 `numbers_mem.py` ✓
 - Small int (0-256, cached)
 - Large int (1000)
-- Very large int (10**100)
+- Very large int (10**20, 10**100)
 - Float
 
-### 2.4 `collections.py`
-- List: empty and 1000 items
-- Dict: empty and 1000 items
-- Set: empty and 1000 items
+### 2.4 `collections_mem.py` ✓
+- List: empty and 10, 100, 1000 items
+- Dict: empty and 10, 100, 1000 items
+- Set: empty and 10, 100, 1000 items
 
-### 2.5 `classes.py`
+### 2.5 `classes.py` ✓
 - Regular class: empty and 5 attributes
 - `__slots__` class: empty and 5 attributes
 - dataclass: 5 attributes
@@ -150,23 +150,26 @@ code/
 
 ---
 
-## Phase 3: Basic Operations (`code/basic_ops/`)
+## Phase 3: Basic Operations (`code/basic_ops/`) ✓ COMPLETED
 
-### 3.1 `arithmetic.py`
+### 3.1 `arithmetic.py` ✓
 - Add two integers
 - Add two floats
 - Multiply two integers
+- Integer/float division
 
-### 3.2 `string_ops.py`
+### 3.2 `string_ops.py` ✓
 - Concatenation (`+`)
 - f-string formatting
 - `.format()` method
 - `%` formatting
+- String join and split
 
-### 3.3 `list_ops.py`
+### 3.3 `list_ops.py` ✓
 - `list.append()`
-- List comprehension (1000 items)
-- Equivalent for-loop (1000 items)
+- List comprehension (10, 100, 1000 items)
+- Equivalent for-loop (10, 100, 1000 items)
+- `list.extend()` and `list.copy()`
 
 ---
 
@@ -265,7 +268,7 @@ Each returns the same JSON payload from a minimal endpoint:
 
 - `flask_app.py` - Flask with gunicorn
 - `django_app.py` - Django with gunicorn
-- `fastapi_app.py` - FastAPI async + sync endpoints with uvicorn
+- `fastapi_app.py` - FastAPI sync endpoint with uvicorn
 - `starlette_app.py` - Starlette with uvicorn
 - `litestar_app.py` - Falcon with gunicorn
 

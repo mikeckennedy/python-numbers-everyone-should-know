@@ -1,0 +1,26 @@
+# Python Numbers Everyone Should Know - Dependencies
+
+# JSON libraries
+orjson
+ujson
+msgspec
+
+# Data validation
+pydantic
+
+# Database/persistence
+diskcache
+pymongo
+
+# Web frameworks
+flask
+django
+fastapi
+starlette
+litestar
+uvicorn
+gunicorn
+
+# Utilities
+colorama
+
