@@ -11,27 +11,27 @@ app = Flask(__name__)
 
 # Standard response payload
 RESPONSE_DATA = {
-    "status": "ok",
-    "message": "Hello from Flask",
-    "data": {
-        "id": 12345,
-        "username": "alice_dev",
-        "email": "alice@example.com",
+    'status': 'ok',
+    'message': 'Hello from Flask',
+    'data': {
+        'id': 12345,
+        'username': 'alice_dev',
+        'email': 'alice@example.com',
     },
 }
 
 
-@app.route("/")
+@app.route('/')
 def index():
     """Root endpoint returning JSON."""
     return jsonify(RESPONSE_DATA)
 
 
-@app.route("/health")
+@app.route('/health')
 def health():
     """Health check endpoint."""
-    return jsonify({"status": "healthy"})
+    return jsonify({'status': 'healthy'})
 
 
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8001, debug=False)
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8001, debug=False)

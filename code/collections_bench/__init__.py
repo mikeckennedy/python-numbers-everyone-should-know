@@ -5,8 +5,7 @@ from .iteration import run_benchmarks as run_iteration_benchmarks
 from .length import run_benchmarks as run_length_benchmarks
 
 __all__ = [
-    "run_access_benchmarks",
-    "run_length_benchmarks",
-    "run_iteration_benchmarks",
+    'run_access_benchmarks',
+    'run_length_benchmarks',
+    'run_iteration_benchmarks',
 ]
-

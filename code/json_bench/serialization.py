@@ -27,112 +27,115 @@ from utils.benchmark import (
     try_import,
 )
 
-CATEGORY = "json_serialization"
+CATEGORY = 'json_serialization'
 
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all JSON serialization benchmarks."""
     results = []
 
-    print_header("JSON Serialization Benchmarks")
+    print_header('JSON Serialization Benchmarks')
 
     # Import optional libraries
-    orjson = try_import("orjson")
-    ujson = try_import("ujson")
-    msgspec = try_import("msgspec")
+    orjson = try_import('orjson')
+    ujson = try_import('ujson')
+    msgspec = try_import('msgspec')
 
     # -------------------------------------------------------------------------
     # stdlib json
     # -------------------------------------------------------------------------
-    print_subheader("stdlib json.dumps()")
+    print_subheader('stdlib json.dumps()')
 
     def json_dumps_simple():
         return json.dumps(SIMPLE_OBJ)
 
     time_ms = time_operation(json_dumps_simple, iterations=5000)
-    results.append(BenchmarkResult("json.dumps() - simple", time_ms, category=CATEGORY))
-    print_result("json.dumps() - simple", time_ms)
+    results.append(BenchmarkResult('json.dumps() - simple', time_ms, category=CATEGORY))
+    print_result('json.dumps() - simple', time_ms)
 
     def json_dumps_complex():
         return json.dumps(COMPLEX_OBJ)
 
     time_ms = time_operation(json_dumps_complex, iterations=5000)
-    results.append(BenchmarkResult("json.dumps() - complex", time_ms, category=CATEGORY))
-    print_result("json.dumps() - complex", time_ms)
+    results.append(BenchmarkResult('json.dumps() - complex', time_ms, category=CATEGORY))
+    print_result('json.dumps() - complex', time_ms)
 
     # With ensure_ascii=False (faster for unicode)
     def json_dumps_complex_no_ascii():
         return json.dumps(COMPLEX_OBJ, ensure_ascii=False)
 
     time_ms = time_operation(json_dumps_complex_no_ascii, iterations=5000)
-    results.append(BenchmarkResult("json.dumps() - complex (no ascii)", time_ms, category=CATEGORY))
-    print_result("json.dumps() - complex (no ascii)", time_ms)
+    results.append(BenchmarkResult('json.dumps() - complex (no ascii)', time_ms, category=CATEGORY))
+    print_result('json.dumps() - complex (no ascii)', time_ms)
 
     # -------------------------------------------------------------------------
     # orjson
     # -------------------------------------------------------------------------
-    print_subheader("orjson.dumps()")
+    print_subheader('orjson.dumps()')
 
     if orjson:
+
         def orjson_dumps_simple():
             return orjson.dumps(SIMPLE_OBJ)
 
         time_ms = time_operation(orjson_dumps_simple, iterations=5000, warmup=500)
-        results.append(BenchmarkResult("orjson.dumps() - simple", time_ms, category=CATEGORY))
-        print_result("orjson.dumps() - simple", time_ms)
+        results.append(BenchmarkResult('orjson.dumps() - simple', time_ms, category=CATEGORY))
+        print_result('orjson.dumps() - simple', time_ms)
 
         def orjson_dumps_complex():
             return orjson.dumps(COMPLEX_OBJ)
 
         time_ms = time_operation(orjson_dumps_complex, iterations=5000, warmup=500)
-        results.append(BenchmarkResult("orjson.dumps() - complex", time_ms, category=CATEGORY))
-        print_result("orjson.dumps() - complex", time_ms)
+        results.append(BenchmarkResult('orjson.dumps() - complex', time_ms, category=CATEGORY))
+        print_result('orjson.dumps() - complex', time_ms)
     else:
-        print_skip_message("orjson")
+        print_skip_message('orjson')
 
     # -------------------------------------------------------------------------
     # ujson
     # -------------------------------------------------------------------------
-    print_subheader("ujson.dumps()")
+    print_subheader('ujson.dumps()')
 
     if ujson:
+
         def ujson_dumps_simple():
             return ujson.dumps(SIMPLE_OBJ)
 
         time_ms = time_operation(ujson_dumps_simple, iterations=5000)
-        results.append(BenchmarkResult("ujson.dumps() - simple", time_ms, category=CATEGORY))
-        print_result("ujson.dumps() - simple", time_ms)
+        results.append(BenchmarkResult('ujson.dumps() - simple', time_ms, category=CATEGORY))
+        print_result('ujson.dumps() - simple', time_ms)
 
         def ujson_dumps_complex():
             return ujson.dumps(COMPLEX_OBJ)
 
         time_ms = time_operation(ujson_dumps_complex, iterations=5000)
-        results.append(BenchmarkResult("ujson.dumps() - complex", time_ms, category=CATEGORY))
-        print_result("ujson.dumps() - complex", time_ms)
+        results.append(BenchmarkResult('ujson.dumps() - complex', time_ms, category=CATEGORY))
+        print_result('ujson.dumps() - complex', time_ms)
     else:
-        print_skip_message("ujson")
+        print_skip_message('ujson')
 
     # -------------------------------------------------------------------------
     # msgspec
     # -------------------------------------------------------------------------
-    print_subheader("msgspec.json.encode()")
+    print_subheader('msgspec.json.encode()')
 
     if msgspec:
+
         def msgspec_encode_simple():
             return msgspec.json.encode(SIMPLE_OBJ)
 
         time_ms = time_operation(msgspec_encode_simple, iterations=5000)
-        results.append(BenchmarkResult("msgspec.json.encode() - simple", time_ms, category=CATEGORY))
-        print_result("msgspec.json.encode() - simple", time_ms)
+        results.append(BenchmarkResult('msgspec.json.encode() - simple', time_ms, category=CATEGORY))
+        print_result('msgspec.json.encode() - simple', time_ms)
 
         def msgspec_encode_complex():
             return msgspec.json.encode(COMPLEX_OBJ)
 
         time_ms = time_operation(msgspec_encode_complex, iterations=5000)
-        results.append(BenchmarkResult("msgspec.json.encode() - complex", time_ms, category=CATEGORY))
-        print_result("msgspec.json.encode() - complex", time_ms)
+        results.append(BenchmarkResult('msgspec.json.encode() - complex', time_ms, category=CATEGORY))
+        print_result('msgspec.json.encode() - complex', time_ms)
     else:
-        print_skip_message("msgspec")
+        print_skip_message('msgspec')
 
     return results
 
@@ -143,10 +146,10 @@ def main():
     output = collect_results(CATEGORY, results)
 
     print()
-    print(f"Total benchmarks: {len(results)}")
+    print(f'Total benchmarks: {len(results)}')
 
     return output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -23,7 +23,7 @@ from utils.benchmark import (
     time_operation,
 )
 
-CATEGORY = "functions_exceptions"
+CATEGORY = 'functions_exceptions'
 
 
 # =============================================================================
@@ -38,16 +38,17 @@ def no_exception():
 
 def raises_value_error():
     """Function that raises ValueError."""
-    raise ValueError("test error")
+    raise ValueError('test error')
 
 
 def raises_custom_error():
     """Function that raises custom exception."""
-    raise CustomError("test error")
+    raise CustomError('test error')
 
 
 class CustomError(Exception):
     """Custom exception for benchmarking."""
+
     pass
 
 
@@ -55,20 +56,20 @@ def run_benchmarks() -> list[BenchmarkResult]:
     """Run all exception handling benchmarks."""
     results = []
 
-    print_header("Exception Handling Benchmarks")
+    print_header('Exception Handling Benchmarks')
 
     # -------------------------------------------------------------------------
     # Try/Except Overhead (No Exception)
     # -------------------------------------------------------------------------
-    print_subheader("Try/Except Overhead (No Exception)")
+    print_subheader('Try/Except Overhead (No Exception)')
 
     def no_try_except():
         x = no_exception()
         return x
 
     time_ms = time_operation(no_try_except, iterations=100000)
-    results.append(BenchmarkResult("function call (no try/except)", time_ms, category=CATEGORY))
-    print_result("function call (no try/except)", time_ms)
+    results.append(BenchmarkResult('function call (no try/except)', time_ms, category=CATEGORY))
+    print_result('function call (no try/except)', time_ms)
 
     def with_try_except():
         try:
@@ -78,8 +79,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(with_try_except, iterations=100000)
-    results.append(BenchmarkResult("try/except (no exception raised)", time_ms, category=CATEGORY))
-    print_result("try/except (no exception raised)", time_ms)
+    results.append(BenchmarkResult('try/except (no exception raised)', time_ms, category=CATEGORY))
+    print_result('try/except (no exception raised)', time_ms)
 
     def with_try_except_specific():
         try:
@@ -89,8 +90,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(with_try_except_specific, iterations=100000)
-    results.append(BenchmarkResult("try/except ValueError (not raised)", time_ms, category=CATEGORY))
-    print_result("try/except ValueError (not raised)", time_ms)
+    results.append(BenchmarkResult('try/except ValueError (not raised)', time_ms, category=CATEGORY))
+    print_result('try/except ValueError (not raised)', time_ms)
 
     def with_try_except_finally():
         try:
@@ -102,8 +103,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(with_try_except_finally, iterations=100000)
-    results.append(BenchmarkResult("try/except/finally (no exception)", time_ms, category=CATEGORY))
-    print_result("try/except/finally (no exception)", time_ms)
+    results.append(BenchmarkResult('try/except/finally (no exception)', time_ms, category=CATEGORY))
+    print_result('try/except/finally (no exception)', time_ms)
 
     def with_multiple_except():
         try:
@@ -117,13 +118,13 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(with_multiple_except, iterations=100000)
-    results.append(BenchmarkResult("try with 3 except clauses (not raised)", time_ms, category=CATEGORY))
-    print_result("try with 3 except clauses (not raised)", time_ms)
+    results.append(BenchmarkResult('try with 3 except clauses (not raised)', time_ms, category=CATEGORY))
+    print_result('try with 3 except clauses (not raised)', time_ms)
 
     # -------------------------------------------------------------------------
     # Try/Except (Exception Raised)
     # -------------------------------------------------------------------------
-    print_subheader("Try/Except (Exception Raised)")
+    print_subheader('Try/Except (Exception Raised)')
 
     def catch_value_error():
         try:
@@ -132,8 +133,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(catch_value_error, iterations=50000)
-    results.append(BenchmarkResult("raise + catch ValueError", time_ms, category=CATEGORY))
-    print_result("raise + catch ValueError", time_ms)
+    results.append(BenchmarkResult('raise + catch ValueError', time_ms, category=CATEGORY))
+    print_result('raise + catch ValueError', time_ms)
 
     def catch_with_exception():
         try:
@@ -142,8 +143,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(catch_with_exception, iterations=50000)
-    results.append(BenchmarkResult("raise ValueError, catch Exception", time_ms, category=CATEGORY))
-    print_result("raise ValueError, catch Exception", time_ms)
+    results.append(BenchmarkResult('raise ValueError, catch Exception', time_ms, category=CATEGORY))
+    print_result('raise ValueError, catch Exception', time_ms)
 
     def catch_custom_error():
         try:
@@ -152,8 +153,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(catch_custom_error, iterations=50000)
-    results.append(BenchmarkResult("raise + catch custom exception", time_ms, category=CATEGORY))
-    print_result("raise + catch custom exception", time_ms)
+    results.append(BenchmarkResult('raise + catch custom exception', time_ms, category=CATEGORY))
+    print_result('raise + catch custom exception', time_ms)
 
     def catch_with_binding():
         try:
@@ -174,42 +175,42 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(catch_with_finally, iterations=50000)
-    results.append(BenchmarkResult("raise + catch + finally", time_ms, category=CATEGORY))
-    print_result("raise + catch + finally", time_ms)
+    results.append(BenchmarkResult('raise + catch + finally', time_ms, category=CATEGORY))
+    print_result('raise + catch + finally', time_ms)
 
     # -------------------------------------------------------------------------
     # Exception Creation
     # -------------------------------------------------------------------------
-    print_subheader("Exception Creation")
+    print_subheader('Exception Creation')
 
     def create_value_error():
-        return ValueError("test error")
+        return ValueError('test error')
 
     time_ms = time_operation(create_value_error, iterations=100000)
-    results.append(BenchmarkResult("create ValueError", time_ms, category=CATEGORY))
-    print_result("create ValueError", time_ms)
+    results.append(BenchmarkResult('create ValueError', time_ms, category=CATEGORY))
+    print_result('create ValueError', time_ms)
 
     def create_custom_error():
-        return CustomError("test error")
+        return CustomError('test error')
 
     time_ms = time_operation(create_custom_error, iterations=100000)
-    results.append(BenchmarkResult("create custom exception", time_ms, category=CATEGORY))
-    print_result("create custom exception", time_ms)
+    results.append(BenchmarkResult('create custom exception', time_ms, category=CATEGORY))
+    print_result('create custom exception', time_ms)
 
     def create_exception_with_traceback():
         try:
-            raise ValueError("test")
+            raise ValueError('test')
         except ValueError as e:
             return e
 
     time_ms = time_operation(create_exception_with_traceback, iterations=50000)
-    results.append(BenchmarkResult("exception with traceback", time_ms, category=CATEGORY))
-    print_result("exception with traceback", time_ms)
+    results.append(BenchmarkResult('exception with traceback', time_ms, category=CATEGORY))
+    print_result('exception with traceback', time_ms)
 
     # -------------------------------------------------------------------------
     # Re-raise Patterns
     # -------------------------------------------------------------------------
-    print_subheader("Re-raise Patterns")
+    print_subheader('Re-raise Patterns')
 
     def catch_and_reraise():
         try:
@@ -221,21 +222,21 @@ def run_benchmarks() -> list[BenchmarkResult]:
             pass
 
     time_ms = time_operation(catch_and_reraise, iterations=50000)
-    results.append(BenchmarkResult("catch and re-raise (bare raise)", time_ms, category=CATEGORY))
-    print_result("catch and re-raise (bare raise)", time_ms)
+    results.append(BenchmarkResult('catch and re-raise (bare raise)', time_ms, category=CATEGORY))
+    print_result('catch and re-raise (bare raise)', time_ms)
 
     def catch_wrap_reraise():
         try:
             try:
                 raises_value_error()
             except ValueError as e:
-                raise RuntimeError("wrapped") from e
+                raise RuntimeError('wrapped') from e
         except RuntimeError:
             pass
 
     time_ms = time_operation(catch_wrap_reraise, iterations=50000)
-    results.append(BenchmarkResult("catch, wrap, re-raise (from e)", time_ms, category=CATEGORY))
-    print_result("catch, wrap, re-raise (from e)", time_ms)
+    results.append(BenchmarkResult('catch, wrap, re-raise (from e)', time_ms, category=CATEGORY))
+    print_result('catch, wrap, re-raise (from e)', time_ms)
 
     return results
 
@@ -246,10 +247,10 @@ def main():
     output = collect_results(CATEGORY, results)
 
     print()
-    print(f"Total benchmarks: {len(results)}")
+    print(f'Total benchmarks: {len(results)}')
 
     return output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

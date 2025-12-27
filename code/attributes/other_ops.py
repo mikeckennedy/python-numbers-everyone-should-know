@@ -21,7 +21,7 @@ from utils.benchmark import (
     time_operation,
 )
 
-CATEGORY = "attribute_other_ops"
+CATEGORY = 'attribute_other_ops'
 
 
 # =============================================================================
@@ -71,7 +71,7 @@ class SimpleClass:
 class ClassWithSlots:
     """Slots class for getattr/hasattr comparison."""
 
-    __slots__ = ("a", "b", "c", "d", "e")
+    __slots__ = ('a', 'b', 'c', 'd', 'e')
 
     def __init__(self):
         self.a = 1
@@ -85,7 +85,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     """Run all other attribute operation benchmarks."""
     results = []
 
-    print_header("Other Attribute Operations")
+    print_header('Other Attribute Operations')
 
     # Create test instances
     prop_obj = ClassWithProperty(42)
@@ -95,65 +95,65 @@ def run_benchmarks() -> list[BenchmarkResult]:
     # -------------------------------------------------------------------------
     # @property
     # -------------------------------------------------------------------------
-    print_subheader("@property Access")
+    print_subheader('@property Access')
 
     def read_property():
         return prop_obj.value
 
     time_ms = time_operation(read_property, iterations=10000)
-    results.append(BenchmarkResult("@property: read", time_ms, category=CATEGORY))
-    print_result("@property: read", time_ms)
+    results.append(BenchmarkResult('@property: read', time_ms, category=CATEGORY))
+    print_result('@property: read', time_ms)
 
     def write_property():
         prop_obj.value = 100
 
     time_ms = time_operation(write_property, iterations=10000)
-    results.append(BenchmarkResult("@property: write (setter)", time_ms, category=CATEGORY))
-    print_result("@property: write (setter)", time_ms)
+    results.append(BenchmarkResult('@property: write (setter)', time_ms, category=CATEGORY))
+    print_result('@property: write (setter)', time_ms)
 
     def read_computed_property():
         return prop_obj.computed
 
     time_ms = time_operation(read_computed_property, iterations=10000)
-    results.append(BenchmarkResult("@property: computed", time_ms, category=CATEGORY))
-    print_result("@property: computed", time_ms)
+    results.append(BenchmarkResult('@property: computed', time_ms, category=CATEGORY))
+    print_result('@property: computed', time_ms)
 
     def read_cached_property():
         return prop_obj.cached_property_manual
 
     time_ms = time_operation(read_cached_property, iterations=10000)
-    results.append(BenchmarkResult("@property: cached (manual)", time_ms, category=CATEGORY))
-    print_result("@property: cached (manual)", time_ms)
+    results.append(BenchmarkResult('@property: cached (manual)', time_ms, category=CATEGORY))
+    print_result('@property: cached (manual)', time_ms)
 
     # Compare to direct attribute access
     def read_direct():
         return prop_obj._value
 
     time_ms = time_operation(read_direct, iterations=10000)
-    results.append(BenchmarkResult("direct attr (comparison)", time_ms, category=CATEGORY))
-    print_result("direct attr (comparison)", time_ms)
+    results.append(BenchmarkResult('direct attr (comparison)', time_ms, category=CATEGORY))
+    print_result('direct attr (comparison)', time_ms)
 
     # -------------------------------------------------------------------------
     # getattr()
     # -------------------------------------------------------------------------
-    print_subheader("getattr()")
+    print_subheader('getattr()')
 
     def getattr_regular():
-        return getattr(simple_obj, "a")
+        return getattr(simple_obj, 'a')
 
     time_ms = time_operation(getattr_regular, iterations=10000)
     results.append(BenchmarkResult("getattr(obj, 'attr')", time_ms, category=CATEGORY))
     print_result("getattr(obj, 'attr')", time_ms)
 
     def getattr_slots():
-        return getattr(slots_obj, "a")
+        return getattr(slots_obj, 'a')
 
     time_ms = time_operation(getattr_slots, iterations=10000)
     results.append(BenchmarkResult("getattr(slots_obj, 'attr')", time_ms, category=CATEGORY))
     print_result("getattr(slots_obj, 'attr')", time_ms)
 
     def getattr_with_default():
-        return getattr(simple_obj, "missing", None)
+        return getattr(simple_obj, 'missing', None)
 
     time_ms = time_operation(getattr_with_default, iterations=10000)
     results.append(BenchmarkResult("getattr(obj, 'missing', default)", time_ms, category=CATEGORY))
@@ -164,37 +164,37 @@ def run_benchmarks() -> list[BenchmarkResult]:
         return simple_obj.a
 
     time_ms = time_operation(direct_access, iterations=10000)
-    results.append(BenchmarkResult("obj.attr (comparison)", time_ms, category=CATEGORY))
-    print_result("obj.attr (comparison)", time_ms)
+    results.append(BenchmarkResult('obj.attr (comparison)', time_ms, category=CATEGORY))
+    print_result('obj.attr (comparison)', time_ms)
 
     # -------------------------------------------------------------------------
     # hasattr()
     # -------------------------------------------------------------------------
-    print_subheader("hasattr()")
+    print_subheader('hasattr()')
 
     def hasattr_existing():
-        return hasattr(simple_obj, "a")
+        return hasattr(simple_obj, 'a')
 
     time_ms = time_operation(hasattr_existing, iterations=10000)
     results.append(BenchmarkResult("hasattr(obj, 'existing')", time_ms, category=CATEGORY))
     print_result("hasattr(obj, 'existing')", time_ms)
 
     def hasattr_missing():
-        return hasattr(simple_obj, "missing")
+        return hasattr(simple_obj, 'missing')
 
     time_ms = time_operation(hasattr_missing, iterations=10000)
     results.append(BenchmarkResult("hasattr(obj, 'missing')", time_ms, category=CATEGORY))
     print_result("hasattr(obj, 'missing')", time_ms)
 
     def hasattr_slots_existing():
-        return hasattr(slots_obj, "a")
+        return hasattr(slots_obj, 'a')
 
     time_ms = time_operation(hasattr_slots_existing, iterations=10000)
     results.append(BenchmarkResult("hasattr(slots_obj, 'existing')", time_ms, category=CATEGORY))
     print_result("hasattr(slots_obj, 'existing')", time_ms)
 
     def hasattr_slots_missing():
-        return hasattr(slots_obj, "missing")
+        return hasattr(slots_obj, 'missing')
 
     time_ms = time_operation(hasattr_slots_missing, iterations=10000)
     results.append(BenchmarkResult("hasattr(slots_obj, 'missing')", time_ms, category=CATEGORY))
@@ -203,17 +203,17 @@ def run_benchmarks() -> list[BenchmarkResult]:
     # -------------------------------------------------------------------------
     # setattr()
     # -------------------------------------------------------------------------
-    print_subheader("setattr()")
+    print_subheader('setattr()')
 
     def setattr_regular():
-        setattr(simple_obj, "a", 100)
+        setattr(simple_obj, 'a', 100)
 
     time_ms = time_operation(setattr_regular, iterations=10000)
     results.append(BenchmarkResult("setattr(obj, 'attr', val)", time_ms, category=CATEGORY))
     print_result("setattr(obj, 'attr', val)", time_ms)
 
     def setattr_slots():
-        setattr(slots_obj, "a", 100)
+        setattr(slots_obj, 'a', 100)
 
     time_ms = time_operation(setattr_slots, iterations=10000)
     results.append(BenchmarkResult("setattr(slots_obj, 'attr', val)", time_ms, category=CATEGORY))
@@ -224,8 +224,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
         simple_obj.a = 100
 
     time_ms = time_operation(direct_assign, iterations=10000)
-    results.append(BenchmarkResult("obj.attr = val (comparison)", time_ms, category=CATEGORY))
-    print_result("obj.attr = val (comparison)", time_ms)
+    results.append(BenchmarkResult('obj.attr = val (comparison)', time_ms, category=CATEGORY))
+    print_result('obj.attr = val (comparison)', time_ms)
 
     return results
 
@@ -236,10 +236,10 @@ def main():
     output = collect_results(CATEGORY, results)
 
     print()
-    print(f"Total benchmarks: {len(results)}")
+    print(f'Total benchmarks: {len(results)}')
 
     return output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

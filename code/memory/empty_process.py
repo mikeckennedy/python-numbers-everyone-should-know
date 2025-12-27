@@ -25,7 +25,7 @@ def measure_process_memory_mb() -> float:
     """
     usage = resource.getrusage(resource.RUSAGE_SELF)
     # ru_maxrss is in bytes on macOS, kilobytes on Linux
-    if sys.platform == "darwin":
+    if sys.platform == 'darwin':
         return usage.ru_maxrss / (1024 * 1024)
     else:
         return usage.ru_maxrss / 1024
@@ -33,27 +33,27 @@ def measure_process_memory_mb() -> float:
 
 def run_benchmarks() -> dict:
     """Run empty process memory benchmark."""
-    print_header("Empty Python Process Memory")
+    print_header('Empty Python Process Memory')
 
     memory_mb = measure_process_memory_mb()
 
-    print_result("Python process memory", memory_mb, unit="MB")
+    print_result('Python process memory', memory_mb, unit='MB')
 
     result = MemoryResult(
-        name="empty_process",
+        name='empty_process',
         value=memory_mb,
-        unit="MB",
-        category="memory",
+        unit='MB',
+        category='memory',
     )
 
     return {
-        "category": "memory",
-        "section": "empty_process",
-        "results": [result.to_dict()],
+        'category': 'memory',
+        'section': 'empty_process',
+        'results': [result.to_dict()],
     }
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     results = run_benchmarks()
     print()
     print(json.dumps(results, indent=2))

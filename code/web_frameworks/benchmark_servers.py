@@ -49,11 +49,11 @@ class ServerConfig:
 
 
 SERVERS = [
-    ServerConfig(name="flask", module="flask_app:app", interface="wsgi"),
-    ServerConfig(name="django", module="django_app:application", interface="wsgi"),
-    ServerConfig(name="fastapi", module="fastapi_app:app", interface="asgi"),
-    ServerConfig(name="starlette", module="starlette_app:app", interface="asgi"),
-    ServerConfig(name="litestar", module="litestar_app:app", interface="asgi"),
+    ServerConfig(name='flask', module='flask_app:app', interface='wsgi'),
+    ServerConfig(name='django', module='django_app:application', interface='wsgi'),
+    ServerConfig(name='fastapi', module='fastapi_app:app', interface='asgi'),
+    ServerConfig(name='starlette', module='starlette_app:app', interface='asgi'),
+    ServerConfig(name='litestar', module='litestar_app:app', interface='asgi'),
 ]
 
 
@@ -70,12 +70,16 @@ class BenchmarkResult:
 def get_granian_command(server: ServerConfig, port: int, workers: int) -> list[str]:
     """Build granian command for a server."""
     return [
-        "granian",
-        "--interface", server.interface,
-        "--host", "127.0.0.1",
-        "--port", str(port),
-        "--workers", str(workers),
-        "--no-ws",  # Disable websockets for simpler benchmarking
+        'granian',
+        '--interface',
+        server.interface,
+        '--host',
+        '127.0.0.1',
+        '--port',
+        str(port),
+        '--workers',
+        str(workers),
+        '--no-ws',  # Disable websockets for simpler benchmarking
         server.module,
     ]
 
@@ -92,7 +96,7 @@ def wait_for_server(port: int, timeout: float = 15.0) -> bool:
     start = time.time()
     while time.time() - start < timeout:
         try:
-            with socket.create_connection(("127.0.0.1", port), timeout=1):
+            with socket.create_connection(('127.0.0.1', port), timeout=1):
                 return True
         except (ConnectionRefusedError, socket.timeout, OSError):
             time.sleep(0.2)
@@ -101,18 +105,18 @@ def wait_for_server(port: int, timeout: float = 15.0) -> bool:
 
 def run_wrk(port: int, duration: int, connections: int, threads: int) -> BenchmarkResult | None:
     """Run wrk benchmark and parse results."""
-    url = f"http://127.0.0.1:{port}/"
+    url = f'http://127.0.0.1:{port}/'
 
     # Warmup
     subprocess.run(
-        ["wrk", "-t1", "-c10", "-d2s", url],
+        ['wrk', '-t1', '-c10', '-d2s', url],
         capture_output=True,
         text=True,
     )
 
     # Actual benchmark
     result = subprocess.run(
-        ["wrk", f"-t{threads}", f"-c{connections}", f"-d{duration}s", "--latency", url],
+        ['wrk', f'-t{threads}', f'-c{connections}', f'-d{duration}s', '--latency', url],
         capture_output=True,
         text=True,
     )
@@ -121,15 +125,15 @@ def run_wrk(port: int, duration: int, connections: int, threads: int) -> Benchma
     print(output)
 
     # Parse results
-    rps_match = re.search(r"Requests/sec:\s+([\d.]+)", output)
-    latency_match = re.search(r"Latency\s+([\d.]+\w+)", output)
-    p99_match = re.search(r"99%\s+([\d.]+\w+)", output)
-    transfer_match = re.search(r"Transfer/sec:\s+([\d.]+\w+)", output)
-    errors_match = re.search(r"Socket errors:.*?(\d+) total", output)
+    rps_match = re.search(r'Requests/sec:\s+([\d.]+)', output)
+    latency_match = re.search(r'Latency\s+([\d.]+\w+)', output)
+    p99_match = re.search(r'99%\s+([\d.]+\w+)', output)
+    transfer_match = re.search(r'Transfer/sec:\s+([\d.]+\w+)', output)
+    errors_match = re.search(r'Socket errors:.*?(\d+) total', output)
 
     if rps_match and latency_match:
         return BenchmarkResult(
-            name="",
+            name='',
             requests_per_sec=float(rps_match.group(1)),
             latency_avg=latency_match.group(1),
             latency_p99=p99_match.group(1) if p99_match else None,
@@ -141,18 +145,18 @@ def run_wrk(port: int, duration: int, connections: int, threads: int) -> Benchma
 
 def run_hey(port: int, duration: int, connections: int) -> BenchmarkResult | None:
     """Run hey benchmark and parse results."""
-    url = f"http://127.0.0.1:{port}/"
+    url = f'http://127.0.0.1:{port}/'
 
     # Warmup
     subprocess.run(
-        ["hey", "-n", "1000", "-c", "10", url],
+        ['hey', '-n', '1000', '-c', '10', url],
         capture_output=True,
         text=True,
     )
 
     # Actual benchmark
     result = subprocess.run(
-        ["hey", "-z", f"{duration}s", "-c", str(connections), url],
+        ['hey', '-z', f'{duration}s', '-c', str(connections), url],
         capture_output=True,
         text=True,
     )
@@ -161,17 +165,17 @@ def run_hey(port: int, duration: int, connections: int) -> BenchmarkResult | Non
     print(output)
 
     # Parse results
-    rps_match = re.search(r"Requests/sec:\s+([\d.]+)", output)
-    latency_match = re.search(r"Average:\s+([\d.]+)", output)
-    p99_match = re.search(r"99% in ([\d.]+) secs", output)
+    rps_match = re.search(r'Requests/sec:\s+([\d.]+)', output)
+    latency_match = re.search(r'Average:\s+([\d.]+)', output)
+    p99_match = re.search(r'99% in ([\d.]+) secs', output)
 
     if rps_match and latency_match:
         latency_ms = float(latency_match.group(1)) * 1000
         return BenchmarkResult(
-            name="",
+            name='',
             requests_per_sec=float(rps_match.group(1)),
-            latency_avg=f"{latency_ms:.2f}ms",
-            latency_p99=f"{float(p99_match.group(1)) * 1000:.2f}ms" if p99_match else None,
+            latency_avg=f'{latency_ms:.2f}ms',
+            latency_p99=f'{float(p99_match.group(1)) * 1000:.2f}ms' if p99_match else None,
         )
     return None
 
@@ -192,7 +196,7 @@ def kill_server(proc: subprocess.Popen):
 
 
 def run_benchmarks(
-    tool: str = "wrk",
+    tool: str = 'wrk',
     duration: int = 10,
     connections: int = 100,
     threads: int = 4,
@@ -203,12 +207,12 @@ def run_benchmarks(
     """Run benchmarks for all servers."""
     results: dict[str, BenchmarkResult] = {}
 
-    print_header("Web Framework Benchmark Suite")
-    print(f"Server: Granian (all frameworks)")
-    print(f"Workers: {workers}")
-    print(f"Tool: {tool}")
-    print(f"Duration: {duration}s")
-    print(f"Connections: {connections}")
+    print_header('Web Framework Benchmark Suite')
+    print('Server: Granian (all frameworks)')
+    print(f'Workers: {workers}')
+    print(f'Tool: {tool}')
+    print(f'Duration: {duration}s')
+    print(f'Connections: {connections}')
     print()
 
     # Filter servers if specific frameworks requested
@@ -217,14 +221,14 @@ def run_benchmarks(
         servers = [s for s in SERVERS if s.name in frameworks]
 
     for server in servers:
-        print_subheader(f"{server.name} ({server.interface.upper()})")
+        print_subheader(f'{server.name} ({server.interface.upper()})')
 
         # Build command
         cmd = get_granian_command(server, port, workers)
 
         # Start server
-        print(f"Starting {server.name} with Granian...")
-        print(f"  Command: {' '.join(cmd)}")
+        print(f'Starting {server.name} with Granian...')
+        print(f'  Command: {" ".join(cmd)}')
         proc = subprocess.Popen(
             cmd,
             cwd=SCRIPT_DIR,
@@ -236,15 +240,15 @@ def run_benchmarks(
         try:
             # Wait for server
             if not wait_for_server(port):
-                print(f"Error: {server.name} failed to start")
+                print(f'Error: {server.name} failed to start')
                 kill_server(proc)
                 continue
 
-            print(f"{server.name} ready, running benchmark...")
+            print(f'{server.name} ready, running benchmark...')
             print()
 
             # Run benchmark
-            if tool == "wrk":
+            if tool == 'wrk':
                 result = run_wrk(port, duration, connections, threads)
             else:
                 result = run_hey(port, duration, connections)
@@ -255,11 +259,11 @@ def run_benchmarks(
 
         finally:
             # Stop server
-            print(f"\nStopping {server.name}...")
+            print(f'\nStopping {server.name}...')
             kill_server(proc)
             # Also kill any orphaned granian workers
             subprocess.run(
-                ["pkill", "-f", f"granian.*{server.module}"],
+                ['pkill', '-f', f'granian.*{server.module}'],
                 capture_output=True,
             )
             time.sleep(1)
@@ -269,101 +273,99 @@ def run_benchmarks(
 
 def print_summary(results: dict[str, BenchmarkResult]):
     """Print benchmark summary."""
-    print_header("Summary")
+    print_header('Summary')
 
     # Sort by requests/sec
     sorted_results = sorted(results.values(), key=lambda r: r.requests_per_sec, reverse=True)
 
-    print(f"{'Framework':<12} {'Req/sec':>12} {'Latency':>12} {'p99':>12}")
-    print("-" * 50)
+    print(f'{"Framework":<12} {"Req/sec":>12} {"Latency":>12} {"p99":>12}')
+    print('-' * 50)
 
     for r in sorted_results:
-        p99 = r.latency_p99 or "N/A"
-        print(f"{r.name:<12} {r.requests_per_sec:>12.2f} {r.latency_avg:>12} {p99:>12}")
+        p99 = r.latency_p99 or 'N/A'
+        print(f'{r.name:<12} {r.requests_per_sec:>12.2f} {r.latency_avg:>12} {p99:>12}')
 
 
 def output_json(results: dict[str, BenchmarkResult]) -> dict:
     """Output results as JSON."""
     return {
         name: {
-            "requests_per_sec": r.requests_per_sec,
-            "latency_avg": r.latency_avg,
-            "latency_p99": r.latency_p99,
-            "errors": r.errors,
+            'requests_per_sec': r.requests_per_sec,
+            'latency_avg': r.latency_avg,
+            'latency_p99': r.latency_p99,
+            'errors': r.errors,
         }
         for name, r in results.items()
     }
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Benchmark web framework servers (all running on Granian)"
+    parser = argparse.ArgumentParser(description='Benchmark web framework servers (all running on Granian)')
+    parser.add_argument(
+        '--tool',
+        '-t',
+        choices=['wrk', 'hey'],
+        default='wrk',
+        help='Benchmark tool to use (default: wrk)',
     )
     parser.add_argument(
-        "--tool",
-        "-t",
-        choices=["wrk", "hey"],
-        default="wrk",
-        help="Benchmark tool to use (default: wrk)",
-    )
-    parser.add_argument(
-        "--duration",
-        "-d",
+        '--duration',
+        '-d',
         type=int,
         default=10,
-        help="Benchmark duration in seconds (default: 10)",
+        help='Benchmark duration in seconds (default: 10)',
     )
     parser.add_argument(
-        "--connections",
-        "-c",
+        '--connections',
+        '-c',
         type=int,
         default=100,
-        help="Number of concurrent connections (default: 100)",
+        help='Number of concurrent connections (default: 100)',
     )
     parser.add_argument(
-        "--threads",
+        '--threads',
         type=int,
         default=4,
-        help="Number of threads for wrk (default: 4)",
+        help='Number of threads for wrk (default: 4)',
     )
     parser.add_argument(
-        "--workers",
-        "-w",
+        '--workers',
+        '-w',
         type=int,
         default=DEFAULT_WORKERS,
-        help=f"Number of Granian workers (default: {DEFAULT_WORKERS})",
+        help=f'Number of Granian workers (default: {DEFAULT_WORKERS})',
     )
     parser.add_argument(
-        "--port",
-        "-p",
+        '--port',
+        '-p',
         type=int,
         default=DEFAULT_PORT,
-        help=f"Port to run servers on (default: {DEFAULT_PORT})",
+        help=f'Port to run servers on (default: {DEFAULT_PORT})',
     )
     parser.add_argument(
-        "--frameworks",
-        "-f",
-        nargs="+",
-        choices=["flask", "django", "fastapi", "starlette", "litestar"],
-        help="Specific frameworks to benchmark (default: all)",
+        '--frameworks',
+        '-f',
+        nargs='+',
+        choices=['flask', 'django', 'fastapi', 'starlette', 'litestar'],
+        help='Specific frameworks to benchmark (default: all)',
     )
     parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output results as JSON",
+        '--json',
+        action='store_true',
+        help='Output results as JSON',
     )
 
     args = parser.parse_args()
 
     # Check tool availability
     if not check_tool(args.tool):
-        print(f"Error: {args.tool} not found.")
-        print(f"Install with: brew install {args.tool}")
+        print(f'Error: {args.tool} not found.')
+        print(f'Install with: brew install {args.tool}')
         sys.exit(1)
 
-    if not check_tool("granian"):
-        print("Error: granian not found.")
-        print("Install with: pip install granian")
+    if not check_tool('granian'):
+        print('Error: granian not found.')
+        print('Install with: pip install granian')
         sys.exit(1)
 
     # Run benchmarks
@@ -382,11 +384,11 @@ def main():
         print_summary(results)
 
         if args.json:
-            print("\nJSON Results:")
+            print('\nJSON Results:')
             print(json.dumps(output_json(results), indent=2))
 
     return results
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

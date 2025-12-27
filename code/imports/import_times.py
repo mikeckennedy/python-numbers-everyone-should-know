@@ -29,7 +29,7 @@ from utils.benchmark import (
     print_subheader,
 )
 
-CATEGORY = "import_times"
+CATEGORY = 'import_times'
 
 # Number of subprocess runs for each import
 ITERATIONS = 10
@@ -43,18 +43,18 @@ def time_import_subprocess(module_name: str, from_import: str = None) -> float |
     Returns median time in milliseconds, or None if import fails.
     """
     if from_import:
-        import_stmt = f"from {module_name} import {from_import}"
+        import_stmt = f'from {module_name} import {from_import}'
     else:
-        import_stmt = f"import {module_name}"
+        import_stmt = f'import {module_name}'
 
     # Python code to time the import
-    code = f'''
+    code = f"""
 import time
 start = time.perf_counter_ns()
 {import_stmt}
 end = time.perf_counter_ns()
 print((end - start) / 1_000_000)  # Convert to ms
-'''
+"""
 
     times = []
 
@@ -62,7 +62,7 @@ print((end - start) / 1_000_000)  # Convert to ms
     for _ in range(WARMUP):
         try:
             subprocess.run(
-                [sys.executable, "-c", code],
+                [sys.executable, '-c', code],
                 capture_output=True,
                 text=True,
                 timeout=30,
@@ -74,7 +74,7 @@ print((end - start) / 1_000_000)  # Convert to ms
     for _ in range(ITERATIONS):
         try:
             result = subprocess.run(
-                [sys.executable, "-c", code],
+                [sys.executable, '-c', code],
                 capture_output=True,
                 text=True,
                 timeout=30,
@@ -92,9 +92,9 @@ print((end - start) / 1_000_000)  # Convert to ms
 
 def check_module_available(module_name: str) -> bool:
     """Check if a module can be imported."""
-    code = f"import {module_name}"
+    code = f'import {module_name}'
     result = subprocess.run(
-        [sys.executable, "-c", code],
+        [sys.executable, '-c', code],
         capture_output=True,
         timeout=30,
     )
@@ -105,59 +105,59 @@ def run_benchmarks() -> list[BenchmarkResult]:
     """Run all import time benchmarks."""
     results = []
 
-    print_header("Import Time Benchmarks")
-    print("  (Each import timed in fresh subprocess)")
+    print_header('Import Time Benchmarks')
+    print('  (Each import timed in fresh subprocess)')
 
     # -------------------------------------------------------------------------
     # Built-in Modules (compiled into Python)
     # -------------------------------------------------------------------------
-    print_subheader("Built-in Modules")
+    print_subheader('Built-in Modules')
 
     builtins = [
-        ("sys", "sys (built-in)"),
-        ("os", "os"),
-        ("json", "json"),
-        ("math", "math"),
-        ("time", "time"),
+        ('sys', 'sys (built-in)'),
+        ('os', 'os'),
+        ('json', 'json'),
+        ('math', 'math'),
+        ('time', 'time'),
     ]
 
     for module, label in builtins:
         time_ms = time_import_subprocess(module)
         if time_ms is not None:
-            results.append(BenchmarkResult(f"import {label}", time_ms, category=CATEGORY))
-            print_result(f"import {label}", time_ms)
+            results.append(BenchmarkResult(f'import {label}', time_ms, category=CATEGORY))
+            print_result(f'import {label}', time_ms)
 
     # -------------------------------------------------------------------------
     # Standard Library (pure Python)
     # -------------------------------------------------------------------------
-    print_subheader("Standard Library")
+    print_subheader('Standard Library')
 
     stdlib = [
-        ("pathlib", "pathlib"),
-        ("dataclasses", "dataclasses"),
-        ("typing", "typing"),
-        ("collections", "collections"),
-        ("datetime", "datetime"),
-        ("re", "re"),
-        ("logging", "logging"),
-        ("urllib.parse", "urllib.parse"),
-        ("asyncio", "asyncio"),
-        ("sqlite3", "sqlite3"),
+        ('pathlib', 'pathlib'),
+        ('dataclasses', 'dataclasses'),
+        ('typing', 'typing'),
+        ('collections', 'collections'),
+        ('datetime', 'datetime'),
+        ('re', 're'),
+        ('logging', 'logging'),
+        ('urllib.parse', 'urllib.parse'),
+        ('asyncio', 'asyncio'),
+        ('sqlite3', 'sqlite3'),
     ]
 
     for module, label in stdlib:
         time_ms = time_import_subprocess(module)
         if time_ms is not None:
-            results.append(BenchmarkResult(f"import {label}", time_ms, category=CATEGORY))
-            print_result(f"import {label}", time_ms)
+            results.append(BenchmarkResult(f'import {label}', time_ms, category=CATEGORY))
+            print_result(f'import {label}', time_ms)
 
     # -------------------------------------------------------------------------
     # Local Module
     # -------------------------------------------------------------------------
-    print_subheader("Local Module")
+    print_subheader('Local Module')
 
     # Create a test that imports our local module
-    local_module_path = Path(__file__).parent / "local_module.py"
+    local_module_path = Path(__file__).parent / 'local_module.py'
     if local_module_path.exists():
         # We need to run from the imports directory for relative import to work
         code = f'''
@@ -171,10 +171,10 @@ print((end - start) / 1_000_000)
 '''
         times = []
         for _ in range(WARMUP):
-            subprocess.run([sys.executable, "-c", code], capture_output=True, timeout=30)
+            subprocess.run([sys.executable, '-c', code], capture_output=True, timeout=30)
         for _ in range(ITERATIONS):
             result = subprocess.run(
-                [sys.executable, "-c", code],
+                [sys.executable, '-c', code],
                 capture_output=True,
                 text=True,
                 timeout=30,
@@ -184,88 +184,88 @@ print((end - start) / 1_000_000)
 
         if times:
             time_ms = statistics.median(times)
-            results.append(BenchmarkResult("import local_module (small .py)", time_ms, category=CATEGORY))
-            print_result("import local_module (small .py)", time_ms)
+            results.append(BenchmarkResult('import local_module (small .py)', time_ms, category=CATEGORY))
+            print_result('import local_module (small .py)', time_ms)
 
     # -------------------------------------------------------------------------
     # External Packages - Small
     # -------------------------------------------------------------------------
-    print_subheader("External Packages (Small)")
+    print_subheader('External Packages (Small)')
 
     small_packages = [
-        ("colorama", "colorama"),
-        ("diskcache", "diskcache"),
+        ('colorama', 'colorama'),
+        ('diskcache', 'diskcache'),
     ]
 
     for module, label in small_packages:
         if check_module_available(module):
             time_ms = time_import_subprocess(module)
             if time_ms is not None:
-                results.append(BenchmarkResult(f"import {label}", time_ms, category=CATEGORY))
-                print_result(f"import {label}", time_ms)
+                results.append(BenchmarkResult(f'import {label}', time_ms, category=CATEGORY))
+                print_result(f'import {label}', time_ms)
         else:
-            print_skip_message(label, "not installed")
+            print_skip_message(label, 'not installed')
 
     # -------------------------------------------------------------------------
     # External Packages - Rust-based
     # -------------------------------------------------------------------------
-    print_subheader("External Packages (Rust-based)")
+    print_subheader('External Packages (Rust-based)')
 
     rust_packages = [
-        ("pydantic", "pydantic"),
-        ("orjson", "orjson"),
-        ("msgspec", "msgspec"),
+        ('pydantic', 'pydantic'),
+        ('orjson', 'orjson'),
+        ('msgspec', 'msgspec'),
     ]
 
     for module, label in rust_packages:
         if check_module_available(module):
             time_ms = time_import_subprocess(module)
             if time_ms is not None:
-                results.append(BenchmarkResult(f"import {label}", time_ms, category=CATEGORY))
-                print_result(f"import {label}", time_ms)
+                results.append(BenchmarkResult(f'import {label}', time_ms, category=CATEGORY))
+                print_result(f'import {label}', time_ms)
         else:
-            print_skip_message(label, "not installed")
+            print_skip_message(label, 'not installed')
 
     # -------------------------------------------------------------------------
     # External Packages - Large
     # -------------------------------------------------------------------------
-    print_subheader("External Packages (Large)")
+    print_subheader('External Packages (Large)')
 
     large_packages = [
-        ("django", "django"),
-        ("flask", "flask"),
-        ("fastapi", "fastapi"),
-        ("starlette", "starlette"),
-        ("litestar", "litestar"),
+        ('django', 'django'),
+        ('flask', 'flask'),
+        ('fastapi', 'fastapi'),
+        ('starlette', 'starlette'),
+        ('litestar', 'litestar'),
     ]
 
     for module, label in large_packages:
         if check_module_available(module):
             time_ms = time_import_subprocess(module)
             if time_ms is not None:
-                results.append(BenchmarkResult(f"import {label}", time_ms, category=CATEGORY))
-                print_result(f"import {label}", time_ms)
+                results.append(BenchmarkResult(f'import {label}', time_ms, category=CATEGORY))
+                print_result(f'import {label}', time_ms)
         else:
-            print_skip_message(label, "not installed")
+            print_skip_message(label, 'not installed')
 
     # -------------------------------------------------------------------------
     # Comparison: from X import Y
     # -------------------------------------------------------------------------
-    print_subheader("From Import Comparison")
+    print_subheader('From Import Comparison')
 
     # Compare 'import X' vs 'from X import Y'
-    if check_module_available("pydantic"):
-        time_ms = time_import_subprocess("pydantic", "BaseModel")
+    if check_module_available('pydantic'):
+        time_ms = time_import_subprocess('pydantic', 'BaseModel')
         if time_ms is not None:
-            results.append(BenchmarkResult("from pydantic import BaseModel", time_ms, category=CATEGORY))
-            print_result("from pydantic import BaseModel", time_ms)
+            results.append(BenchmarkResult('from pydantic import BaseModel', time_ms, category=CATEGORY))
+            print_result('from pydantic import BaseModel', time_ms)
 
-    if check_module_available("django"):
+    if check_module_available('django'):
         # Just importing django.conf is faster than full django
-        time_ms = time_import_subprocess("django.conf", "settings")
+        time_ms = time_import_subprocess('django.conf', 'settings')
         if time_ms is not None:
-            results.append(BenchmarkResult("from django.conf import settings", time_ms, category=CATEGORY))
-            print_result("from django.conf import settings", time_ms)
+            results.append(BenchmarkResult('from django.conf import settings', time_ms, category=CATEGORY))
+            print_result('from django.conf import settings', time_ms)
 
     return results
 
@@ -276,10 +276,10 @@ def main():
     output = collect_results(CATEGORY, results)
 
     print()
-    print(f"Total benchmarks: {len(results)}")
+    print(f'Total benchmarks: {len(results)}')
 
     return output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

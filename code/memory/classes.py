@@ -39,7 +39,7 @@ class RegularClassEmpty:
 
 # Slots class
 class SlotsClass:
-    __slots__ = ["a", "b", "c", "d", "e"]
+    __slots__ = ['a', 'b', 'c', 'd', 'e']
 
     def __init__(self, a=None, b=None, c=None, d=None, e=None):
         self.a = a
@@ -75,111 +75,83 @@ class SlotsDataclass:
 
 
 # Named tuple
-PersonTuple = namedtuple("PersonTuple", ["a", "b", "c", "d", "e"])
+PersonTuple = namedtuple('PersonTuple', ['a', 'b', 'c', 'd', 'e'])
 
 
 def run_benchmarks() -> dict:
     """Run class memory benchmarks."""
-    print_header("Class Instance Memory Sizes")
+    print_header('Class Instance Memory Sizes')
 
     results = []
 
     # Regular class
-    print_subheader("Regular Class")
+    print_subheader('Regular Class')
 
     empty_regular = RegularClassEmpty()
     size = measure_size(empty_regular)
-    print_memory_result("Regular class (empty)", size)
-    results.append(
-        MemoryResult(
-            name="regular_class_empty", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Regular class (empty)', size)
+    results.append(MemoryResult(name='regular_class_empty', value=size, unit='bytes', category='memory'))
 
     # Need to also measure __dict__
     dict_size = measure_size(empty_regular.__dict__)
-    print_memory_result("  └─ __dict__ overhead", dict_size)
+    print_memory_result('  └─ __dict__ overhead', dict_size)
 
     regular_5attr = RegularClass(1, 2, 3, 4, 5)
     size = measure_size(regular_5attr)
-    print_memory_result("Regular class (5 attrs)", size)
-    results.append(
-        MemoryResult(
-            name="regular_class_5attr", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Regular class (5 attrs)', size)
+    results.append(MemoryResult(name='regular_class_5attr', value=size, unit='bytes', category='memory'))
 
     dict_size = measure_size(regular_5attr.__dict__)
-    print_memory_result("  └─ __dict__ overhead", dict_size)
+    print_memory_result('  └─ __dict__ overhead', dict_size)
 
     # Slots class
-    print_subheader("__slots__ Class")
+    print_subheader('__slots__ Class')
 
     empty_slots = SlotsClassEmpty()
     size = measure_size(empty_slots)
-    print_memory_result("Slots class (empty)", size)
-    results.append(
-        MemoryResult(
-            name="slots_class_empty", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Slots class (empty)', size)
+    results.append(MemoryResult(name='slots_class_empty', value=size, unit='bytes', category='memory'))
 
     slots_5attr = SlotsClass(1, 2, 3, 4, 5)
     size = measure_size(slots_5attr)
-    print_memory_result("Slots class (5 attrs)", size)
-    results.append(
-        MemoryResult(
-            name="slots_class_5attr", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Slots class (5 attrs)', size)
+    results.append(MemoryResult(name='slots_class_5attr', value=size, unit='bytes', category='memory'))
 
     # Dataclass
-    print_subheader("Dataclass")
+    print_subheader('Dataclass')
 
     dataclass_5attr = RegularDataclass(1, 2, 3, 4, 5)
     size = measure_size(dataclass_5attr)
-    print_memory_result("Dataclass (5 attrs)", size)
-    results.append(
-        MemoryResult(
-            name="dataclass_5attr", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Dataclass (5 attrs)', size)
+    results.append(MemoryResult(name='dataclass_5attr', value=size, unit='bytes', category='memory'))
 
     dict_size = measure_size(dataclass_5attr.__dict__)
-    print_memory_result("  └─ __dict__ overhead", dict_size)
+    print_memory_result('  └─ __dict__ overhead', dict_size)
 
     # Slots dataclass
-    print_subheader("Slots Dataclass")
+    print_subheader('Slots Dataclass')
 
     slots_dataclass_5attr = SlotsDataclass(1, 2, 3, 4, 5)
     size = measure_size(slots_dataclass_5attr)
-    print_memory_result("Slots dataclass (5 attrs)", size)
-    results.append(
-        MemoryResult(
-            name="slots_dataclass_5attr", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Slots dataclass (5 attrs)', size)
+    results.append(MemoryResult(name='slots_dataclass_5attr', value=size, unit='bytes', category='memory'))
 
     # Named tuple
-    print_subheader("Named Tuple")
+    print_subheader('Named Tuple')
 
     named_tuple_5attr = PersonTuple(1, 2, 3, 4, 5)
     size = measure_size(named_tuple_5attr)
-    print_memory_result("Named tuple (5 attrs)", size)
-    results.append(
-        MemoryResult(
-            name="namedtuple_5attr", value=size, unit="bytes", category="memory"
-        )
-    )
+    print_memory_result('Named tuple (5 attrs)', size)
+    results.append(MemoryResult(name='namedtuple_5attr', value=size, unit='bytes', category='memory'))
 
     return {
-        "category": "memory",
-        "section": "classes",
-        "results": [r.to_dict() for r in results],
+        'category': 'memory',
+        'section': 'classes',
+        'results': [r.to_dict() for r in results],
     }
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     results = run_benchmarks()
     print()
     print(json.dumps(results, indent=2))

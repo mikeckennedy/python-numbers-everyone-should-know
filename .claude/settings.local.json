@@ -6,7 +6,9 @@
       "Bash(chmod:*)",
       "Bash(cat:*)",
       "Bash(python3:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(ruff format:*)",
+      "Bash(ruff check:*)"
     ]
   }
 }

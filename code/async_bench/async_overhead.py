@@ -25,7 +25,7 @@ from utils.benchmark import (
     time_operation,
 )
 
-CATEGORY = "async_overhead"
+CATEGORY = 'async_overhead'
 
 
 # =============================================================================
@@ -45,13 +45,13 @@ async def return_value_coro():
 
 async def already_complete():
     """Coroutine that's immediately ready."""
-    return "done"
+    return 'done'
 
 
 async def with_sleep_zero():
     """Coroutine with sleep(0)."""
     await asyncio.sleep(0)
-    return "done"
+    return 'done'
 
 
 async def nested_await():
@@ -99,7 +99,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     """Run all async overhead benchmarks."""
     results = []
 
-    print_header("Async Overhead Benchmarks")
+    print_header('Async Overhead Benchmarks')
 
     # Get or create event loop
     try:
@@ -111,116 +111,114 @@ def run_benchmarks() -> list[BenchmarkResult]:
     # -------------------------------------------------------------------------
     # Coroutine Creation
     # -------------------------------------------------------------------------
-    print_subheader("Coroutine Creation")
+    print_subheader('Coroutine Creation')
 
     def create_coro():
         coro = empty_coro()
         coro.close()  # Must close to avoid warning
 
     time_ms = time_operation(create_coro, iterations=100000)
-    results.append(BenchmarkResult("create coroutine object", time_ms, category=CATEGORY))
-    print_result("create coroutine object", time_ms)
+    results.append(BenchmarkResult('create coroutine object', time_ms, category=CATEGORY))
+    print_result('create coroutine object', time_ms)
 
     def create_coro_with_return():
         coro = return_value_coro()
         coro.close()
 
     time_ms = time_operation(create_coro_with_return, iterations=100000)
-    results.append(BenchmarkResult("create coroutine (with return)", time_ms, category=CATEGORY))
-    print_result("create coroutine (with return)", time_ms)
+    results.append(BenchmarkResult('create coroutine (with return)', time_ms, category=CATEGORY))
+    print_result('create coroutine (with return)', time_ms)
 
     # -------------------------------------------------------------------------
     # Running Coroutines
     # -------------------------------------------------------------------------
-    print_subheader("Running Coroutines")
+    print_subheader('Running Coroutines')
 
     def run_empty():
         loop.run_until_complete(empty_coro())
 
     time_ms = time_operation(run_empty, iterations=10000)
-    results.append(BenchmarkResult("run_until_complete(empty)", time_ms, category=CATEGORY))
-    print_result("run_until_complete(empty)", time_ms)
+    results.append(BenchmarkResult('run_until_complete(empty)', time_ms, category=CATEGORY))
+    print_result('run_until_complete(empty)', time_ms)
 
     def run_with_return():
         loop.run_until_complete(return_value_coro())
 
     time_ms = time_operation(run_with_return, iterations=10000)
-    results.append(BenchmarkResult("run_until_complete(return value)", time_ms, category=CATEGORY))
-    print_result("run_until_complete(return value)", time_ms)
+    results.append(BenchmarkResult('run_until_complete(return value)', time_ms, category=CATEGORY))
+    print_result('run_until_complete(return value)', time_ms)
 
     def run_nested():
         loop.run_until_complete(nested_await())
 
     time_ms = time_operation(run_nested, iterations=10000)
-    results.append(BenchmarkResult("run nested await", time_ms, category=CATEGORY))
-    print_result("run nested await", time_ms)
+    results.append(BenchmarkResult('run nested await', time_ms, category=CATEGORY))
+    print_result('run nested await', time_ms)
 
     def run_multiple():
         loop.run_until_complete(multiple_awaits())
 
     time_ms = time_operation(run_multiple, iterations=10000)
-    results.append(BenchmarkResult("run 3 sequential awaits", time_ms, category=CATEGORY))
-    print_result("run 3 sequential awaits", time_ms)
+    results.append(BenchmarkResult('run 3 sequential awaits', time_ms, category=CATEGORY))
+    print_result('run 3 sequential awaits', time_ms)
 
     # -------------------------------------------------------------------------
     # asyncio.sleep()
     # -------------------------------------------------------------------------
-    print_subheader("asyncio.sleep()")
+    print_subheader('asyncio.sleep()')
 
     def run_sleep_zero():
         loop.run_until_complete(asyncio.sleep(0))
 
     time_ms = time_operation(run_sleep_zero, iterations=10000)
-    results.append(BenchmarkResult("asyncio.sleep(0)", time_ms, category=CATEGORY))
-    print_result("asyncio.sleep(0)", time_ms)
+    results.append(BenchmarkResult('asyncio.sleep(0)', time_ms, category=CATEGORY))
+    print_result('asyncio.sleep(0)', time_ms)
 
     def run_coro_with_sleep():
         loop.run_until_complete(with_sleep_zero())
 
     time_ms = time_operation(run_coro_with_sleep, iterations=10000)
-    results.append(BenchmarkResult("coroutine with sleep(0)", time_ms, category=CATEGORY))
-    print_result("coroutine with sleep(0)", time_ms)
+    results.append(BenchmarkResult('coroutine with sleep(0)', time_ms, category=CATEGORY))
+    print_result('coroutine with sleep(0)', time_ms)
 
     # -------------------------------------------------------------------------
     # asyncio.gather()
     # -------------------------------------------------------------------------
-    print_subheader("asyncio.gather()")
+    print_subheader('asyncio.gather()')
 
     def run_gather_5():
-        loop.run_until_complete(asyncio.gather(
-            return_value_coro(),
-            return_value_coro(),
-            return_value_coro(),
-            return_value_coro(),
-            return_value_coro(),
-        ))
+        loop.run_until_complete(
+            asyncio.gather(
+                return_value_coro(),
+                return_value_coro(),
+                return_value_coro(),
+                return_value_coro(),
+                return_value_coro(),
+            )
+        )
 
     time_ms = time_operation(run_gather_5, iterations=5000)
-    results.append(BenchmarkResult("gather() 5 coroutines", time_ms, category=CATEGORY))
-    print_result("gather() 5 coroutines", time_ms)
+    results.append(BenchmarkResult('gather() 5 coroutines', time_ms, category=CATEGORY))
+    print_result('gather() 5 coroutines', time_ms)
 
     def run_gather_10():
-        loop.run_until_complete(asyncio.gather(
-            *[return_value_coro() for _ in range(10)]
-        ))
+        loop.run_until_complete(asyncio.gather(*[return_value_coro() for _ in range(10)]))
 
     time_ms = time_operation(run_gather_10, iterations=5000)
-    results.append(BenchmarkResult("gather() 10 coroutines", time_ms, category=CATEGORY))
-    print_result("gather() 10 coroutines", time_ms)
+    results.append(BenchmarkResult('gather() 10 coroutines', time_ms, category=CATEGORY))
+    print_result('gather() 10 coroutines', time_ms)
 
     def run_gather_100():
-        loop.run_until_complete(asyncio.gather(
-            *[return_value_coro() for _ in range(100)]
-        ))
+        loop.run_until_complete(asyncio.gather(*[return_value_coro() for _ in range(100)]))
 
     time_ms = time_operation(run_gather_100, iterations=1000)
-    results.append(BenchmarkResult("gather() 100 coroutines", time_ms, category=CATEGORY))
-    print_result("gather() 100 coroutines", time_ms)
+    results.append(BenchmarkResult('gather() 100 coroutines', time_ms, category=CATEGORY))
+    print_result('gather() 100 coroutines', time_ms)
 
     # -------------------------------------------------------------------------
     # Task Creation
     # -------------------------------------------------------------------------
-    print_subheader("Task Creation")
+    print_subheader('Task Creation')
 
     async def create_and_await_task():
         task = asyncio.create_task(return_value_coro())
@@ -230,8 +228,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
         loop.run_until_complete(create_and_await_task())
 
     time_ms = time_operation(run_create_task, iterations=5000)
-    results.append(BenchmarkResult("create_task() + await", time_ms, category=CATEGORY))
-    print_result("create_task() + await", time_ms)
+    results.append(BenchmarkResult('create_task() + await', time_ms, category=CATEGORY))
+    print_result('create_task() + await', time_ms)
 
     async def create_multiple_tasks():
         tasks = [asyncio.create_task(return_value_coro()) for _ in range(10)]
@@ -241,13 +239,13 @@ def run_benchmarks() -> list[BenchmarkResult]:
         loop.run_until_complete(create_multiple_tasks())
 
     time_ms = time_operation(run_multiple_tasks, iterations=2000)
-    results.append(BenchmarkResult("create 10 tasks + gather", time_ms, category=CATEGORY))
-    print_result("create 10 tasks + gather", time_ms)
+    results.append(BenchmarkResult('create 10 tasks + gather', time_ms, category=CATEGORY))
+    print_result('create 10 tasks + gather', time_ms)
 
     # -------------------------------------------------------------------------
     # Async Context Managers
     # -------------------------------------------------------------------------
-    print_subheader("Async Context Managers")
+    print_subheader('Async Context Managers')
 
     async def use_async_ctx():
         async with AsyncContextManager():
@@ -257,13 +255,13 @@ def run_benchmarks() -> list[BenchmarkResult]:
         loop.run_until_complete(use_async_ctx())
 
     time_ms = time_operation(run_async_ctx, iterations=10000)
-    results.append(BenchmarkResult("async with (context manager)", time_ms, category=CATEGORY))
-    print_result("async with (context manager)", time_ms)
+    results.append(BenchmarkResult('async with (context manager)', time_ms, category=CATEGORY))
+    print_result('async with (context manager)', time_ms)
 
     # -------------------------------------------------------------------------
     # Async Iteration
     # -------------------------------------------------------------------------
-    print_subheader("Async Iteration")
+    print_subheader('Async Iteration')
 
     async def iterate_5():
         result = []
@@ -275,8 +273,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
         loop.run_until_complete(iterate_5())
 
     time_ms = time_operation(run_iterate_5, iterations=5000)
-    results.append(BenchmarkResult("async for (5 items)", time_ms, category=CATEGORY))
-    print_result("async for (5 items)", time_ms)
+    results.append(BenchmarkResult('async for (5 items)', time_ms, category=CATEGORY))
+    print_result('async for (5 items)', time_ms)
 
     async def iterate_100():
         result = []
@@ -288,13 +286,13 @@ def run_benchmarks() -> list[BenchmarkResult]:
         loop.run_until_complete(iterate_100())
 
     time_ms = time_operation(run_iterate_100, iterations=1000)
-    results.append(BenchmarkResult("async for (100 items)", time_ms, category=CATEGORY))
-    print_result("async for (100 items)", time_ms)
+    results.append(BenchmarkResult('async for (100 items)', time_ms, category=CATEGORY))
+    print_result('async for (100 items)', time_ms)
 
     # -------------------------------------------------------------------------
     # Comparison: Sync vs Async
     # -------------------------------------------------------------------------
-    print_subheader("Sync vs Async Comparison")
+    print_subheader('Sync vs Async Comparison')
 
     def sync_function():
         return 42
@@ -303,15 +301,15 @@ def run_benchmarks() -> list[BenchmarkResult]:
         return sync_function()
 
     time_ms = time_operation(call_sync, iterations=100000)
-    results.append(BenchmarkResult("sync function call", time_ms, category=CATEGORY))
-    print_result("sync function call", time_ms)
+    results.append(BenchmarkResult('sync function call', time_ms, category=CATEGORY))
+    print_result('sync function call', time_ms)
 
     def call_async_equivalent():
         return loop.run_until_complete(return_value_coro())
 
     time_ms = time_operation(call_async_equivalent, iterations=10000)
-    results.append(BenchmarkResult("async equivalent (run_until_complete)", time_ms, category=CATEGORY))
-    print_result("async equivalent (run_until_complete)", time_ms)
+    results.append(BenchmarkResult('async equivalent (run_until_complete)', time_ms, category=CATEGORY))
+    print_result('async equivalent (run_until_complete)', time_ms)
 
     return results
 
@@ -322,10 +320,10 @@ def main():
     output = collect_results(CATEGORY, results)
 
     print()
-    print(f"Total benchmarks: {len(results)}")
+    print(f'Total benchmarks: {len(results)}')
 
     return output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

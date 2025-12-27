@@ -25,7 +25,7 @@ from utils.benchmark import (
     time_operation,
 )
 
-CATEGORY = "functions_calls"
+CATEGORY = 'functions_calls'
 
 
 # =============================================================================
@@ -84,6 +84,7 @@ class SimpleClass:
 def make_closure(x):
     def inner():
         return x
+
     return inner
 
 
@@ -96,59 +97,59 @@ def run_benchmarks() -> list[BenchmarkResult]:
     """Run all function call benchmarks."""
     results = []
 
-    print_header("Function Call Benchmarks")
+    print_header('Function Call Benchmarks')
 
     # -------------------------------------------------------------------------
     # Basic Function Calls
     # -------------------------------------------------------------------------
-    print_subheader("Basic Function Calls")
+    print_subheader('Basic Function Calls')
 
     def call_empty():
         empty_function()
 
     time_ms = time_operation(call_empty, iterations=100000)
-    results.append(BenchmarkResult("empty function call", time_ms, category=CATEGORY))
-    print_result("empty function call", time_ms)
+    results.append(BenchmarkResult('empty function call', time_ms, category=CATEGORY))
+    print_result('empty function call', time_ms)
 
     def call_with_return():
         return function_returns_value()
 
     time_ms = time_operation(call_with_return, iterations=100000)
-    results.append(BenchmarkResult("function with return", time_ms, category=CATEGORY))
-    print_result("function with return", time_ms)
+    results.append(BenchmarkResult('function with return', time_ms, category=CATEGORY))
+    print_result('function with return', time_ms)
 
     def call_with_5_args():
         function_with_args(1, 2, 3, 4, 5)
 
     time_ms = time_operation(call_with_5_args, iterations=100000)
-    results.append(BenchmarkResult("function with 5 args", time_ms, category=CATEGORY))
-    print_result("function with 5 args", time_ms)
+    results.append(BenchmarkResult('function with 5 args', time_ms, category=CATEGORY))
+    print_result('function with 5 args', time_ms)
 
     def call_with_defaults():
         function_with_defaults(1)
 
     time_ms = time_operation(call_with_defaults, iterations=100000)
-    results.append(BenchmarkResult("function with defaults (1 provided)", time_ms, category=CATEGORY))
-    print_result("function with defaults (1 provided)", time_ms)
+    results.append(BenchmarkResult('function with defaults (1 provided)', time_ms, category=CATEGORY))
+    print_result('function with defaults (1 provided)', time_ms)
 
     def call_with_kwargs():
         function_with_defaults(a=1, b=2, c=3, d=4, e=5)
 
     time_ms = time_operation(call_with_kwargs, iterations=100000)
-    results.append(BenchmarkResult("function with keyword args", time_ms, category=CATEGORY))
-    print_result("function with keyword args", time_ms)
+    results.append(BenchmarkResult('function with keyword args', time_ms, category=CATEGORY))
+    print_result('function with keyword args', time_ms)
 
     def call_args_kwargs():
         function_with_args_kwargs(1, 2, 3, x=4, y=5)
 
     time_ms = time_operation(call_args_kwargs, iterations=100000)
-    results.append(BenchmarkResult("function with *args/**kwargs", time_ms, category=CATEGORY))
-    print_result("function with *args/**kwargs", time_ms)
+    results.append(BenchmarkResult('function with *args/**kwargs', time_ms, category=CATEGORY))
+    print_result('function with *args/**kwargs', time_ms)
 
     # -------------------------------------------------------------------------
     # Method Calls
     # -------------------------------------------------------------------------
-    print_subheader("Method Calls")
+    print_subheader('Method Calls')
 
     obj = SimpleClass()
 
@@ -156,55 +157,55 @@ def run_benchmarks() -> list[BenchmarkResult]:
         obj.method()
 
     time_ms = time_operation(call_method, iterations=100000)
-    results.append(BenchmarkResult("instance method call", time_ms, category=CATEGORY))
-    print_result("instance method call", time_ms)
+    results.append(BenchmarkResult('instance method call', time_ms, category=CATEGORY))
+    print_result('instance method call', time_ms)
 
     def call_method_with_args():
         obj.method_with_args(1, 2, 3, 4, 5)
 
     time_ms = time_operation(call_method_with_args, iterations=100000)
-    results.append(BenchmarkResult("method with 5 args", time_ms, category=CATEGORY))
-    print_result("method with 5 args", time_ms)
+    results.append(BenchmarkResult('method with 5 args', time_ms, category=CATEGORY))
+    print_result('method with 5 args', time_ms)
 
     def call_static():
         SimpleClass.static_method()
 
     time_ms = time_operation(call_static, iterations=100000)
-    results.append(BenchmarkResult("static method call", time_ms, category=CATEGORY))
-    print_result("static method call", time_ms)
+    results.append(BenchmarkResult('static method call', time_ms, category=CATEGORY))
+    print_result('static method call', time_ms)
 
     def call_classmethod():
         SimpleClass.class_method()
 
     time_ms = time_operation(call_classmethod, iterations=100000)
-    results.append(BenchmarkResult("class method call", time_ms, category=CATEGORY))
-    print_result("class method call", time_ms)
+    results.append(BenchmarkResult('class method call', time_ms, category=CATEGORY))
+    print_result('class method call', time_ms)
 
     def call_property():
         _ = obj.prop
 
     time_ms = time_operation(call_property, iterations=100000)
-    results.append(BenchmarkResult("property access", time_ms, category=CATEGORY))
-    print_result("property access", time_ms)
+    results.append(BenchmarkResult('property access', time_ms, category=CATEGORY))
+    print_result('property access', time_ms)
 
     # -------------------------------------------------------------------------
     # Lambda and Closure
     # -------------------------------------------------------------------------
-    print_subheader("Lambda and Closure")
+    print_subheader('Lambda and Closure')
 
     def call_lambda():
         lambda_func()
 
     time_ms = time_operation(call_lambda, iterations=100000)
-    results.append(BenchmarkResult("lambda call (no args)", time_ms, category=CATEGORY))
-    print_result("lambda call (no args)", time_ms)
+    results.append(BenchmarkResult('lambda call (no args)', time_ms, category=CATEGORY))
+    print_result('lambda call (no args)', time_ms)
 
     def call_lambda_args():
         lambda_with_args(1, 2, 3, 4, 5)
 
     time_ms = time_operation(call_lambda_args, iterations=100000)
-    results.append(BenchmarkResult("lambda call (5 args)", time_ms, category=CATEGORY))
-    print_result("lambda call (5 args)", time_ms)
+    results.append(BenchmarkResult('lambda call (5 args)', time_ms, category=CATEGORY))
+    print_result('lambda call (5 args)', time_ms)
 
     closure = make_closure(42)
 
@@ -212,13 +213,13 @@ def run_benchmarks() -> list[BenchmarkResult]:
         closure()
 
     time_ms = time_operation(call_closure, iterations=100000)
-    results.append(BenchmarkResult("closure call", time_ms, category=CATEGORY))
-    print_result("closure call", time_ms)
+    results.append(BenchmarkResult('closure call', time_ms, category=CATEGORY))
+    print_result('closure call', time_ms)
 
     # -------------------------------------------------------------------------
     # Built-in Functions
     # -------------------------------------------------------------------------
-    print_subheader("Built-in Functions")
+    print_subheader('Built-in Functions')
 
     test_list = [1, 2, 3, 4, 5]
 
@@ -226,58 +227,60 @@ def run_benchmarks() -> list[BenchmarkResult]:
         len(test_list)
 
     time_ms = time_operation(call_len, iterations=100000)
-    results.append(BenchmarkResult("len() on list", time_ms, category=CATEGORY))
-    print_result("len() on list", time_ms)
+    results.append(BenchmarkResult('len() on list', time_ms, category=CATEGORY))
+    print_result('len() on list', time_ms)
 
     def call_abs():
         abs(-42)
 
     time_ms = time_operation(call_abs, iterations=100000)
-    results.append(BenchmarkResult("abs()", time_ms, category=CATEGORY))
-    print_result("abs()", time_ms)
+    results.append(BenchmarkResult('abs()', time_ms, category=CATEGORY))
+    print_result('abs()', time_ms)
 
     def call_min():
         min(1, 2, 3, 4, 5)
 
     time_ms = time_operation(call_min, iterations=100000)
-    results.append(BenchmarkResult("min() with 5 args", time_ms, category=CATEGORY))
-    print_result("min() with 5 args", time_ms)
+    results.append(BenchmarkResult('min() with 5 args', time_ms, category=CATEGORY))
+    print_result('min() with 5 args', time_ms)
 
     def call_max_list():
         max(test_list)
 
     time_ms = time_operation(call_max_list, iterations=100000)
-    results.append(BenchmarkResult("max() on list", time_ms, category=CATEGORY))
-    print_result("max() on list", time_ms)
+    results.append(BenchmarkResult('max() on list', time_ms, category=CATEGORY))
+    print_result('max() on list', time_ms)
 
     def call_sorted():
         sorted(test_list)
 
     time_ms = time_operation(call_sorted, iterations=50000)
-    results.append(BenchmarkResult("sorted() on 5-item list", time_ms, category=CATEGORY))
-    print_result("sorted() on 5-item list", time_ms)
+    results.append(BenchmarkResult('sorted() on 5-item list', time_ms, category=CATEGORY))
+    print_result('sorted() on 5-item list', time_ms)
 
     # -------------------------------------------------------------------------
     # Function Creation Overhead
     # -------------------------------------------------------------------------
-    print_subheader("Function Creation Overhead")
+    print_subheader('Function Creation Overhead')
 
     def create_lambda():
         return lambda x: x + 1
 
     time_ms = time_operation(create_lambda, iterations=100000)
-    results.append(BenchmarkResult("create lambda", time_ms, category=CATEGORY))
-    print_result("create lambda", time_ms)
+    results.append(BenchmarkResult('create lambda', time_ms, category=CATEGORY))
+    print_result('create lambda', time_ms)
 
     def create_closure():
         x = 42
+
         def inner():
             return x
+
         return inner
 
     time_ms = time_operation(create_closure, iterations=100000)
-    results.append(BenchmarkResult("create closure", time_ms, category=CATEGORY))
-    print_result("create closure", time_ms)
+    results.append(BenchmarkResult('create closure', time_ms, category=CATEGORY))
+    print_result('create closure', time_ms)
 
     return results
 
@@ -288,10 +291,10 @@ def main():
     output = collect_results(CATEGORY, results)
 
     print()
-    print(f"Total benchmarks: {len(results)}")
+    print(f'Total benchmarks: {len(results)}')
 
     return output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -12,41 +12,41 @@ app = FastAPI()
 
 # Standard response payload
 RESPONSE_DATA = {
-    "status": "ok",
-    "message": "Hello from FastAPI",
-    "data": {
-        "id": 12345,
-        "username": "alice_dev",
-        "email": "alice@example.com",
+    'status': 'ok',
+    'message': 'Hello from FastAPI',
+    'data': {
+        'id': 12345,
+        'username': 'alice_dev',
+        'email': 'alice@example.com',
     },
 }
 
 
-@app.get("/")
+@app.get('/')
 def index():
     """Root endpoint returning JSON (sync)."""
     return RESPONSE_DATA
 
 
-@app.get("/async")
+@app.get('/async')
 async def index_async():
     """Root endpoint returning JSON (async)."""
     return RESPONSE_DATA
 
 
-@app.get("/orjson", response_class=ORJSONResponse)
+@app.get('/orjson', response_class=ORJSONResponse)
 def index_orjson():
     """Root endpoint using ORJSONResponse for faster serialization."""
     return RESPONSE_DATA
 
 
-@app.get("/health")
+@app.get('/health')
 def health():
     """Health check endpoint."""
-    return {"status": "healthy"}
+    return {'status': 'healthy'}
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import uvicorn
 
-    uvicorn.run(app, host="127.0.0.1", port=8003)
+    uvicorn.run(app, host='127.0.0.1', port=8003)

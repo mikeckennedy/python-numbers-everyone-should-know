@@ -11,12 +11,12 @@ from starlette.routing import Route
 
 # Standard response payload
 RESPONSE_DATA = {
-    "status": "ok",
-    "message": "Hello from Starlette",
-    "data": {
-        "id": 12345,
-        "username": "alice_dev",
-        "email": "alice@example.com",
+    'status': 'ok',
+    'message': 'Hello from Starlette',
+    'data': {
+        'id': 12345,
+        'username': 'alice_dev',
+        'email': 'alice@example.com',
     },
 }
 
@@ -28,18 +28,18 @@ async def index(request):
 
 async def health(request):
     """Health check endpoint."""
-    return JSONResponse({"status": "healthy"})
+    return JSONResponse({'status': 'healthy'})
 
 
 routes = [
-    Route("/", index),
-    Route("/health", health),
+    Route('/', index),
+    Route('/health', health),
 ]
 
 app = Starlette(routes=routes)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import uvicorn
 
-    uvicorn.run(app, host="127.0.0.1", port=8004)
+    uvicorn.run(app, host='127.0.0.1', port=8004)
