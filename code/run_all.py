@@ -15,6 +15,7 @@ import argparse
 import datetime
 import json
 import platform
+import random
 import sys
 from pathlib import Path
 from typing import Any
@@ -178,7 +179,11 @@ def run_category(category_key: str, category_info: dict) -> dict[str, Any]:
 
     all_results = []
 
-    for module_name, func_name in category_info["modules"]:
+    # Randomize module execution order to reduce ordering bias
+    modules = list(category_info["modules"])
+    random.shuffle(modules)
+
+    for module_name, func_name in modules:
         results = import_and_run(module_name, func_name)
         all_results.extend(results)
 

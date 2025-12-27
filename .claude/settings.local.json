@@ -4,7 +4,9 @@
       "Bash(/bin/ls:*)",
       "Bash(python:*)",
       "Bash(chmod:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(find:*)"
     ]
   }
 }

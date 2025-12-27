@@ -77,14 +77,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_dumps_simple():
             return orjson.dumps(SIMPLE_OBJ)
 
-        time_ms = time_operation(orjson_dumps_simple, iterations=5000)
+        time_ms = time_operation(orjson_dumps_simple, iterations=5000, warmup=500)
         results.append(BenchmarkResult("orjson.dumps() - simple", time_ms, category=CATEGORY))
         print_result("orjson.dumps() - simple", time_ms)
 
         def orjson_dumps_complex():
             return orjson.dumps(COMPLEX_OBJ)
 
-        time_ms = time_operation(orjson_dumps_complex, iterations=5000)
+        time_ms = time_operation(orjson_dumps_complex, iterations=5000, warmup=500)
         results.append(BenchmarkResult("orjson.dumps() - complex", time_ms, category=CATEGORY))
         print_result("orjson.dumps() - complex", time_ms)
     else:

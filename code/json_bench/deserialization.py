@@ -77,14 +77,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_loads_simple():
             return orjson.loads(SIMPLE_JSON_BYTES)
 
-        time_ms = time_operation(orjson_loads_simple, iterations=5000)
+        time_ms = time_operation(orjson_loads_simple, iterations=5000, warmup=500)
         results.append(BenchmarkResult("orjson.loads() - simple", time_ms, category=CATEGORY))
         print_result("orjson.loads() - simple", time_ms)
 
         def orjson_loads_complex():
             return orjson.loads(COMPLEX_JSON_BYTES)
 
-        time_ms = time_operation(orjson_loads_complex, iterations=5000)
+        time_ms = time_operation(orjson_loads_complex, iterations=5000, warmup=500)
         results.append(BenchmarkResult("orjson.loads() - complex", time_ms, category=CATEGORY))
         print_result("orjson.loads() - complex", time_ms)
 
@@ -92,7 +92,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_loads_str():
             return orjson.loads(COMPLEX_JSON)
 
-        time_ms = time_operation(orjson_loads_str, iterations=5000)
+        time_ms = time_operation(orjson_loads_str, iterations=5000, warmup=500)
         results.append(BenchmarkResult("orjson.loads() - complex (str)", time_ms, category=CATEGORY))
         print_result("orjson.loads() - complex (str)", time_ms)
     else:

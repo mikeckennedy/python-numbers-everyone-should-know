@@ -50,12 +50,9 @@ def run_benchmarks() -> list[BenchmarkResult]:
         # -------------------------------------------------------------------------
         print_subheader("Set Operations")
 
-        key_counter = [0]  # Use list for mutable closure
-
+        # Use a fixed key for consistent benchmarking
         def cache_set():
-            key = f"user:{key_counter[0]}"
-            key_counter[0] += 1
-            cache.set(key, USER_DATA)
+            cache.set("bench:user", USER_DATA)
 
         time_ms = time_operation(cache_set, iterations=1000)
         results.append(BenchmarkResult("cache.set() (complex obj)", time_ms, category=CATEGORY))
@@ -63,9 +60,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
         # Set simple value
         def cache_set_simple():
-            key = f"simple:{key_counter[0]}"
-            key_counter[0] += 1
-            cache.set(key, "hello world")
+            cache.set("bench:simple", "hello world")
 
         time_ms = time_operation(cache_set_simple, iterations=1000)
         results.append(BenchmarkResult("cache.set() (string)", time_ms, category=CATEGORY))
@@ -73,9 +68,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
         # Set with expire
         def cache_set_expire():
-            key = f"expire:{key_counter[0]}"
-            key_counter[0] += 1
-            cache.set(key, USER_DATA, expire=3600)
+            cache.set("bench:expire", USER_DATA, expire=3600)
 
         time_ms = time_operation(cache_set_expire, iterations=1000)
         results.append(BenchmarkResult("cache.set() with expire", time_ms, category=CATEGORY))
@@ -136,31 +129,26 @@ def run_benchmarks() -> list[BenchmarkResult]:
         # -------------------------------------------------------------------------
         print_subheader("Delete Operations")
 
-        # Pre-populate keys to delete
-        for i in range(5000):
-            cache.set(f"delete:{i}", "value")
-
-        delete_counter = [0]
+        # Pre-populate a key to delete (recreated each time)
+        cache.set("bench:delete", "value")
 
         def cache_delete():
-            key = f"delete:{delete_counter[0]}"
-            delete_counter[0] += 1
-            cache.delete(key)
+            # Delete and immediately recreate for next iteration
+            cache.delete("bench:delete")
+            cache.set("bench:delete", "value")
 
         time_ms = time_operation(cache_delete, iterations=1000)
         results.append(BenchmarkResult("cache.delete()", time_ms, category=CATEGORY))
         print_result("cache.delete()", time_ms)
 
         # Pop (get and delete)
-        for i in range(5000):
-            cache.set(f"pop:{i}", USER_DATA)
-
-        pop_counter = [0]
+        cache.set("bench:pop", USER_DATA)
 
         def cache_pop():
-            key = f"pop:{pop_counter[0]}"
-            pop_counter[0] += 1
-            return cache.pop(key)
+            # Pop and immediately recreate for next iteration
+            result = cache.pop("bench:pop")
+            cache.set("bench:pop", USER_DATA)
+            return result
 
         time_ms = time_operation(cache_pop, iterations=1000)
         results.append(BenchmarkResult("cache.pop() (get+delete)", time_ms, category=CATEGORY))

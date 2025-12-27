@@ -8,7 +8,6 @@ import gc
 import statistics
 import sys
 import timeit
-import tracemalloc
 from dataclasses import dataclass
 from time import perf_counter_ns
 from typing import Any, Callable, Optional
@@ -116,25 +115,32 @@ def time_operation(
     Returns:
         Median time per operation in milliseconds
     """
-    # Warmup
+    # Warmup - capture results to prevent optimizer elimination
+    result = None
     for _ in range(warmup):
-        func()
+        result = func()
 
     # Collect garbage before timing
     gc.collect()
 
-    # Time multiple runs
-    times = []
-    for _ in range(repeat):
-        start = perf_counter_ns()
-        for _ in range(iterations):
-            func()
-        end = perf_counter_ns()
-        # Calculate per-operation time in milliseconds
-        time_per_op_ms = (end - start) / iterations / 1_000_000
-        times.append(time_per_op_ms)
+    # Disable GC during timing to prevent interference
+    gc.disable()
+    try:
+        # Time multiple runs
+        times = []
+        for _ in range(repeat):
+            start = perf_counter_ns()
+            for _ in range(iterations):
+                result = func()
+            end = perf_counter_ns()
+            # Calculate per-operation time in milliseconds
+            time_per_op_ms = (end - start) / iterations / 1_000_000
+            times.append(time_per_op_ms)
 
-    return statistics.median(times)
+        return statistics.median(times)
+    finally:
+        # Re-enable GC
+        gc.enable()
 
 
 def time_operation_ns(
@@ -150,22 +156,29 @@ def time_operation_ns(
     Returns:
         Median time per operation in nanoseconds
     """
-    # Warmup
+    # Warmup - capture results to prevent optimizer elimination
+    result = None
     for _ in range(warmup):
-        func()
+        result = func()
 
     gc.collect()
 
-    times = []
-    for _ in range(repeat):
-        start = perf_counter_ns()
-        for _ in range(iterations):
-            func()
-        end = perf_counter_ns()
-        time_per_op_ns = (end - start) / iterations
-        times.append(time_per_op_ns)
+    # Disable GC during timing to prevent interference
+    gc.disable()
+    try:
+        times = []
+        for _ in range(repeat):
+            start = perf_counter_ns()
+            for _ in range(iterations):
+                result = func()
+            end = perf_counter_ns()
+            time_per_op_ns = (end - start) / iterations
+            times.append(time_per_op_ns)
 
-    return statistics.median(times)
+        return statistics.median(times)
+    finally:
+        # Re-enable GC
+        gc.enable()
 
 
 def ns_to_ms(ns: float) -> float:
@@ -226,20 +239,36 @@ def measure_deep_size(obj: Any) -> int:
     """
     Measure the total memory of an object including all referenced objects.
 
-    Uses tracemalloc for accurate measurement.
+    Uses recursive traversal with seen tracking to avoid double-counting.
     """
-    gc.collect()
-    tracemalloc.start()
+    seen = set()
 
-    # Create a copy to measure (avoids measuring pre-existing references)
-    import copy
+    def _get_size(o: Any) -> int:
+        # Avoid counting the same object twice
+        obj_id = id(o)
+        if obj_id in seen:
+            return 0
+        seen.add(obj_id)
 
-    _ = copy.deepcopy(obj)
+        size = sys.getsizeof(o)
 
-    current, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+        # Recursively get size of contents
+        if isinstance(o, dict):
+            size += sum(_get_size(k) + _get_size(v) for k, v in o.items())
+        elif isinstance(o, (list, tuple, set, frozenset)):
+            size += sum(_get_size(item) for item in o)
+        elif hasattr(o, "__dict__"):
+            size += _get_size(o.__dict__)
+        elif hasattr(o, "__slots__"):
+            size += sum(
+                _get_size(getattr(o, slot))
+                for slot in o.__slots__
+                if hasattr(o, slot)
+            )
 
-    return current
+        return size
+
+    return _get_size(obj)
 
 
 def measure_process_memory_mb() -> float:

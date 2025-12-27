@@ -60,15 +60,11 @@ def run_benchmarks() -> list[BenchmarkResult]:
         # -------------------------------------------------------------------------
         print_subheader("Insert Operations")
 
-        # We need to track the ID for operations
-        insert_id = [1]  # Use list for mutable closure
-
         def insert_one():
-            cur = conn.execute(
+            conn.execute(
                 "INSERT INTO users (data) VALUES (?)", (json_data,)
             )
             conn.commit()
-            insert_id[0] = cur.lastrowid
 
         time_ms = time_operation(insert_one, iterations=1000)
         results.append(BenchmarkResult("INSERT (JSON blob)", time_ms, category=CATEGORY))
