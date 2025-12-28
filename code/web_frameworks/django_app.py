@@ -7,7 +7,6 @@ Run with: gunicorn -w 4 -b 127.0.0.1:8002 django_app:application
 This is a minimal Django setup without a full project structure.
 """
 
-
 import django
 from django.conf import settings
 from django.http import JsonResponse
