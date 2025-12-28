@@ -1,5 +1,9 @@
 # Python Numbers Everyone Should Know - Dependencies
 
+# Reporting
+marimo
+
+# perf?
 uvloop
 
 # JSON libraries
