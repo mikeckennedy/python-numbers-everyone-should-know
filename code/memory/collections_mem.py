@@ -49,6 +49,11 @@ def run_benchmarks() -> dict:
     print_memory_result('List with 1000 ints (container only)', size)
     results.append(MemoryResult(name='list_1000_container', value=size, unit='bytes', category='memory'))
 
+    list_1000_floats = [float(i) for i in range(1000)]
+    size = measure_size(list_1000_floats)
+    print_memory_result('List with 1000 floats (container only)', size)
+    results.append(MemoryResult(name='list_1000_floats_container', value=size, unit='bytes', category='memory'))
+
     # Dicts
     print_subheader('Dicts')
 

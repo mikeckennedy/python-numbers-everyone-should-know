@@ -1,6 +1,6 @@
 # Python Numbers Programmer Should Know
 
-*Inspired by "Latency Numbers Every Programmer Should Know" — but for Python.*
+*Inspired by "Latency Numbers Every Programmer Should Know" -- but for Python.*
 
 A practical reference for understanding the cost of common Python operations. All benchmarks run on macOS-26.2-arm64-arm-64bit-Mach-O with Python 3.14.2.
 
@@ -10,87 +10,89 @@ A practical reference for understanding the cost of common Python operations. Al
 
 | Category | Operation | Time | Memory |
 |----------|-----------|------|--------|
-| **Memory** | Empty Python process | — | 26.02 MB |
+| **Memory** | Empty Python process | — | 25.73 MB |
 | | Empty string | — | 41 bytes |
 | | 100-char string | — | 141 bytes |
 | | Small int (0-256) | — | 28 bytes |
 | | Large int | — | 28 bytes |
 | | Float | — | 24 bytes |
 | | Empty list | — | 56 bytes |
-| | List with 1000 ints | — | 7.87 KB |
+| | List with 1,000 ints | — | 7.87 KB |
+| | List with 1,000 floats | — | 8.65 KB |
 | | Empty dict | — | 64 bytes |
-| | Dict with 1000 items | — | 36.1 KB |
+| | Dict with 1,000 items | — | 36.1 KB |
 | | Empty set | — | 216 bytes |
+| | Set with 1,000 items | — | 32.2 KB |
 | | Regular class instance (5 attrs) | — | 48 bytes |
 | | `__slots__` class instance (5 attrs) | — | 72 bytes |
-| | List of 1000 regular class instances | — | 165.2 KB |
-| | List of 1000 `__slots__` class instances | — | 79.1 KB |
+| | List of 1,000 regular class instances | — | 165.2 KB |
+| | List of 1,000 `__slots__` class instances | — | 79.1 KB |
 | | dataclass instance | — | 48 bytes |
 | | namedtuple instance | — | 88 bytes |
-| **Basic Ops** | Add two integers | 18.7 ns | — |
-| | Add two floats | 18.5 ns | — |
-| | String concatenation (small) | 42.3 ns | — |
-| | f-string formatting | 68.7 ns | — |
-| | `.format()` | 102 ns | — |
-| | `%` formatting | 81.7 ns | — |
-| | List append | 29.1 ns | — |
-| | List comprehension (1000 items) | 9.39 μs | — |
-| | Equivalent for-loop | 11.9 μs | — |
-| **Collections** | Dict lookup by key | 21.5 ns | — |
-| | Set membership check | 20.8 ns | — |
-| | List index access | 17.7 ns | — |
-| | List membership check (1000 items) | 3.95 μs | — |
-| | `len()` on list | 17.9 ns | — |
-| | Iterate 1000-item list | 7.77 μs | — |
-| | Iterate 1000-item dict | 8.70 μs | — |
-| | `range(1000)` iteration | 9.66 μs | — |
-| | `sum()` of 1000 ints | 1.83 μs | — |
-| **Attributes** | Read from regular class | 15.0 ns | — |
-| | Write to regular class | 15.6 ns | — |
-| | Read from `__slots__` class | 14.0 ns | — |
-| | Write to `__slots__` class | 15.3 ns | — |
-| | Read from `@property` | 22.9 ns | — |
-| | `getattr()` | 23.2 ns | — |
-| | `hasattr()` | 22.1 ns | — |
-| **JSON** | `json.dumps()` (simple) | 667 ns | — |
-| | `json.loads()` (simple) | 561 ns | — |
-| | `json.dumps()` (complex) | 2.65 μs | — |
-| | `json.loads()` (complex) | 2.16 μs | — |
-| | `orjson.dumps()` (complex) | 310 ns | — |
-| | `orjson.loads()` (complex) | 854 ns | — |
-| | `ujson.dumps()` (complex) | 1.52 μs | — |
-| | `msgspec` encode (complex) | 416 ns | — |
-| | Pydantic `model_dump_json()` | 1.62 μs | — |
-| | Pydantic `model_validate_json()` | 2.83 μs | — |
+| **Basic Ops** | Add two integers | 20.3 ns | — |
+| | Add two floats | 19.5 ns | — |
+| | String concatenation (small) | 39.6 ns | — |
+| | f-string formatting | 67.8 ns | — |
+| | `.format()` | 99.8 ns | — |
+| | `%` formatting | 85.6 ns | — |
+| | List append | 29.8 ns | — |
+| | List comprehension (1,000 items) | 9.46 μs | — |
+| | Equivalent for-loop (1,000 items) | 13.5 μs | — |
+| **Collections** | Dict lookup by key | 25.3 ns | — |
+| | Set membership check | 23.4 ns | — |
+| | List index access | 20.2 ns | — |
+| | List membership check (1,000 items) | 3.93 μs | — |
+| | `len()` on list | 18.6 ns | — |
+| | Iterate 1,000-item list | 8.44 μs | — |
+| | Iterate 1,000-item dict | 9.02 μs | — |
+| | `range(1000)` iteration | 9.73 μs | — |
+| | `sum()` of 1,000 ints | 1.74 μs | — |
+| **Attributes** | Read from regular class | 13.7 ns | — |
+| | Write to regular class | 16.1 ns | — |
+| | Read from `__slots__` class | 13.9 ns | — |
+| | Write to `__slots__` class | 14.9 ns | — |
+| | Read from `@property` | 19.6 ns | — |
+| | `getattr()` | 23.6 ns | — |
+| | `hasattr()` | 21.7 ns | — |
+| **JSON** | `json.dumps()` (simple) | 706 ns | — |
+| | `json.loads()` (simple) | 604 ns | — |
+| | `json.dumps()` (complex) | 2.68 μs | — |
+| | `json.loads()` (complex) | 2.36 μs | — |
+| | `orjson.dumps()` (complex) | 330 ns | — |
+| | `orjson.loads()` (complex) | 908 ns | — |
+| | `ujson.dumps()` (complex) | 1.78 μs | — |
+| | `msgspec` encode (complex) | 456 ns | — |
+| | Pydantic `model_dump_json()` | 1.60 μs | — |
+| | Pydantic `model_validate_json()` | 2.75 μs | — |
 | **Web Frameworks** | Flask (return JSON) | {{WEB.FLASK_RETURN_JSON}} | — |
 | | Django (return JSON) | {{WEB.DJANGO_RETURN_JSON}} | — |
 | | FastAPI async (return JSON) | {{WEB.FASTAPI_ASYNC_RETURN_JSON}} | — |
 | | FastAPI sync (return JSON) | {{WEB.FASTAPI_SYNC_RETURN_JSON}} | — |
 | | Starlette (return JSON) | {{WEB.STARLETTE_RETURN_JSON}} | — |
-| **File I/O** | Open and close file | 9.03 μs | — |
-| | Read 1KB file | 12.6 μs | — |
-| | Write 1KB file | 31.8 μs | — |
-| | Write 1MB file | 499 μs | — |
-| | `pickle.dumps()` | 1.29 μs | — |
-| | `pickle.loads()` | 1.45 μs | — |
-| **Database** | SQLite insert (JSON blob) | 172 μs | — |
-| | SQLite select by PK | 3.75 μs | — |
-| | SQLite update one field | 5.33 μs | — |
-| | diskcache set | 27.4 μs | — |
-| | diskcache get | 4.68 μs | — |
+| **File I/O** | Open and close file | 9.30 μs | — |
+| | Read 1KB file | 10.8 μs | — |
+| | Write 1KB file | 28.3 μs | — |
+| | Write 1MB file | 473 μs | — |
+| | `pickle.dumps()` | 1.11 μs | — |
+| | `pickle.loads()` | 1.41 μs | — |
+| **Database** | SQLite insert (JSON blob) | 182 μs | — |
+| | SQLite select by PK | 3.57 μs | — |
+| | SQLite update one field | 5.30 μs | — |
+| | diskcache set | 23.9 μs | — |
+| | diskcache get | 4.18 μs | — |
 | | MongoDB insert_one | 115 μs | — |
-| | MongoDB find_one by _id | 121 μs | — |
-| | MongoDB find_one by nested field | 124 μs | — |
-| **Functions** | Empty function call | 19.6 ns | — |
-| | Function with 5 args | 25.7 ns | — |
-| | Method call | 23.1 ns | — |
-| | Lambda call | 18.5 ns | — |
-| | try/except (no exception) | 22.2 ns | — |
-| | try/except (exception raised) | 154 ns | — |
-| | `isinstance()` check | 18.8 ns | — |
-| **Async** | `await` completed coroutine | 54.9 μs | — |
-| | Create coroutine object | 45.3 ns | — |
-| | `asyncio.sleep(0)` | 62.4 μs | — |
+| | MongoDB find_one by _id | 122 μs | — |
+| | MongoDB find_one by nested field | 168 μs | — |
+| **Functions** | Empty function call | 19.5 ns | — |
+| | Function with 5 args | 23.8 ns | — |
+| | Method call | 22.2 ns | — |
+| | Lambda call | 18.6 ns | — |
+| | try/except (no exception) | 22.5 ns | — |
+| | try/except (exception raised) | 127 ns | — |
+| | `isinstance()` check | 18.5 ns | — |
+| **Async** | `await` completed coroutine | 46.0 μs | — |
+| | Create coroutine object | 45.5 ns | — |
+| | `asyncio.sleep(0)` | 58.8 μs | — |
 
 ---
 
@@ -100,7 +102,7 @@ Understanding how much memory different Python objects consume.
 
 ### Empty Python Process
 
-**Result:** 26.02 MB
+**Result:** 25.73 MB
 
 ---
 
@@ -127,9 +129,10 @@ Understanding how much memory different Python objects consume.
 
 ### Collections
 
-| Collection | Empty | 1000 items |
+| Collection | Empty | 1,000 items |
 |------------|-------|------------|
-| List | 56 bytes | 7.87 KB |
+| List (ints) | 56 bytes | 7.87 KB |
+| List (floats) | 56 bytes | 8.65 KB |
 | Dict | 64 bytes | 36.1 KB |
 | Set | 216 bytes | 32.2 KB |
 
@@ -145,12 +148,12 @@ Understanding how much memory different Python objects consume.
 | `@dataclass(slots=True)` | — | 72 bytes |
 | namedtuple | — | 88 bytes |
 
-**Aggregate Memory Usage (1000 instances):**
+**Aggregate Memory Usage (1,000 instances):**
 
 | Type | Total Memory |
 |------|--------------|
-| List of 1000 regular class instances | 165.2 KB |
-| List of 1000 `__slots__` class instances | 79.1 KB |
+| List of 1,000 regular class instances | 165.2 KB |
+| List of 1,000 `__slots__` class instances | 79.1 KB |
 
 ---
 
@@ -162,9 +165,9 @@ The cost of fundamental Python operations.
 
 | Operation | Time |
 |-----------|------|
-| Add two integers | 18.7 ns |
-| Add two floats | 18.5 ns |
-| Multiply two integers | 18.5 ns |
+| Add two integers | 20.3 ns |
+| Add two floats | 19.5 ns |
+| Multiply two integers | 21.4 ns |
 
 ---
 
@@ -172,10 +175,10 @@ The cost of fundamental Python operations.
 
 | Operation | Time |
 |-----------|------|
-| Concatenation (`+`) | 42.3 ns |
-| f-string | 68.7 ns |
-| `.format()` | 102 ns |
-| `%` formatting | 81.7 ns |
+| Concatenation (`+`) | 39.6 ns |
+| f-string | 67.8 ns |
+| `.format()` | 99.8 ns |
+| `%` formatting | 85.6 ns |
 
 ---
 
@@ -183,9 +186,9 @@ The cost of fundamental Python operations.
 
 | Operation | Time |
 |-----------|------|
-| `list.append()` | 29.1 ns |
-| List comprehension (1000 items) | 9.39 μs |
-| Equivalent for-loop (1000 items) | 11.9 μs |
+| `list.append()` | 29.8 ns |
+| List comprehension (1,000 items) | 9.46 μs |
+| Equivalent for-loop (1,000 items) | 13.5 μs |
 
 ---
 
@@ -197,10 +200,10 @@ How fast can you get data out of Python's built-in collections?
 
 | Operation | Time |
 |-----------|------|
-| Dict lookup by key | 21.5 ns |
-| Set membership (`in`) | 20.8 ns |
-| List index access | 17.7 ns |
-| List membership (`in`, 1000 items) | 3.95 μs |
+| Dict lookup by key | 25.3 ns |
+| Set membership (`in`) | 23.4 ns |
+| List index access | 20.2 ns |
+| List membership (`in`, 1,000 items) | 3.93 μs |
 
 ---
 
@@ -208,9 +211,9 @@ How fast can you get data out of Python's built-in collections?
 
 | Collection | `len()` time |
 |------------|--------------|
-| List (1000 items) | 17.9 ns |
-| Dict (1000 items) | 17.5 ns |
-| Set (1000 items) | 17.3 ns |
+| List (1,000 items) | 18.6 ns |
+| Dict (1,000 items) | 17.3 ns |
+| Set (1,000 items) | 18.4 ns |
 
 ---
 
@@ -218,10 +221,10 @@ How fast can you get data out of Python's built-in collections?
 
 | Operation | Time |
 |-----------|------|
-| Iterate 1000-item list | 7.77 μs |
-| Iterate 1000-item dict (keys) | 8.70 μs |
-| Iterate `range(1000)` | 9.66 μs |
-| `sum()` of 1000 integers | 1.83 μs |
+| Iterate 1,000-item list | 8.44 μs |
+| Iterate 1,000-item dict (keys) | 9.02 μs |
+| Iterate `range(1000)` | 9.73 μs |
+| `sum()` of 1,000 integers | 1.74 μs |
 
 ---
 
@@ -233,8 +236,8 @@ The cost of reading and writing attributes, and how `__slots__` changes things.
 
 | Operation | Regular Class | `__slots__` Class |
 |-----------|---------------|-------------------|
-| Read attribute | 15.0 ns | 14.0 ns |
-| Write attribute | 15.6 ns | 15.3 ns |
+| Read attribute | 13.7 ns | 13.9 ns |
+| Write attribute | 16.1 ns | 14.9 ns |
 
 ---
 
@@ -242,9 +245,9 @@ The cost of reading and writing attributes, and how `__slots__` changes things.
 
 | Operation | Time |
 |-----------|------|
-| Read `@property` | 22.9 ns |
-| `getattr(obj, 'attr')` | 23.2 ns |
-| `hasattr(obj, 'attr')` | 22.1 ns |
+| Read `@property` | 19.6 ns |
+| `getattr(obj, 'attr')` | 23.6 ns |
+| `hasattr(obj, 'attr')` | 21.7 ns |
 
 ---
 
@@ -286,10 +289,10 @@ complex_obj = {
 
 | Library | Simple Object | Complex Object |
 |---------|---------------|----------------|
-| `json` (stdlib) | 667 ns | 2.65 μs |
-| `orjson` | 60.4 ns | 310 ns |
-| `ujson` | 229 ns | 1.52 μs |
-| `msgspec` | 71.1 ns | 416 ns |
+| `json` (stdlib) | 706 ns | 2.68 μs |
+| `orjson` | 62.5 ns | 330 ns |
+| `ujson` | 266 ns | 1.78 μs |
+| `msgspec` | 72.9 ns | 456 ns |
 
 ---
 
@@ -297,10 +300,10 @@ complex_obj = {
 
 | Library | Simple Object | Complex Object |
 |---------|---------------|----------------|
-| `json` (stdlib) | 561 ns | 2.16 μs |
-| `orjson` | 107 ns | 854 ns |
-| `ujson` | 277 ns | 1.46 μs |
-| `msgspec` | 93.2 ns | 862 ns |
+| `json` (stdlib) | 604 ns | 2.36 μs |
+| `orjson` | 125 ns | 908 ns |
+| `ujson` | 278 ns | 1.68 μs |
+| `msgspec` | 102 ns | 988 ns |
 
 ---
 
@@ -308,10 +311,10 @@ complex_obj = {
 
 | Operation | Time |
 |-----------|------|
-| `model_dump_json()` | 1.62 μs |
-| `model_validate_json()` | 2.83 μs |
-| `model_dump()` (to dict) | 1.77 μs |
-| `model_validate()` (from dict) | 2.25 μs |
+| `model_dump_json()` | 1.60 μs |
+| `model_validate_json()` | 2.75 μs |
+| `model_dump()` (to dict) | 1.73 μs |
+| `model_validate()` (from dict) | 2.24 μs |
 
 ---
 
@@ -344,11 +347,11 @@ Reading and writing files of various sizes.
 
 | Operation | Time |
 |-----------|------|
-| Open and close (no read) | 9.03 μs |
-| Read 1KB file | 12.6 μs |
-| Read 1MB file | 38.3 μs |
-| Write 1KB file | 31.8 μs |
-| Write 1MB file | 499 μs |
+| Open and close (no read) | 9.30 μs |
+| Read 1KB file | 10.8 μs |
+| Read 1MB file | 31.9 μs |
+| Write 1KB file | 28.3 μs |
+| Write 1MB file | 473 μs |
 
 ---
 
@@ -356,10 +359,10 @@ Reading and writing files of various sizes.
 
 | Operation | Time |
 |-----------|------|
-| `pickle.dumps()` (complex obj) | 1.29 μs |
-| `pickle.loads()` (complex obj) | 1.45 μs |
-| `json.dumps()` (complex obj) | 2.89 μs |
-| `json.loads()` (complex obj) | 2.35 μs |
+| `pickle.dumps()` (complex obj) | 1.11 μs |
+| `pickle.loads()` (complex obj) | 1.41 μs |
+| `json.dumps()` (complex obj) | 2.71 μs |
+| `json.loads()` (complex obj) | 2.24 μs |
 
 ---
 
@@ -397,11 +400,11 @@ user_data = {
 
 | Operation | Time |
 |-----------|------|
-| Insert one object | 172 μs |
-| Select by primary key | 3.75 μs |
-| Update one field | 5.33 μs |
+| Insert one object | 182 μs |
+| Select by primary key | 3.57 μs |
+| Update one field | 5.30 μs |
 | Delete | 168 μs |
-| Select with `json_extract()` | 4.11 μs |
+| Select with `json_extract()` | 4.55 μs |
 
 ---
 
@@ -409,10 +412,10 @@ user_data = {
 
 | Operation | Time |
 |-----------|------|
-| `cache.set(key, obj)` | 27.4 μs |
-| `cache.get(key)` | 4.68 μs |
-| `cache.delete(key)` | 54.0 μs |
-| Check key exists | 2.03 μs |
+| `cache.set(key, obj)` | 23.9 μs |
+| `cache.get(key)` | 4.18 μs |
+| `cache.delete(key)` | 52.9 μs |
+| Check key exists | 1.89 μs |
 
 ---
 
@@ -421,10 +424,10 @@ user_data = {
 | Operation | Time |
 |-----------|------|
 | `insert_one()` | 115 μs |
-| `find_one()` by `_id` | 121 μs |
-| `find_one()` by nested field | 124 μs |
-| `update_one()` | 129 μs |
-| `delete_one()` | 32.0 ns |
+| `find_one()` by `_id` | 122 μs |
+| `find_one()` by nested field | 168 μs |
+| `update_one()` | 139 μs |
+| `delete_one()` | 31.3 ns |
 
 ---
 
@@ -432,11 +435,11 @@ user_data = {
 
 | Operation | SQLite | diskcache | MongoDB |
 |-----------|--------|-----------|---------|
-| Write one object | 172 μs | 27.4 μs | 115 μs |
-| Read by key/id | 3.75 μs | 4.68 μs | 121 μs |
-| Read by nested field | 4.11 μs | N/A | 124 μs |
-| Update one field | 5.33 μs | 27.4 μs | 129 μs |
-| Delete | 168 μs | 54.0 μs | 32.0 ns |
+| Write one object | 182 μs | 23.9 μs | 115 μs |
+| Read by key/id | 3.57 μs | 4.18 μs | 122 μs |
+| Read by nested field | 4.55 μs | N/A | 168 μs |
+| Update one field | 5.30 μs | 23.9 μs | 139 μs |
+| Delete | 168 μs | 52.9 μs | 31.3 ns |
 
 ---
 
@@ -448,11 +451,11 @@ The hidden cost of function calls, exceptions, and async.
 
 | Operation | Time |
 |-----------|------|
-| Empty function call | 19.6 ns |
-| Function with 5 arguments | 25.7 ns |
-| Method call on object | 23.1 ns |
-| Lambda call | 18.5 ns |
-| Built-in function (`len()`) | 17.9 ns |
+| Empty function call | 19.5 ns |
+| Function with 5 arguments | 23.8 ns |
+| Method call on object | 22.2 ns |
+| Lambda call | 18.6 ns |
+| Built-in function (`len()`) | 18.4 ns |
 
 ---
 
@@ -460,8 +463,8 @@ The hidden cost of function calls, exceptions, and async.
 
 | Operation | Time |
 |-----------|------|
-| `try/except` (no exception raised) | 22.2 ns |
-| `try/except` (exception raised) | 154 ns |
+| `try/except` (no exception raised) | 22.5 ns |
+| `try/except` (exception raised) | 127 ns |
 
 ---
 
@@ -469,8 +472,8 @@ The hidden cost of function calls, exceptions, and async.
 
 | Operation | Time |
 |-----------|------|
-| `isinstance()` | 18.8 ns |
-| `type() == type` | 20.8 ns |
+| `isinstance()` | 18.5 ns |
+| `type() == type` | 20.4 ns |
 
 ---
 
@@ -480,10 +483,10 @@ The cost of async machinery.
 
 | Operation | Time |
 |-----------|------|
-| `await` already-completed coroutine | 54.9 μs |
-| Create coroutine object (no await) | 45.3 ns |
-| `asyncio.sleep(0)` | 62.4 μs |
-| `asyncio.gather()` on 10 completed | 70.2 μs |
+| `await` already-completed coroutine | 46.0 μs |
+| Create coroutine object (no await) | 45.5 ns |
+| `asyncio.sleep(0)` | 58.8 μs |
+| `asyncio.gather()` on 10 completed | 68.5 μs |
 
 ---
 

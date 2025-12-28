@@ -4,160 +4,16 @@
     "python_implementation": "CPython",
     "platform": "macOS-26.2-arm64-arm-64bit-Mach-O",
     "processor": "arm",
-    "timestamp": "2025-12-27T16:28:29.603411"
+    "timestamp": "2025-12-27T16:41:51.931776"
   },
   "categories": {
     "memory": {
       "name": "Memory Sizes",
-      "benchmark_count": 34,
+      "benchmark_count": 35,
       "results": [
         {
-          "name": "small_int",
-          "value": 28,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "boundary_int",
-          "value": 28,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "large_int",
-          "value": 28,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "very_large_int_20",
-          "value": 36,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "huge_int_100",
-          "value": 72,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "float",
-          "value": 24,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "large_float",
-          "value": 24,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_string",
-          "value": 41,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "1_char_string",
-          "value": 42,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "10_char_string",
-          "value": 51,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "100_char_string",
-          "value": 141,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "1000_char_string",
-          "value": 1041,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_list",
-          "value": 56,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_10_container",
-          "value": 136,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_100_container",
-          "value": 856,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_1000_container",
-          "value": 8056,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_dict",
-          "value": 64,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "dict_10_container",
-          "value": 352,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "dict_100_container",
-          "value": 4688,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "dict_1000_container",
-          "value": 36952,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_set",
-          "value": 216,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "set_10_container",
-          "value": 728,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "set_100_container",
-          "value": 8408,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "set_1000_container",
-          "value": 32984,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
           "name": "empty_process",
-          "value": 26.015625,
+          "value": 25.734375,
           "unit": "MB",
           "category": "memory"
         },
@@ -214,6 +70,156 @@
           "value": 80996,
           "unit": "bytes",
           "category": "memory"
+        },
+        {
+          "name": "empty_string",
+          "value": 41,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "1_char_string",
+          "value": 42,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "10_char_string",
+          "value": 51,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "100_char_string",
+          "value": 141,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "1000_char_string",
+          "value": 1041,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "small_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "boundary_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "very_large_int_20",
+          "value": 36,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "huge_int_100",
+          "value": 72,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "float",
+          "value": 24,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_float",
+          "value": 24,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_list",
+          "value": 56,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_10_container",
+          "value": 136,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_100_container",
+          "value": 856,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_container",
+          "value": 8056,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_floats_container",
+          "value": 8856,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_dict",
+          "value": 64,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_10_container",
+          "value": 352,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_100_container",
+          "value": 4688,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_1000_container",
+          "value": 36952,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_set",
+          "value": 216,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_10_container",
+          "value": 728,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_100_container",
+          "value": 8408,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_1000_container",
+          "value": 32984,
+          "unit": "bytes",
+          "category": "memory"
         }
       ]
     },
@@ -222,134 +228,134 @@
       "benchmark_count": 22,
       "results": [
         {
-          "name": "concat_small",
-          "value": 4.2294159999999996e-05,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
-          "name": "concat_medium",
-          "value": 4.2441600000000004e-05,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
-          "name": "f_string",
-          "value": 6.873e-05,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
-          "name": "format_method",
-          "value": 0.00010182250000000001,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
-          "name": "percent_formatting",
-          "value": 8.165459e-05,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
-          "name": "join_small",
-          "value": 4.516083e-05,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
-          "name": "split",
-          "value": 7.866167e-05,
-          "unit": "ms",
-          "category": "basic_ops"
-        },
-        {
           "name": "int_add",
-          "value": 1.8727920000000002e-05,
+          "value": 2.033208e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "int_multiply",
-          "value": 1.8497910000000002e-05,
+          "value": 2.1430420000000002e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "int_divide",
-          "value": 2.230708e-05,
+          "value": 2.7471250000000002e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "float_add",
-          "value": 1.847916e-05,
+          "value": 1.950917e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "float_multiply",
-          "value": 1.860708e-05,
+          "value": 1.871666e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "float_divide",
-          "value": 2.1387499999999998e-05,
+          "value": 2.1900829999999997e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "concat_small",
+          "value": 3.96e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "concat_medium",
+          "value": 4.06167e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "f_string",
+          "value": 6.782500000000001e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "format_method",
+          "value": 9.983665999999999e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "percent_formatting",
+          "value": 8.559417e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "join_small",
+          "value": 4.631625e-05,
+          "unit": "ms",
+          "category": "basic_ops"
+        },
+        {
+          "name": "split",
+          "value": 7.627666e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "list_append",
-          "value": 2.90725e-05,
+          "value": 2.9829160000000003e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "list_comp_10",
-          "value": 9.34875e-05,
+          "value": 9.12625e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "for_loop_10",
-          "value": 0.0001161708,
+          "value": 0.0001201042,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "list_comp_100",
-          "value": 0.0006535292,
+          "value": 0.0006494500000000001,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "for_loop_100",
-          "value": 0.0009138875,
+          "value": 0.0009154917000000001,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "list_comp_1000",
-          "value": 0.009393292,
+          "value": 0.009460959000000001,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "for_loop_1000",
-          "value": 0.011885583,
+          "value": 0.013497084000000001,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "list_extend",
-          "value": 6.643208e-05,
+          "value": 7.472541e-05,
           "unit": "ms",
           "category": "basic_ops"
         },
         {
           "name": "list_copy_100",
-          "value": 0.0001314333,
+          "value": 0.0001309417,
           "unit": "ms",
           "category": "basic_ops"
         }
@@ -360,220 +366,220 @@
       "benchmark_count": 36,
       "results": [
         {
-          "name": "len(list) - 10 items",
-          "value": 1.59708e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(list) - 100 items",
-          "value": 1.67792e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(list) - 1000 items",
-          "value": 1.7858399999999998e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(list) - 10000 items",
-          "value": 1.90917e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(dict) - 1000 items",
-          "value": 1.74875e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(set) - 1000 items",
-          "value": 1.72791e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(str) - 1000 chars",
-          "value": 1.76e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "len(tuple) - 1000 items",
-          "value": 1.94583e-05,
-          "unit": "ms",
-          "category": "collections_length"
-        },
-        {
-          "name": "dict[key] (existing)",
-          "value": 2.15458e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "dict.get(key) (existing)",
-          "value": 2.51542e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "dict.get(key) (missing)",
-          "value": 2.4929200000000002e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "key in dict (existing)",
-          "value": 2.21083e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "key in dict (missing)",
-          "value": 1.9945799999999998e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "item in set (existing)",
-          "value": 2.07625e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "item in set (missing)",
-          "value": 1.6520800000000003e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "list[index]",
-          "value": 1.77e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "list[-1]",
-          "value": 2.00166e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "item in list (first)",
-          "value": 1.4667e-05,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "item in list (middle)",
-          "value": 0.0020355,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "item in list (last)",
-          "value": 0.0039465,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
-          "name": "item in list (missing)",
-          "value": 0.00389675,
-          "unit": "ms",
-          "category": "collections_access"
-        },
-        {
           "name": "for item in list",
-          "value": 0.007773375,
+          "value": 0.008436292,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for i, item in enumerate(list)",
-          "value": 0.014262083,
+          "value": 0.015195833,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for key in dict",
-          "value": 0.008696833000000001,
+          "value": 0.009015209000000001,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for value in dict.values()",
-          "value": 0.009006083,
+          "value": 0.009089583,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for k, v in dict.items()",
-          "value": 0.012731165999999999,
+          "value": 0.012567375,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for item in set",
-          "value": 0.009131875,
+          "value": 0.009128042,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for item in tuple",
-          "value": 0.00786325,
+          "value": 0.007776707999999999,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "for i in range(1000)",
-          "value": 0.009662792,
+          "value": 0.009727042,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "sum(list)",
-          "value": 0.001826875,
+          "value": 0.0017411669999999998,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "sum(range(1000))",
-          "value": 0.003938167,
+          "value": 0.0039405,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "sum(generator)",
-          "value": 0.014235625,
+          "value": 0.0143455,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "min(list)",
-          "value": 0.00499025,
+          "value": 0.004980833,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "max(list)",
-          "value": 0.004995417,
+          "value": 0.004981083,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "any(list)",
-          "value": 2.5e-05,
+          "value": 2.4625e-05,
           "unit": "ms",
           "category": "collections_iteration"
         },
         {
           "name": "all(list)",
-          "value": 0.003541458,
+          "value": 0.00350325,
           "unit": "ms",
           "category": "collections_iteration"
+        },
+        {
+          "name": "dict[key] (existing)",
+          "value": 2.52792e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "dict.get(key) (existing)",
+          "value": 3.32042e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "dict.get(key) (missing)",
+          "value": 2.58167e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "key in dict (existing)",
+          "value": 2.70916e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "key in dict (missing)",
+          "value": 2.1841699999999998e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "item in set (existing)",
+          "value": 2.33667e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "item in set (missing)",
+          "value": 2.09417e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "list[index]",
+          "value": 2.01708e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "list[-1]",
+          "value": 2.37542e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "item in list (first)",
+          "value": 1.7209e-05,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "item in list (middle)",
+          "value": 0.0019585830000000003,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "item in list (last)",
+          "value": 0.003931459,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "item in list (missing)",
+          "value": 0.0039043330000000003,
+          "unit": "ms",
+          "category": "collections_access"
+        },
+        {
+          "name": "len(list) - 10 items",
+          "value": 1.6741700000000003e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(list) - 100 items",
+          "value": 1.62709e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(list) - 1000 items",
+          "value": 1.8587499999999998e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(list) - 10000 items",
+          "value": 1.72084e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(dict) - 1000 items",
+          "value": 1.7304200000000003e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(set) - 1000 items",
+          "value": 1.84e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(str) - 1000 chars",
+          "value": 1.73084e-05,
+          "unit": "ms",
+          "category": "collections_length"
+        },
+        {
+          "name": "len(tuple) - 1000 items",
+          "value": 1.8425e-05,
+          "unit": "ms",
+          "category": "collections_length"
         }
       ]
     },
@@ -583,169 +589,169 @@
       "results": [
         {
           "name": "@property: read",
-          "value": 2.29208e-05,
+          "value": 1.9604199999999998e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "@property: write (setter)",
-          "value": 3.28416e-05,
+          "value": 3.49833e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "@property: computed",
-          "value": 2.3324999999999998e-05,
+          "value": 2.46917e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "@property: cached (manual)",
-          "value": 2.38417e-05,
+          "value": 2.5641600000000002e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "direct attr (comparison)",
-          "value": 1.32834e-05,
+          "value": 1.4e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "getattr(obj, 'attr')",
-          "value": 2.3225000000000002e-05,
+          "value": 2.3575e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "getattr(slots_obj, 'attr')",
-          "value": 2.37167e-05,
+          "value": 2.43583e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "getattr(obj, 'missing', default)",
-          "value": 2.56833e-05,
+          "value": 2.3125e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "obj.attr (comparison)",
-          "value": 1.42625e-05,
+          "value": 1.49291e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "hasattr(obj, 'existing')",
-          "value": 2.21459e-05,
+          "value": 2.16666e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "hasattr(obj, 'missing')",
-          "value": 2.43125e-05,
+          "value": 2.19416e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "hasattr(slots_obj, 'existing')",
-          "value": 2.56125e-05,
+          "value": 2.5254100000000003e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "hasattr(slots_obj, 'missing')",
-          "value": 2.18708e-05,
+          "value": 2.11375e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "setattr(obj, 'attr', val)",
-          "value": 2.80417e-05,
+          "value": 2.8916699999999997e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "setattr(slots_obj, 'attr', val)",
-          "value": 2.8691700000000002e-05,
+          "value": 2.82333e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "obj.attr = val (comparison)",
-          "value": 1.53e-05,
+          "value": 1.55125e-05,
           "unit": "ms",
           "category": "attribute_other_ops"
         },
         {
           "name": "regular class: read attr",
-          "value": 1.4958299999999999e-05,
+          "value": 1.36708e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "regular class: write attr",
-          "value": 1.55958e-05,
+          "value": 1.60667e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "regular class: read 5 attrs",
-          "value": 3.1566700000000004e-05,
+          "value": 3.25417e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "slots class: read attr",
-          "value": 1.40208e-05,
+          "value": 1.38958e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "slots class: write attr",
-          "value": 1.5333399999999998e-05,
+          "value": 1.4870799999999998e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "slots class: read 5 attrs",
-          "value": 3.1195900000000004e-05,
+          "value": 3.2787500000000004e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "dataclass: read attr",
-          "value": 1.4104200000000001e-05,
+          "value": 1.4125e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "dataclass: write attr",
-          "value": 1.5425000000000002e-05,
+          "value": 1.5137499999999999e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "slots dataclass: read attr",
-          "value": 1.4625e-05,
+          "value": 1.43041e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "slots dataclass: write attr",
-          "value": 1.3225e-05,
+          "value": 1.44209e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "dict: read key",
-          "value": 1.71083e-05,
+          "value": 1.78792e-05,
           "unit": "ms",
           "category": "attribute_access"
         },
         {
           "name": "dict: write key",
-          "value": 1.77334e-05,
+          "value": 1.66875e-05,
           "unit": "ms",
           "category": "attribute_access"
         }
@@ -756,172 +762,172 @@
       "benchmark_count": 28,
       "results": [
         {
-          "name": "json.loads() - simple",
-          "value": 0.0005610416000000001,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "json.loads() - complex",
-          "value": 0.0021585166,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "orjson.loads() - simple",
-          "value": 0.00010660840000000001,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "orjson.loads() - complex",
-          "value": 0.0008541165999999999,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "orjson.loads() - complex (str)",
-          "value": 0.0008425334,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "ujson.loads() - simple",
-          "value": 0.0002770166,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "ujson.loads() - complex",
-          "value": 0.001458825,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "msgspec.json.decode() - simple",
-          "value": 9.32e-05,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "msgspec.json.decode() - complex",
-          "value": 0.0008619750000000001,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "msgspec.json.decode() - complex (str)",
-          "value": 0.0008600249999999999,
-          "unit": "ms",
-          "category": "json_deserialization"
-        },
-        {
-          "name": "json.dumps() - simple",
-          "value": 0.0006668334,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "json.dumps() - complex",
-          "value": 0.0026472168000000003,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "json.dumps() - complex (no ascii)",
-          "value": 0.0030780916,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "orjson.dumps() - simple",
-          "value": 6.03584e-05,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "orjson.dumps() - complex",
-          "value": 0.0003101166,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "ujson.dumps() - simple",
-          "value": 0.00022876679999999999,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "ujson.dumps() - complex",
-          "value": 0.0015236584000000001,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "msgspec.json.encode() - simple",
-          "value": 7.11416e-05,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
-          "name": "msgspec.json.encode() - complex",
-          "value": 0.0004161166,
-          "unit": "ms",
-          "category": "json_serialization"
-        },
-        {
           "name": "model_dump() - simple",
-          "value": 0.000460875,
+          "value": 0.0004554916,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_dump() - complex",
-          "value": 0.0017713334,
+          "value": 0.001734825,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_dump_json() - simple",
-          "value": 0.0005199332,
+          "value": 0.0005317999999999999,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_dump_json() - complex",
-          "value": 0.0016150168000000002,
+          "value": 0.0015995999999999999,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_validate() - simple",
-          "value": 0.00044105,
+          "value": 0.00043875,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_validate() - complex",
-          "value": 0.0022501500000000002,
+          "value": 0.0022394334,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_validate_json() - simple",
-          "value": 0.0004889082,
+          "value": 0.00047102499999999997,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "model_validate_json() - complex",
-          "value": 0.0028279666,
+          "value": 0.0027450832000000002,
           "unit": "ms",
           "category": "pydantic_serialization"
         },
         {
           "name": "json.dumps(dict) - comparison",
-          "value": 0.0026092,
+          "value": 0.00267075,
           "unit": "ms",
           "category": "pydantic_serialization"
+        },
+        {
+          "name": "json.dumps() - simple",
+          "value": 0.0007058916,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "json.dumps() - complex",
+          "value": 0.0026808334,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "json.dumps() - complex (no ascii)",
+          "value": 0.003232525,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "orjson.dumps() - simple",
+          "value": 6.25e-05,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "orjson.dumps() - complex",
+          "value": 0.0003297584,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "ujson.dumps() - simple",
+          "value": 0.0002660834,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "ujson.dumps() - complex",
+          "value": 0.0017810834,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "msgspec.json.encode() - simple",
+          "value": 7.290000000000001e-05,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "msgspec.json.encode() - complex",
+          "value": 0.0004561916,
+          "unit": "ms",
+          "category": "json_serialization"
+        },
+        {
+          "name": "json.loads() - simple",
+          "value": 0.0006038666,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "json.loads() - complex",
+          "value": 0.0023577084,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "orjson.loads() - simple",
+          "value": 0.00012545,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "orjson.loads() - complex",
+          "value": 0.0009080334000000001,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "orjson.loads() - complex (str)",
+          "value": 0.00094215,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "ujson.loads() - simple",
+          "value": 0.0002782916,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "ujson.loads() - complex",
+          "value": 0.0016762416,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "msgspec.json.decode() - simple",
+          "value": 0.0001017,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "msgspec.json.decode() - complex",
+          "value": 0.000987575,
+          "unit": "ms",
+          "category": "json_deserialization"
+        },
+        {
+          "name": "msgspec.json.decode() - complex (str)",
+          "value": 0.0009839416,
+          "unit": "ms",
+          "category": "json_deserialization"
         }
       ]
     },
@@ -930,178 +936,178 @@
       "benchmark_count": 29,
       "results": [
         {
-          "name": "open() + close() (read mode)",
-          "value": 0.0090295168,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "open() + close() (write mode)",
-          "value": 0.010771483200000001,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "with open() (context manager)",
-          "value": 0.0111548084,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "read 1KB file",
-          "value": 0.0125801916,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "read 1MB file",
-          "value": 0.038322125,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "read text file (1.4KB)",
-          "value": 0.0183092916,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "readlines() (100 lines)",
-          "value": 0.0186717334,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "write 1KB file",
-          "value": 0.0317994334,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "write 1MB file",
-          "value": 0.49876925,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "write 1KB + flush()",
-          "value": 0.0331354,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "write 1KB + fsync()",
-          "value": 0.048288375,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "Path.read_bytes() 1KB",
-          "value": 0.0098951084,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "Path.write_bytes() 1KB",
-          "value": 0.0348587166,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "Path.read_text()",
-          "value": 0.01312965,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "Path.exists()",
-          "value": 0.001601925,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "Path.is_file()",
-          "value": 0.001620925,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
-          "name": "os.path.exists()",
-          "value": 0.0015594417000000002,
-          "unit": "ms",
-          "category": "file_io_basic"
-        },
-        {
           "name": "pickle.dumps()",
-          "value": 0.001287325,
+          "value": 0.0011143084,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "pickle.loads()",
-          "value": 0.0014536666,
+          "value": 0.0014111584,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "pickle.dumps() protocol=4",
-          "value": 0.0011970584,
+          "value": 0.0010952166,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "pickle.dumps() protocol=5",
-          "value": 0.0012561916,
+          "value": 0.001123625,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "json.dumps()",
-          "value": 0.0028885584,
+          "value": 0.0027137,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "json.loads()",
-          "value": 0.0023509834,
+          "value": 0.0022404333999999997,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "orjson.dumps()",
-          "value": 0.000326675,
+          "value": 0.0003171168,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "orjson.loads()",
-          "value": 0.0009469916,
+          "value": 0.0008558,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "msgspec.json.encode()",
-          "value": 0.0004358834,
+          "value": 0.0004272,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "msgspec.json.decode()",
-          "value": 0.0009999584,
+          "value": 0.0008742668,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "msgspec.msgpack.encode()",
-          "value": 0.0012700666,
+          "value": 0.0004065168,
           "unit": "ms",
           "category": "file_io_serialization"
         },
         {
           "name": "msgspec.msgpack.decode()",
-          "value": 0.0012303668,
+          "value": 0.0007955916,
           "unit": "ms",
           "category": "file_io_serialization"
+        },
+        {
+          "name": "open() + close() (read mode)",
+          "value": 0.0093030416,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "open() + close() (write mode)",
+          "value": 0.0111181918,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "with open() (context manager)",
+          "value": 0.009815049999999999,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "read 1KB file",
+          "value": 0.0107704666,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "read 1MB file",
+          "value": 0.031899167,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "read text file (1.4KB)",
+          "value": 0.0112916832,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "readlines() (100 lines)",
+          "value": 0.0150567834,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "write 1KB file",
+          "value": 0.0282658832,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "write 1MB file",
+          "value": 0.473093666,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "write 1KB + flush()",
+          "value": 0.0309144,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "write 1KB + fsync()",
+          "value": 0.039585792,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "Path.read_bytes() 1KB",
+          "value": 0.009130825,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "Path.write_bytes() 1KB",
+          "value": 0.031103941599999997,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "Path.read_text()",
+          "value": 0.011582658400000001,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "Path.exists()",
+          "value": 0.0014670125000000001,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "Path.is_file()",
+          "value": 0.0014437042,
+          "unit": "ms",
+          "category": "file_io_basic"
+        },
+        {
+          "name": "os.path.exists()",
+          "value": 0.0013869292000000001,
+          "unit": "ms",
+          "category": "file_io_basic"
         }
       ]
     },
@@ -1110,218 +1116,218 @@
       "benchmark_count": 36,
       "results": [
         {
-          "name": "INSERT (JSON blob)",
-          "value": 0.172192625,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "INSERT (no commit)",
-          "value": 0.000615833,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "SELECT by primary key",
-          "value": 0.0037517334000000003,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "SELECT LIMIT 100",
-          "value": 0.027395,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "json_extract() simple path",
-          "value": 0.0041053415999999995,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "json_extract() nested path",
-          "value": 0.004171899999999999,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "json_extract() array access",
-          "value": 0.004225416599999999,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "UPDATE (full JSON)",
-          "value": 0.005333292000000001,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "UPDATE (no commit)",
-          "value": 0.00044433300000000004,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "DELETE by primary key",
-          "value": 0.168202916,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "BEGIN + INSERT + COMMIT",
-          "value": 0.165303334,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
-          "name": "executemany() 10 rows",
-          "value": 0.196817085,
-          "unit": "ms",
-          "category": "database_sqlite"
-        },
-        {
           "name": "insert_one()",
-          "value": 0.114731542,
+          "value": 0.115439458,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "insert_many() 10 docs",
-          "value": 0.17480834,
+          "value": 0.19640625,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "find_one() by _id",
-          "value": 0.1205096918,
+          "value": 0.121818175,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "find_one() by field",
-          "value": 0.1283305205,
+          "value": 0.14966125,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "find_one() by nested field (indexed)",
-          "value": 0.12359139599999999,
+          "value": 0.1681198955,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "find().limit(100)",
-          "value": 0.449980334,
+          "value": 0.4024495,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "update_one() by _id",
-          "value": 0.128921625,
+          "value": 0.13863504199999999,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "update_one() by field",
-          "value": 0.178618625,
+          "value": 0.122758916,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "update_one() with $inc",
-          "value": 0.15545725,
+          "value": 0.129027834,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "delete_one() by _id",
-          "value": 3.2e-05,
+          "value": 3.1334e-05,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "count_documents()",
-          "value": 1.3369085840000001,
+          "value": 1.18652625,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
           "name": "aggregate() simple pipeline",
-          "value": 0.16131375,
+          "value": 0.154204416,
           "unit": "ms",
           "category": "database_mongodb"
         },
         {
+          "name": "INSERT (JSON blob)",
+          "value": 0.181845791,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "INSERT (no commit)",
+          "value": 0.000639417,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "SELECT by primary key",
+          "value": 0.003565225,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "SELECT LIMIT 100",
+          "value": 0.027958708999999998,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "json_extract() simple path",
+          "value": 0.0045451082,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "json_extract() nested path",
+          "value": 0.004521949999999999,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "json_extract() array access",
+          "value": 0.004271675,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "UPDATE (full JSON)",
+          "value": 0.005300875,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "UPDATE (no commit)",
+          "value": 0.00046520800000000005,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "DELETE by primary key",
+          "value": 0.16754133400000001,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "BEGIN + INSERT + COMMIT",
+          "value": 0.16878616800000001,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
+          "name": "executemany() 10 rows",
+          "value": 0.21314333,
+          "unit": "ms",
+          "category": "database_sqlite"
+        },
+        {
           "name": "cache.set() (complex obj)",
-          "value": 0.027431,
+          "value": 0.023904458,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.set() (string)",
-          "value": 0.026507957999999998,
+          "value": 0.02195175,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.set() with expire",
-          "value": 0.028418709,
+          "value": 0.02540425,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.get() (complex obj)",
-          "value": 0.0046833249999999995,
+          "value": 0.0041845168,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.get() (string)",
-          "value": 0.0026649916,
+          "value": 0.0024613168,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.get() miss (with default)",
-          "value": 0.0019478584000000001,
+          "value": 0.00180955,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "key in cache (hit)",
-          "value": 0.0020261916000000003,
+          "value": 0.0018890832,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "key in cache (miss)",
-          "value": 0.0016203834,
+          "value": 0.0016421166,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.delete()",
-          "value": 0.054048,
+          "value": 0.052879290999999995,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "cache.pop() (get+delete)",
-          "value": 0.060896125,
+          "value": 0.0575815,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "set 10 items (loop)",
-          "value": 0.263915625,
+          "value": 0.24989604,
           "unit": "ms",
           "category": "database_diskcache"
         },
         {
           "name": "get 10 items (loop)",
-          "value": 0.043873334,
+          "value": 0.042956084000000005,
           "unit": "ms",
           "category": "database_diskcache"
         }
@@ -1332,358 +1338,358 @@
       "benchmark_count": 59,
       "results": [
         {
-          "name": "empty function call",
-          "value": 1.9582080000000002e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "function with return",
-          "value": 2.0339580000000003e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "function with 5 args",
-          "value": 2.5665e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "function with defaults (1 provided)",
-          "value": 2.701417e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "function with keyword args",
-          "value": 4.288333e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "function with *args/**kwargs",
-          "value": 6.0270000000000004e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "instance method call",
-          "value": 2.3065e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "method with 5 args",
-          "value": 2.7917919999999997e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "static method call",
-          "value": 2.752458e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "class method call",
-          "value": 3.564625e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "property access",
-          "value": 2.151708e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "lambda call (no args)",
-          "value": 1.848125e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "lambda call (5 args)",
-          "value": 2.578292e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "closure call",
-          "value": 2.528792e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "len() on list",
-          "value": 1.7885000000000002e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "abs()",
-          "value": 1.709542e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "min() with 5 args",
-          "value": 3.893584e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "max() on list",
-          "value": 4.912292e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "sorted() on 5-item list",
-          "value": 6.296918e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "create lambda",
-          "value": 3.4142919999999996e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "create closure",
-          "value": 5.8939999999999995e-05,
-          "unit": "ms",
-          "category": "functions_calls"
-        },
-        {
-          "name": "function call (no try/except)",
-          "value": 2.209208e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "try/except (no exception raised)",
-          "value": 2.2165e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "try/except ValueError (not raised)",
-          "value": 2.369583e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "try/except/finally (no exception)",
-          "value": 2.17425e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "try with 3 except clauses (not raised)",
-          "value": 2.0875e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "raise + catch ValueError",
-          "value": 0.0001543325,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "raise ValueError, catch Exception",
-          "value": 0.000153955,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "raise + catch custom exception",
-          "value": 0.00016342418,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "raise + catch with 'as e'",
-          "value": 0.00015435584,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "raise + catch + finally",
-          "value": 0.00014785834,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "create ValueError",
-          "value": 3.412917e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "create custom exception",
-          "value": 4.3543750000000005e-05,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "exception with traceback",
-          "value": 0.000106025,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "catch and re-raise (bare raise)",
-          "value": 0.000166055,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
-          "name": "catch, wrap, re-raise (from e)",
-          "value": 0.00024712166,
-          "unit": "ms",
-          "category": "functions_exceptions"
-        },
-        {
           "name": "isinstance() exact match",
-          "value": 1.879042e-05,
+          "value": 1.8518339999999998e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "isinstance() parent class",
-          "value": 1.922875e-05,
+          "value": 1.861792e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "isinstance() 3-level inheritance",
-          "value": 1.9086670000000003e-05,
+          "value": 1.915333e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "isinstance() ABC check",
-          "value": 7.561584e-05,
+          "value": 7.641584e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "isinstance(x, str)",
-          "value": 1.785042e-05,
+          "value": 1.800833e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "isinstance() tuple of types",
-          "value": 3.149708e-05,
+          "value": 3.0229579999999998e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "isinstance() returns False",
-          "value": 2.588208e-05,
+          "value": 2.454542e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "type(x) == Class",
-          "value": 2.08325e-05,
+          "value": 2.039209e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "type(x) is Class",
-          "value": 1.830583e-05,
+          "value": 1.8215e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "type(x) is str",
-          "value": 1.785875e-05,
+          "value": 1.81325e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "type(x) in (int, float, str)",
-          "value": 2.969833e-05,
+          "value": 2.99725e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "issubclass() direct parent",
-          "value": 2.023958e-05,
+          "value": 2.032541e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "issubclass() 3-level",
-          "value": 2.039042e-05,
+          "value": 2.031625e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "issubclass() ABC",
-          "value": 7.267458e-05,
+          "value": 7.375541e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "callable() on function",
-          "value": 1.544791e-05,
+          "value": 1.546917e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "callable() on non-callable",
-          "value": 1.614458e-05,
+          "value": 1.65725e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "hasattr() exists",
-          "value": 2.5563749999999997e-05,
+          "value": 2.5864999999999997e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "hasattr() missing",
-          "value": 2.35275e-05,
+          "value": 2.3681670000000002e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "hasattr() on __slots__ class",
-          "value": 2.702208e-05,
+          "value": 2.6080829999999998e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "obj.__class__",
-          "value": 1.414958e-05,
+          "value": 1.4635e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "obj.__class__.__name__",
-          "value": 2.089167e-05,
+          "value": 2.084375e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "obj.__class__.__mro__",
-          "value": 2.1271249999999997e-05,
+          "value": 2.11275e-05,
           "unit": "ms",
           "category": "functions_type_checking"
         },
         {
           "name": "Class.__bases__",
-          "value": 1.807709e-05,
+          "value": 1.809042e-05,
           "unit": "ms",
           "category": "functions_type_checking"
+        },
+        {
+          "name": "function call (no try/except)",
+          "value": 2.2299160000000002e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "try/except (no exception raised)",
+          "value": 2.254167e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "try/except ValueError (not raised)",
+          "value": 2.165125e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "try/except/finally (no exception)",
+          "value": 2.081875e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "try with 3 except clauses (not raised)",
+          "value": 2.162083e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "raise + catch ValueError",
+          "value": 0.000127175,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "raise ValueError, catch Exception",
+          "value": 0.00012823334,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "raise + catch custom exception",
+          "value": 0.00013484416,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "raise + catch with 'as e'",
+          "value": 0.00015689832,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "raise + catch + finally",
+          "value": 0.00013430832,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "create ValueError",
+          "value": 3.404792e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "create custom exception",
+          "value": 4.187666e-05,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "exception with traceback",
+          "value": 0.00010377666000000001,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "catch and re-raise (bare raise)",
+          "value": 0.00015716416,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "catch, wrap, re-raise (from e)",
+          "value": 0.00023925,
+          "unit": "ms",
+          "category": "functions_exceptions"
+        },
+        {
+          "name": "empty function call",
+          "value": 1.945666e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "function with return",
+          "value": 1.9211670000000002e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "function with 5 args",
+          "value": 2.375625e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "function with defaults (1 provided)",
+          "value": 2.6702079999999998e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "function with keyword args",
+          "value": 4.113875e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "function with *args/**kwargs",
+          "value": 5.944333e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "instance method call",
+          "value": 2.2176659999999998e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "method with 5 args",
+          "value": 2.7075410000000002e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "static method call",
+          "value": 2.631166e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "class method call",
+          "value": 3.5153750000000005e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "property access",
+          "value": 2.127209e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "lambda call (no args)",
+          "value": 1.863959e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "lambda call (5 args)",
+          "value": 2.4416250000000002e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "closure call",
+          "value": 2.6638750000000003e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "len() on list",
+          "value": 1.835125e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "abs()",
+          "value": 1.7730830000000002e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "min() with 5 args",
+          "value": 3.854292e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "max() on list",
+          "value": 4.873375e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "sorted() on 5-item list",
+          "value": 6.245750000000001e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "create lambda",
+          "value": 3.498833e-05,
+          "unit": "ms",
+          "category": "functions_calls"
+        },
+        {
+          "name": "create closure",
+          "value": 5.931e-05,
+          "unit": "ms",
+          "category": "functions_calls"
         }
       ]
     },
@@ -1693,109 +1699,109 @@
       "results": [
         {
           "name": "create coroutine object",
-          "value": 4.5255409999999994e-05,
+          "value": 4.5465000000000006e-05,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "create coroutine (with return)",
-          "value": 4.531042e-05,
+          "value": 4.51425e-05,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "run_until_complete(empty)",
-          "value": 0.0549251458,
+          "value": 0.0460034916,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "run_until_complete(return value)",
-          "value": 0.0475889084,
+          "value": 0.0460173416,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "run nested await",
-          "value": 0.0480961084,
+          "value": 0.0464457042,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "run 3 sequential awaits",
-          "value": 0.0490100583,
+          "value": 0.0463181959,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "asyncio.sleep(0)",
-          "value": 0.062361820899999997,
+          "value": 0.0588437875,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "coroutine with sleep(0)",
-          "value": 0.0620931584,
+          "value": 0.058900012499999994,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "gather() 5 coroutines",
-          "value": 0.06590905,
+          "value": 0.0639513084,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "gather() 10 coroutines",
-          "value": 0.07016565820000001,
+          "value": 0.0685326668,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "gather() 100 coroutines",
-          "value": 0.132437375,
+          "value": 0.139964542,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "create_task() + await",
-          "value": 0.0738659,
+          "value": 0.0801173334,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "create 10 tasks + gather",
-          "value": 0.1014913125,
+          "value": 0.09977972900000001,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "async with (context manager)",
-          "value": 0.0466602458,
+          "value": 0.046120262499999995,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "async for (5 items)",
-          "value": 0.0469954166,
+          "value": 0.0469377832,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "async for (100 items)",
-          "value": 0.055358459000000006,
+          "value": 0.055041,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "sync function call",
-          "value": 2.007292e-05,
+          "value": 1.997333e-05,
           "unit": "ms",
           "category": "async_overhead"
         },
         {
           "name": "async equivalent (run_until_complete)",
-          "value": 0.046617145900000004,
+          "value": 0.0489104,
           "unit": "ms",
           "category": "async_overhead"
         }
@@ -1807,169 +1813,169 @@
       "results": [
         {
           "name": "import sys (built-in)",
-          "value": 0.000208,
+          "value": 0.00025,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import os",
-          "value": 0.0002085,
+          "value": 0.0002295,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import json",
-          "value": 3.145125,
+          "value": 3.00325,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import math",
-          "value": 0.028291999999999998,
+          "value": 0.0250625,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import time",
-          "value": 0.000208,
+          "value": 0.0002085,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import pathlib",
-          "value": 4.0697915,
+          "value": 3.6875834999999997,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import dataclasses",
-          "value": 6.2981455,
+          "value": 6.05825,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import typing",
-          "value": 2.0427705,
+          "value": 1.9721039999999999,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import collections",
-          "value": 0.6613125,
+          "value": 0.9056875,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import datetime",
-          "value": 0.071458,
+          "value": 0.07910400000000001,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import re",
-          "value": 2.3951465,
+          "value": 2.4882705,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import logging",
-          "value": 10.657416999999999,
+          "value": 10.559291,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import urllib.parse",
-          "value": 3.5384165000000003,
+          "value": 3.6215415,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import asyncio",
-          "value": 18.0313125,
+          "value": 17.602249999999998,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import sqlite3",
-          "value": 1.6533125,
+          "value": 1.5782295,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import local_module (small .py)",
-          "value": 0.06793750000000001,
+          "value": 0.066542,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import colorama",
-          "value": 4.47875,
+          "value": 4.405666999999999,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import diskcache",
-          "value": 27.948708500000002,
+          "value": 28.2098755,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import pydantic",
-          "value": 16.795063,
+          "value": 15.641271,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import orjson",
-          "value": 7.6450415,
+          "value": 7.502625,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import msgspec",
-          "value": 10.5221875,
+          "value": 10.154396,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import django",
-          "value": 5.500229,
+          "value": 5.2761875,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import flask",
-          "value": 48.228437,
+          "value": 47.482521,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import fastapi",
-          "value": 106.845125,
+          "value": 106.209979,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import starlette",
-          "value": 0.068354,
+          "value": 0.06397900000000001,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "import litestar",
-          "value": 85.202646,
+          "value": 89.78535450000001,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "from pydantic import BaseModel",
-          "value": 27.829583,
+          "value": 40.195145999999994,
           "unit": "ms",
           "category": "import_times"
         },
         {
           "name": "from django.conf import settings",
-          "value": 13.190854,
+          "value": 16.694,
           "unit": "ms",
           "category": "import_times"
         }

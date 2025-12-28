@@ -163,6 +163,27 @@ python3 code/async_bench/async_overhead.py
 python3 code/imports/import_times.py
 ```
 
+## Generating the Report
+
+After running benchmarks, generate the formatted report from the results:
+
+```bash
+# Generate the-report.md from results.json
+python3 code/generate_report.py
+
+# Or specify custom paths
+python3 code/generate_report.py --results my-results.json --template custom-template.md --output my-report.md
+```
+
+This will:
+- Read benchmark results from `results.json`
+- Fill in all placeholders in `the-report-template.md`
+- Generate `the-report.md` with formatted values
+- Apply automatic unit conversions (ms → ns/μs/ms, bytes → KB/MB)
+- Add digit grouping (1,000 instead of 1000) for readability
+
+The report generator uses a template-based system where placeholders like `{{MEMORY.EMPTY_PROCESS}}` are replaced with actual benchmark values. This ensures consistency and makes it easy to regenerate the report whenever benchmarks are updated.
+
 ## Understanding the Output
 
 ### Terminal Output

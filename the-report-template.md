@@ -1,6 +1,6 @@
 # Python Numbers Programmer Should Know
 
-*Inspired by "Latency Numbers Every Programmer Should Know" — but for Python.*
+*Inspired by "Latency Numbers Every Programmer Should Know" -- but for Python.*
 
 A practical reference for understanding the cost of common Python operations. All benchmarks run on {{METADATA.PLATFORM}} with Python {{METADATA.PYTHON_VERSION}}.
 
@@ -17,14 +17,16 @@ A practical reference for understanding the cost of common Python operations. Al
 | | Large int | — | {{MEMORY.LARGE_INT}} |
 | | Float | — | {{MEMORY.FLOAT}} |
 | | Empty list | — | {{MEMORY.EMPTY_LIST}} |
-| | List with 1000 ints | — | {{MEMORY.LIST_1000_CONTAINER}} |
+| | List with 1,000 ints | — | {{MEMORY.LIST_1000_CONTAINER}} |
+| | List with 1,000 floats | — | {{MEMORY.LIST_1000_FLOATS_CONTAINER}} |
 | | Empty dict | — | {{MEMORY.EMPTY_DICT}} |
-| | Dict with 1000 items | — | {{MEMORY.DICT_1000_CONTAINER}} |
+| | Dict with 1,000 items | — | {{MEMORY.DICT_1000_CONTAINER}} |
 | | Empty set | — | {{MEMORY.EMPTY_SET}} |
+| | Set with 1,000 items | — | {{MEMORY.SET_1000_CONTAINER}} |
 | | Regular class instance (5 attrs) | — | {{MEMORY.REGULAR_CLASS_5ATTR}} |
 | | `__slots__` class instance (5 attrs) | — | {{MEMORY.SLOTS_CLASS_5ATTR}} |
-| | List of 1000 regular class instances | — | {{MEMORY.LIST_1000_REGULAR_CLASS}} |
-| | List of 1000 `__slots__` class instances | — | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
+| | List of 1,000 regular class instances | — | {{MEMORY.LIST_1000_REGULAR_CLASS}} |
+| | List of 1,000 `__slots__` class instances | — | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
 | | dataclass instance | — | {{MEMORY.DATACLASS_5ATTR}} |
 | | namedtuple instance | — | {{MEMORY.NAMEDTUPLE_5ATTR}} |
 | **Basic Ops** | Add two integers | {{BASIC_OPS.INT_ADD}} | — |
@@ -34,17 +36,17 @@ A practical reference for understanding the cost of common Python operations. Al
 | | `.format()` | {{BASIC_OPS.FORMAT_METHOD}} | — |
 | | `%` formatting | {{BASIC_OPS.PERCENT_FORMATTING}} | — |
 | | List append | {{BASIC_OPS.LIST_APPEND}} | — |
-| | List comprehension (1000 items) | {{BASIC_OPS.LIST_COMP_1000}} | — |
-| | Equivalent for-loop | {{BASIC_OPS.FOR_LOOP_1000}} | — |
+| | List comprehension (1,000 items) | {{BASIC_OPS.LIST_COMP_1000}} | — |
+| | Equivalent for-loop (1,000 items) | {{BASIC_OPS.FOR_LOOP_1000}} | — |
 | **Collections** | Dict lookup by key | {{COLLECTIONS.DICT_KEY_EXISTING}} | — |
 | | Set membership check | {{COLLECTIONS.ITEM_IN_SET_EXISTING}} | — |
 | | List index access | {{COLLECTIONS.LIST_INDEX}} | — |
-| | List membership check (1000 items) | {{COLLECTIONS.ITEM_IN_LIST_LAST}} | — |
+| | List membership check (1,000 items) | {{COLLECTIONS.ITEM_IN_LIST_LAST}} | — |
 | | `len()` on list | {{COLLECTIONS.LEN_LIST_1000_ITEMS}} | — |
-| | Iterate 1000-item list | {{COLLECTIONS.FOR_ITEM_IN_LIST}} | — |
-| | Iterate 1000-item dict | {{COLLECTIONS.FOR_KEY_IN_DICT}} | — |
+| | Iterate 1,000-item list | {{COLLECTIONS.FOR_ITEM_IN_LIST}} | — |
+| | Iterate 1,000-item dict | {{COLLECTIONS.FOR_KEY_IN_DICT}} | — |
 | | `range(1000)` iteration | {{COLLECTIONS.FOR_I_IN_RANGE_1000}} | — |
-| | `sum()` of 1000 ints | {{COLLECTIONS.SUM_LIST}} | — |
+| | `sum()` of 1,000 ints | {{COLLECTIONS.SUM_LIST}} | — |
 | **Attributes** | Read from regular class | {{ATTRIBUTES.REGULAR_CLASS_READ_ATTR}} | — |
 | | Write to regular class | {{ATTRIBUTES.REGULAR_CLASS_WRITE_ATTR}} | — |
 | | Read from `__slots__` class | {{ATTRIBUTES.SLOTS_CLASS_READ_ATTR}} | — |
@@ -127,9 +129,10 @@ Understanding how much memory different Python objects consume.
 
 ### Collections
 
-| Collection | Empty | 1000 items |
+| Collection | Empty | 1,000 items |
 |------------|-------|------------|
-| List | {{MEMORY.EMPTY_LIST}} | {{MEMORY.LIST_1000_CONTAINER}} |
+| List (ints) | {{MEMORY.EMPTY_LIST}} | {{MEMORY.LIST_1000_CONTAINER}} |
+| List (floats) | {{MEMORY.EMPTY_LIST}} | {{MEMORY.LIST_1000_FLOATS_CONTAINER}} |
 | Dict | {{MEMORY.EMPTY_DICT}} | {{MEMORY.DICT_1000_CONTAINER}} |
 | Set | {{MEMORY.EMPTY_SET}} | {{MEMORY.SET_1000_CONTAINER}} |
 
@@ -145,12 +148,12 @@ Understanding how much memory different Python objects consume.
 | `@dataclass(slots=True)` | — | {{MEMORY.SLOTS_DATACLASS_5ATTR}} |
 | namedtuple | — | {{MEMORY.NAMEDTUPLE_5ATTR}} |
 
-**Aggregate Memory Usage (1000 instances):**
+**Aggregate Memory Usage (1,000 instances):**
 
 | Type | Total Memory |
 |------|--------------|
-| List of 1000 regular class instances | {{MEMORY.LIST_1000_REGULAR_CLASS}} |
-| List of 1000 `__slots__` class instances | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
+| List of 1,000 regular class instances | {{MEMORY.LIST_1000_REGULAR_CLASS}} |
+| List of 1,000 `__slots__` class instances | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
 
 ---
 
@@ -184,8 +187,8 @@ The cost of fundamental Python operations.
 | Operation | Time |
 |-----------|------|
 | `list.append()` | {{BASIC_OPS.LIST_APPEND}} |
-| List comprehension (1000 items) | {{BASIC_OPS.LIST_COMP_1000}} |
-| Equivalent for-loop (1000 items) | {{BASIC_OPS.FOR_LOOP_1000}} |
+| List comprehension (1,000 items) | {{BASIC_OPS.LIST_COMP_1000}} |
+| Equivalent for-loop (1,000 items) | {{BASIC_OPS.FOR_LOOP_1000}} |
 
 ---
 
@@ -200,7 +203,7 @@ How fast can you get data out of Python's built-in collections?
 | Dict lookup by key | {{COLLECTIONS.DICT_KEY_EXISTING}} |
 | Set membership (`in`) | {{COLLECTIONS.ITEM_IN_SET_EXISTING}} |
 | List index access | {{COLLECTIONS.LIST_INDEX}} |
-| List membership (`in`, 1000 items) | {{COLLECTIONS.ITEM_IN_LIST_LAST}} |
+| List membership (`in`, 1,000 items) | {{COLLECTIONS.ITEM_IN_LIST_LAST}} |
 
 ---
 
@@ -208,9 +211,9 @@ How fast can you get data out of Python's built-in collections?
 
 | Collection | `len()` time |
 |------------|--------------|
-| List (1000 items) | {{COLLECTIONS.LEN_LIST_1000_ITEMS}} |
-| Dict (1000 items) | {{COLLECTIONS.LEN_DICT_1000_ITEMS}} |
-| Set (1000 items) | {{COLLECTIONS.LEN_SET_1000_ITEMS}} |
+| List (1,000 items) | {{COLLECTIONS.LEN_LIST_1000_ITEMS}} |
+| Dict (1,000 items) | {{COLLECTIONS.LEN_DICT_1000_ITEMS}} |
+| Set (1,000 items) | {{COLLECTIONS.LEN_SET_1000_ITEMS}} |
 
 ---
 
@@ -218,10 +221,10 @@ How fast can you get data out of Python's built-in collections?
 
 | Operation | Time |
 |-----------|------|
-| Iterate 1000-item list | {{COLLECTIONS.FOR_ITEM_IN_LIST}} |
-| Iterate 1000-item dict (keys) | {{COLLECTIONS.FOR_KEY_IN_DICT}} |
+| Iterate 1,000-item list | {{COLLECTIONS.FOR_ITEM_IN_LIST}} |
+| Iterate 1,000-item dict (keys) | {{COLLECTIONS.FOR_KEY_IN_DICT}} |
 | Iterate `range(1000)` | {{COLLECTIONS.FOR_I_IN_RANGE_1000}} |
-| `sum()` of 1000 integers | {{COLLECTIONS.SUM_LIST}} |
+| `sum()` of 1,000 integers | {{COLLECTIONS.SUM_LIST}} |
 
 ---
 
