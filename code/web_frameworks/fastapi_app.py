@@ -24,7 +24,7 @@ RESPONSE_DATA = {
 
 
 @app.get('/')
-def index():
+async def index():
     """Root endpoint returning JSON (sync)."""
     return RESPONSE_DATA
 
@@ -36,13 +36,13 @@ async def index_async():
 
 
 @app.get('/orjson', response_class=ORJSONResponse)
-def index_orjson():
+async def index_orjson():
     """Root endpoint using ORJSONResponse for faster serialization."""
     return RESPONSE_DATA
 
 
 @app.get('/health')
-def health():
+async def health():
     """Health check endpoint."""
     return {'status': 'healthy'}
 
