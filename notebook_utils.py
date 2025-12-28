@@ -1132,3 +1132,56 @@ def create_import_times_chart(import_results):
     fig.update_traces(texttemplate='%{text:.1f} ms', textposition='outside', marker_color='#E91E63', textfont_size=14)
     fig.update_layout(height=600, margin=dict(l=200, t=50))
     return fig
+
+
+# ============================================================================
+# Chart Creation - Web Frameworks
+# ============================================================================
+
+
+def create_web_framework_chart(web_results):
+    """Create web framework request handling comparison"""
+    if not web_results:
+        return None
+
+    records = []
+    for r in web_results:
+        time_str, ops_str = format_time(r['value'])
+        # Extract framework name from benchmark name
+        name = r['name']
+        if 'Flask' in name:
+            framework = 'Flask'
+        elif 'Django' in name:
+            framework = 'Django'
+        elif 'FastAPI' in name:
+            framework = 'FastAPI'
+        elif 'Starlette' in name:
+            framework = 'Starlette'
+        elif 'Litestar' in name:
+            framework = 'Litestar'
+        else:
+            framework = name
+
+        records.append({'Framework': framework, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    if not records:
+        return None
+
+    df = pd.DataFrame(records).sort_values('Time')
+
+    # Calculate speedup relative to slowest
+    slowest_time = df['Time'].max()
+    df['Speedup'] = slowest_time / df['Time']
+
+    fig = px.bar(
+        df,
+        y='Framework',
+        x='Time',
+        title='Web Framework Request Handling Performance',
+        labels={'Time': 'Time per Request (ms)', 'Framework': ''},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#00897B', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=150, t=50))
+    return fig, df

@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.18.4"
-app = marimo.App(width="full")
+__generated_with = '0.18.4'
+app = marimo.App(width='full')
 
 
 @app.cell(hide_code=True)
@@ -109,15 +109,15 @@ def _(memory_results, utils):
 
 @app.cell(hide_code=True)
 def _(memory_results, mo, utils):
-    fig, savings_pct, savings_kb = utils.create_aggregate_class_memory_chart(memory_results)
+    fig_agg_class, savings_pct_agg, savings_kb_agg = utils.create_aggregate_class_memory_chart(memory_results)
 
     mo.vstack(
         [
-            fig,
+            fig_agg_class,
             mo.callout(
                 mo.md(f"""
-            **__slots__ Memory Savings:** {savings_pct:.1f}% less memory 
-            ({savings_kb:.1f} KB saved for 1,000 instances)
+            **__slots__ Memory Savings:** {savings_pct_agg:.1f}% less memory 
+            ({savings_kb_agg:.1f} KB saved for 1,000 instances)
             """),
                 kind='success',
             ),
@@ -310,6 +310,84 @@ def _(json_results, mo, utils):
 def _(mo):
     mo.md("""
     ---
+    ## 🌐 Web Frameworks
+    
+    Comparing request handling performance across popular Python web frameworks.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, mo, utils):
+    web_results = categories['web']['results']
+    if web_results:
+        result = utils.create_web_framework_chart(web_results)
+        if result:
+            fig_web, web_df = result
+            fastest = web_df.iloc[0]['Framework']
+            slowest = web_df.iloc[-1]['Framework']
+            speedup = web_df.iloc[-1]['Time'] / web_df.iloc[0]['Time']
+
+            mo.vstack(
+                [
+                    fig_web,
+                    mo.callout(
+                        mo.md(
+                            f"""
+                    **Framework Performance:** {fastest} is the fastest, handling requests {speedup:.1f}x 
+                    faster than {slowest}. Choose based on your needs: async frameworks (Starlette, FastAPI, 
+                    Litestar) excel at I/O-bound workloads with many concurrent connections.
+                    """
+                        ),
+                        kind='success',
+                    ),
+                ]
+            )
+        else:
+            mo.callout(
+                mo.md(
+                    """
+                **Web framework benchmarks not yet run.** 
+                
+                To run these benchmarks, you need `wrk` installed:
+                
+                ```bash
+                # macOS
+                brew install wrk
+                
+                # Then run:
+                python code/run_all.py --category web
+                ```
+                """
+                ),
+                kind='warn',
+            )
+    else:
+        mo.callout(
+            mo.md(
+                """
+            **Web framework benchmarks not yet run.** 
+            
+            To run these benchmarks, you need `wrk` installed:
+            
+            ```bash
+            # macOS
+            brew install wrk
+            
+            # Then run:
+            python code/run_all.py --category web
+            ```
+            """
+            ),
+            kind='warn',
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
     ## 📁 File I/O
 
     Reading and writing files of various sizes.
@@ -488,7 +566,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(coll_results, mo):
     # Calculate actual speedups from the data
     dict_lookup = next(r['value'] for r in coll_results if r['name'] == 'key in dict (existing)')
@@ -520,7 +598,7 @@ def _(coll_results, mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(func_results, mo):
     # Get actual exception data
     no_exception = next(r['value'] for r in func_results if r['name'] == 'try/except (no exception raised)')
@@ -555,7 +633,7 @@ def _(func_results, mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(memory_results, mo):
     # Get memory data for classes
     regular_5attr = next(r['value'] for r in memory_results if r['name'] == 'regular_class_5attr')
@@ -565,7 +643,7 @@ def _(memory_results, mo):
 
     single_savings = ((regular_5attr - slots_5attr) / regular_5attr) * 100
     aggregate_savings = ((regular_1000 - slots_1000) / regular_1000) * 100
-    savings_kb = (regular_1000 - slots_1000) / 1024
+    slots_savings_kb = (regular_1000 - slots_1000) / 1024
     direction = 'more' if single_savings < 0 else 'less'
 
     mo.md(f"""
@@ -579,7 +657,7 @@ def _(memory_results, mo):
     **At Scale (1,000 instances):**
     - Regular classes: **{regular_1000 / 1024:.1f} KB**
     - `__slots__` classes: **{slots_1000 / 1024:.1f} KB**
-    - Total savings: **{savings_kb:.1f} KB** ({aggregate_savings:.1f}% reduction)
+    - Total savings: **{slots_savings_kb:.1f} KB** ({aggregate_savings:.1f}% reduction)
 
     **Why the difference?** Regular classes store attributes in a `__dict__` (64 bytes + hash table overhead).
     `__slots__` classes use a fixed array of attribute descriptors - no dict required!
@@ -587,9 +665,9 @@ def _(memory_results, mo):
     **Speed difference:** Only ~3-5% faster attribute access. The real win is memory.
 
     **When it matters:**
-    - Loading 10,000 database records as objects? Save ~{savings_kb * 10:.0f} KB
-    - Parsing 100,000 JSON records? Save ~{savings_kb * 100 / 1024:.1f} MB
-    - Game with 1M entities? Save ~{savings_kb * 1000 / 1024:.0f} MB
+    - Loading 10,000 database records as objects? Save ~{slots_savings_kb * 10:.0f} KB
+    - Parsing 100,000 JSON records? Save ~{slots_savings_kb * 100 / 1024:.1f} MB
+    - Game with 1M entities? Save ~{slots_savings_kb * 1000 / 1024:.0f} MB
 
     **Trade-off:** You lose dynamic attribute assignment (`obj.new_attr = value` won't work).
 
@@ -598,7 +676,7 @@ def _(memory_results, mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(json_results, mo):
     # Get JSON performance data
     json_ser_complex = next(r['value'] for r in json_results if r['name'] == 'json.dumps() - complex')
@@ -653,7 +731,7 @@ def _(json_results, mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(async_results, mo):
     # Get async overhead data
     sync_call = next(r['value'] for r in async_results if r['name'] == 'sync function call')
@@ -708,7 +786,7 @@ def _(async_results, mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(basic_results, mo):
     # Get list comp vs for loop data
     list_comp_1000 = next(r['value'] for r in basic_results if r['name'] == 'list_comp_1000')
@@ -757,7 +835,7 @@ def _(basic_results, mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""
     ---
@@ -788,5 +866,5 @@ def _(mo):
     return
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
