@@ -3,6 +3,11 @@
 # Reporting
 marimo
 
+# Visualization libraries
+plotly
+pandas
+altair
+
 # perf?
 uvloop
 
