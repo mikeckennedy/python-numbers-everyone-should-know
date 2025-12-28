@@ -76,7 +76,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         result = collection.insert_one(USER_DATA.copy())
         inserted_ids.append(result.inserted_id)
 
-    time_ms = time_operation(insert_one, iterations=1000)
+    time_ms = time_operation(insert_one, iterations=1_000)
     results.append(BenchmarkResult('insert_one()', time_ms, category=CATEGORY))
     print_result('insert_one()', time_ms)
 
@@ -103,21 +103,21 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def find_by_id():
             return collection.find_one({'_id': test_id})
 
-        time_ms = time_operation(find_by_id, iterations=5000)
+        time_ms = time_operation(find_by_id, iterations=5_000)
         results.append(BenchmarkResult('find_one() by _id', time_ms, category=CATEGORY))
         print_result('find_one() by _id', time_ms)
 
     def find_by_field():
         return collection.find_one({'username': 'alice_dev'})
 
-    time_ms = time_operation(find_by_field, iterations=2000)
+    time_ms = time_operation(find_by_field, iterations=2_000)
     results.append(BenchmarkResult('find_one() by field', time_ms, category=CATEGORY))
     print_result('find_one() by field', time_ms)
 
     def find_by_nested():
         return collection.find_one({'profile.location': 'Portland, OR'})
 
-    time_ms = time_operation(find_by_nested, iterations=2000)
+    time_ms = time_operation(find_by_nested, iterations=2_000)
     results.append(BenchmarkResult('find_one() by nested field (indexed)', time_ms, category=CATEGORY))
     print_result('find_one() by nested field (indexed)', time_ms)
 
@@ -139,14 +139,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def update_one_by_id():
             collection.update_one({'_id': test_id}, {'$set': {'settings.theme': 'light'}})
 
-        time_ms = time_operation(update_one_by_id, iterations=1000)
+        time_ms = time_operation(update_one_by_id, iterations=1_000)
         results.append(BenchmarkResult('update_one() by _id', time_ms, category=CATEGORY))
         print_result('update_one() by _id', time_ms)
 
     def update_one_by_field():
         collection.update_one({'username': 'alice_dev'}, {'$set': {'settings.theme': 'dark'}})
 
-    time_ms = time_operation(update_one_by_field, iterations=1000)
+    time_ms = time_operation(update_one_by_field, iterations=1_000)
     results.append(BenchmarkResult('update_one() by field', time_ms, category=CATEGORY))
     print_result('update_one() by field', time_ms)
 
@@ -154,7 +154,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def update_inc():
         collection.update_one({'username': 'alice_dev'}, {'$inc': {'posts.0.views': 1}})
 
-    time_ms = time_operation(update_inc, iterations=1000)
+    time_ms = time_operation(update_inc, iterations=1_000)
     results.append(BenchmarkResult('update_one() with $inc', time_ms, category=CATEGORY))
     print_result('update_one() with $inc', time_ms)
 
@@ -176,7 +176,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             collection.delete_one({'_id': delete_ids[delete_idx[0]]})
             delete_idx[0] += 1
 
-    time_ms = time_operation(delete_one_by_id, iterations=1000)
+    time_ms = time_operation(delete_one_by_id, iterations=1_000)
     results.append(BenchmarkResult('delete_one() by _id', time_ms, category=CATEGORY))
     print_result('delete_one() by _id', time_ms)
 

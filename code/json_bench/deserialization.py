@@ -57,14 +57,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def json_loads_simple():
         return json.loads(SIMPLE_JSON)
 
-    time_ms = time_operation(json_loads_simple, iterations=5000)
+    time_ms = time_operation(json_loads_simple, iterations=5_000)
     results.append(BenchmarkResult('json.loads() - simple', time_ms, category=CATEGORY))
     print_result('json.loads() - simple', time_ms)
 
     def json_loads_complex():
         return json.loads(COMPLEX_JSON)
 
-    time_ms = time_operation(json_loads_complex, iterations=5000)
+    time_ms = time_operation(json_loads_complex, iterations=5_000)
     results.append(BenchmarkResult('json.loads() - complex', time_ms, category=CATEGORY))
     print_result('json.loads() - complex', time_ms)
 
@@ -78,14 +78,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_loads_simple():
             return orjson.loads(SIMPLE_JSON_BYTES)
 
-        time_ms = time_operation(orjson_loads_simple, iterations=5000, warmup=500)
+        time_ms = time_operation(orjson_loads_simple, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.loads() - simple', time_ms, category=CATEGORY))
         print_result('orjson.loads() - simple', time_ms)
 
         def orjson_loads_complex():
             return orjson.loads(COMPLEX_JSON_BYTES)
 
-        time_ms = time_operation(orjson_loads_complex, iterations=5000, warmup=500)
+        time_ms = time_operation(orjson_loads_complex, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.loads() - complex', time_ms, category=CATEGORY))
         print_result('orjson.loads() - complex', time_ms)
 
@@ -93,7 +93,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_loads_str():
             return orjson.loads(COMPLEX_JSON)
 
-        time_ms = time_operation(orjson_loads_str, iterations=5000, warmup=500)
+        time_ms = time_operation(orjson_loads_str, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.loads() - complex (str)', time_ms, category=CATEGORY))
         print_result('orjson.loads() - complex (str)', time_ms)
     else:
@@ -109,14 +109,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def ujson_loads_simple():
             return ujson.loads(SIMPLE_JSON)
 
-        time_ms = time_operation(ujson_loads_simple, iterations=5000)
+        time_ms = time_operation(ujson_loads_simple, iterations=5_000)
         results.append(BenchmarkResult('ujson.loads() - simple', time_ms, category=CATEGORY))
         print_result('ujson.loads() - simple', time_ms)
 
         def ujson_loads_complex():
             return ujson.loads(COMPLEX_JSON)
 
-        time_ms = time_operation(ujson_loads_complex, iterations=5000)
+        time_ms = time_operation(ujson_loads_complex, iterations=5_000)
         results.append(BenchmarkResult('ujson.loads() - complex', time_ms, category=CATEGORY))
         print_result('ujson.loads() - complex', time_ms)
     else:
@@ -132,14 +132,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def msgspec_decode_simple():
             return msgspec.json.decode(SIMPLE_JSON_BYTES)
 
-        time_ms = time_operation(msgspec_decode_simple, iterations=5000)
+        time_ms = time_operation(msgspec_decode_simple, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode() - simple', time_ms, category=CATEGORY))
         print_result('msgspec.json.decode() - simple', time_ms)
 
         def msgspec_decode_complex():
             return msgspec.json.decode(COMPLEX_JSON_BYTES)
 
-        time_ms = time_operation(msgspec_decode_complex, iterations=5000)
+        time_ms = time_operation(msgspec_decode_complex, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode() - complex', time_ms, category=CATEGORY))
         print_result('msgspec.json.decode() - complex', time_ms)
 
@@ -147,7 +147,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def msgspec_decode_str():
             return msgspec.json.decode(COMPLEX_JSON)
 
-        time_ms = time_operation(msgspec_decode_str, iterations=5000)
+        time_ms = time_operation(msgspec_decode_str, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode() - complex (str)', time_ms, category=CATEGORY))
         print_result('msgspec.json.decode() - complex (str)', time_ms)
     else:

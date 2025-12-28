@@ -49,14 +49,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def json_dumps_simple():
         return json.dumps(SIMPLE_OBJ)
 
-    time_ms = time_operation(json_dumps_simple, iterations=5000)
+    time_ms = time_operation(json_dumps_simple, iterations=5_000)
     results.append(BenchmarkResult('json.dumps() - simple', time_ms, category=CATEGORY))
     print_result('json.dumps() - simple', time_ms)
 
     def json_dumps_complex():
         return json.dumps(COMPLEX_OBJ)
 
-    time_ms = time_operation(json_dumps_complex, iterations=5000)
+    time_ms = time_operation(json_dumps_complex, iterations=5_000)
     results.append(BenchmarkResult('json.dumps() - complex', time_ms, category=CATEGORY))
     print_result('json.dumps() - complex', time_ms)
 
@@ -64,7 +64,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def json_dumps_complex_no_ascii():
         return json.dumps(COMPLEX_OBJ, ensure_ascii=False)
 
-    time_ms = time_operation(json_dumps_complex_no_ascii, iterations=5000)
+    time_ms = time_operation(json_dumps_complex_no_ascii, iterations=5_000)
     results.append(BenchmarkResult('json.dumps() - complex (no ascii)', time_ms, category=CATEGORY))
     print_result('json.dumps() - complex (no ascii)', time_ms)
 
@@ -78,14 +78,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_dumps_simple():
             return orjson.dumps(SIMPLE_OBJ)
 
-        time_ms = time_operation(orjson_dumps_simple, iterations=5000, warmup=500)
+        time_ms = time_operation(orjson_dumps_simple, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.dumps() - simple', time_ms, category=CATEGORY))
         print_result('orjson.dumps() - simple', time_ms)
 
         def orjson_dumps_complex():
             return orjson.dumps(COMPLEX_OBJ)
 
-        time_ms = time_operation(orjson_dumps_complex, iterations=5000, warmup=500)
+        time_ms = time_operation(orjson_dumps_complex, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.dumps() - complex', time_ms, category=CATEGORY))
         print_result('orjson.dumps() - complex', time_ms)
     else:
@@ -101,14 +101,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def ujson_dumps_simple():
             return ujson.dumps(SIMPLE_OBJ)
 
-        time_ms = time_operation(ujson_dumps_simple, iterations=5000)
+        time_ms = time_operation(ujson_dumps_simple, iterations=5_000)
         results.append(BenchmarkResult('ujson.dumps() - simple', time_ms, category=CATEGORY))
         print_result('ujson.dumps() - simple', time_ms)
 
         def ujson_dumps_complex():
             return ujson.dumps(COMPLEX_OBJ)
 
-        time_ms = time_operation(ujson_dumps_complex, iterations=5000)
+        time_ms = time_operation(ujson_dumps_complex, iterations=5_000)
         results.append(BenchmarkResult('ujson.dumps() - complex', time_ms, category=CATEGORY))
         print_result('ujson.dumps() - complex', time_ms)
     else:
@@ -124,14 +124,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def msgspec_encode_simple():
             return msgspec.json.encode(SIMPLE_OBJ)
 
-        time_ms = time_operation(msgspec_encode_simple, iterations=5000)
+        time_ms = time_operation(msgspec_encode_simple, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.encode() - simple', time_ms, category=CATEGORY))
         print_result('msgspec.json.encode() - simple', time_ms)
 
         def msgspec_encode_complex():
             return msgspec.json.encode(COMPLEX_OBJ)
 
-        time_ms = time_operation(msgspec_encode_complex, iterations=5000)
+        time_ms = time_operation(msgspec_encode_complex, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.encode() - complex', time_ms, category=CATEGORY))
         print_result('msgspec.json.encode() - complex', time_ms)
     else:

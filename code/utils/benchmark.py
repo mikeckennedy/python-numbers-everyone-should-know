@@ -71,7 +71,7 @@ class BenchmarkResult:
         if self.category:
             result['category'] = self.category
         if self.details:
-            result['details'] = self.details # type: ignore
+            result['details'] = self.details  # type: ignore
         return result
 
 

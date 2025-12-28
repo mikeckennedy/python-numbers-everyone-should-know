@@ -44,12 +44,12 @@ def run_benchmarks() -> dict:
     print_memory_result('List with 100 ints (container only)', size)
     results.append(MemoryResult(name='list_100_container', value=size, unit='bytes', category='memory'))
 
-    list_1000 = list(range(1000))
+    list_1000 = list(range(1_000))
     size = measure_size(list_1000)
     print_memory_result('List with 1000 ints (container only)', size)
     results.append(MemoryResult(name='list_1000_container', value=size, unit='bytes', category='memory'))
 
-    list_1000_floats = [float(i) for i in range(1000)]
+    list_1000_floats = [float(i) for i in range(1_000)]
     size = measure_size(list_1000_floats)
     print_memory_result('List with 1000 floats (container only)', size)
     results.append(MemoryResult(name='list_1000_floats_container', value=size, unit='bytes', category='memory'))
@@ -72,7 +72,7 @@ def run_benchmarks() -> dict:
     print_memory_result('Dict with 100 items (container only)', size)
     results.append(MemoryResult(name='dict_100_container', value=size, unit='bytes', category='memory'))
 
-    dict_1000 = {i: i for i in range(1000)}
+    dict_1000 = {i: i for i in range(1_000)}
     size = measure_size(dict_1000)
     print_memory_result('Dict with 1000 items (container only)', size)
     results.append(MemoryResult(name='dict_1000_container', value=size, unit='bytes', category='memory'))
@@ -95,7 +95,7 @@ def run_benchmarks() -> dict:
     print_memory_result('Set with 100 items (container only)', size)
     results.append(MemoryResult(name='set_100_container', value=size, unit='bytes', category='memory'))
 
-    set_1000 = set(range(1000))
+    set_1000 = set(range(1_000))
     size = measure_size(set_1000)
     print_memory_result('Set with 1000 items (container only)', size)
     results.append(MemoryResult(name='set_1000_container', value=size, unit='bytes', category='memory'))

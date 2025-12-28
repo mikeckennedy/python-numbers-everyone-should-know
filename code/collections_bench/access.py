@@ -32,9 +32,9 @@ def run_benchmarks() -> list[BenchmarkResult]:
     print_header('Collection Access Benchmarks')
 
     # Setup test data
-    test_dict = {f'key_{i}': i for i in range(1000)}
-    test_set = {f'item_{i}' for i in range(1000)}
-    test_list = list(range(1000))
+    test_dict = {f'key_{i}': i for i in range(1_000)}
+    test_set = {f'item_{i}' for i in range(1_000)}
+    test_list = list(range(1_000))
 
     # Keys/items that exist (middle of collection)
     existing_key = 'key_500'
@@ -54,7 +54,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def dict_lookup_existing():
         return test_dict[existing_key]
 
-    time_ms = time_operation(dict_lookup_existing, iterations=10000)
+    time_ms = time_operation(dict_lookup_existing, iterations=10_000)
     results.append(BenchmarkResult('dict[key] (existing)', time_ms, category=CATEGORY))
     print_result('dict[key] (existing)', time_ms)
 
@@ -62,7 +62,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def dict_get_existing():
         return test_dict.get(existing_key)
 
-    time_ms = time_operation(dict_get_existing, iterations=10000)
+    time_ms = time_operation(dict_get_existing, iterations=10_000)
     results.append(BenchmarkResult('dict.get(key) (existing)', time_ms, category=CATEGORY))
     print_result('dict.get(key) (existing)', time_ms)
 
@@ -70,7 +70,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def dict_get_missing():
         return test_dict.get(missing_key)
 
-    time_ms = time_operation(dict_get_missing, iterations=10000)
+    time_ms = time_operation(dict_get_missing, iterations=10_000)
     results.append(BenchmarkResult('dict.get(key) (missing)', time_ms, category=CATEGORY))
     print_result('dict.get(key) (missing)', time_ms)
 
@@ -78,14 +78,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def dict_in_existing():
         return existing_key in test_dict
 
-    time_ms = time_operation(dict_in_existing, iterations=10000)
+    time_ms = time_operation(dict_in_existing, iterations=10_000)
     results.append(BenchmarkResult('key in dict (existing)', time_ms, category=CATEGORY))
     print_result('key in dict (existing)', time_ms)
 
     def dict_in_missing():
         return missing_key in test_dict
 
-    time_ms = time_operation(dict_in_missing, iterations=10000)
+    time_ms = time_operation(dict_in_missing, iterations=10_000)
     results.append(BenchmarkResult('key in dict (missing)', time_ms, category=CATEGORY))
     print_result('key in dict (missing)', time_ms)
 
@@ -97,14 +97,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def set_in_existing():
         return existing_item in test_set
 
-    time_ms = time_operation(set_in_existing, iterations=10000)
+    time_ms = time_operation(set_in_existing, iterations=10_000)
     results.append(BenchmarkResult('item in set (existing)', time_ms, category=CATEGORY))
     print_result('item in set (existing)', time_ms)
 
     def set_in_missing():
         return missing_item in test_set
 
-    time_ms = time_operation(set_in_missing, iterations=10000)
+    time_ms = time_operation(set_in_missing, iterations=10_000)
     results.append(BenchmarkResult('item in set (missing)', time_ms, category=CATEGORY))
     print_result('item in set (missing)', time_ms)
 
@@ -117,7 +117,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def list_index_access():
         return test_list[existing_index]
 
-    time_ms = time_operation(list_index_access, iterations=10000)
+    time_ms = time_operation(list_index_access, iterations=10_000)
     results.append(BenchmarkResult('list[index]', time_ms, category=CATEGORY))
     print_result('list[index]', time_ms)
 
@@ -125,7 +125,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def list_negative_index():
         return test_list[-1]
 
-    time_ms = time_operation(list_negative_index, iterations=10000)
+    time_ms = time_operation(list_negative_index, iterations=10_000)
     results.append(BenchmarkResult('list[-1]', time_ms, category=CATEGORY))
     print_result('list[-1]', time_ms)
 
@@ -138,7 +138,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def list_in_first():
         return 0 in test_list
 
-    time_ms = time_operation(list_in_first, iterations=1000)
+    time_ms = time_operation(list_in_first, iterations=1_000)
     results.append(BenchmarkResult('item in list (first)', time_ms, category=CATEGORY))
     print_result('item in list (first)', time_ms)
 
@@ -146,7 +146,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def list_in_middle():
         return 500 in test_list
 
-    time_ms = time_operation(list_in_middle, iterations=1000)
+    time_ms = time_operation(list_in_middle, iterations=1_000)
     results.append(BenchmarkResult('item in list (middle)', time_ms, category=CATEGORY))
     print_result('item in list (middle)', time_ms)
 
@@ -154,7 +154,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def list_in_last():
         return 999 in test_list
 
-    time_ms = time_operation(list_in_last, iterations=1000)
+    time_ms = time_operation(list_in_last, iterations=1_000)
     results.append(BenchmarkResult('item in list (last)', time_ms, category=CATEGORY))
     print_result('item in list (last)', time_ms)
 
@@ -162,7 +162,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def list_in_missing():
         return 9999 in test_list
 
-    time_ms = time_operation(list_in_missing, iterations=1000)
+    time_ms = time_operation(list_in_missing, iterations=1_000)
     results.append(BenchmarkResult('item in list (missing)', time_ms, category=CATEGORY))
     print_result('item in list (missing)', time_ms)
 
@@ -172,7 +172,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

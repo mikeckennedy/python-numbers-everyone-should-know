@@ -54,7 +54,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def cache_set():
             cache.set('bench:user', USER_DATA)
 
-        time_ms = time_operation(cache_set, iterations=1000)
+        time_ms = time_operation(cache_set, iterations=1_000)
         results.append(BenchmarkResult('cache.set() (complex obj)', time_ms, category=CATEGORY))
         print_result('cache.set() (complex obj)', time_ms)
 
@@ -62,7 +62,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def cache_set_simple():
             cache.set('bench:simple', 'hello world')
 
-        time_ms = time_operation(cache_set_simple, iterations=1000)
+        time_ms = time_operation(cache_set_simple, iterations=1_000)
         results.append(BenchmarkResult('cache.set() (string)', time_ms, category=CATEGORY))
         print_result('cache.set() (string)', time_ms)
 
@@ -70,7 +70,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def cache_set_expire():
             cache.set('bench:expire', USER_DATA, expire=3600)
 
-        time_ms = time_operation(cache_set_expire, iterations=1000)
+        time_ms = time_operation(cache_set_expire, iterations=1_000)
         results.append(BenchmarkResult('cache.set() with expire', time_ms, category=CATEGORY))
         print_result('cache.set() with expire', time_ms)
 
@@ -86,14 +86,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def cache_get():
             return cache.get('test_key')
 
-        time_ms = time_operation(cache_get, iterations=5000)
+        time_ms = time_operation(cache_get, iterations=5_000)
         results.append(BenchmarkResult('cache.get() (complex obj)', time_ms, category=CATEGORY))
         print_result('cache.get() (complex obj)', time_ms)
 
         def cache_get_simple():
             return cache.get('test_simple')
 
-        time_ms = time_operation(cache_get_simple, iterations=5000)
+        time_ms = time_operation(cache_get_simple, iterations=5_000)
         results.append(BenchmarkResult('cache.get() (string)', time_ms, category=CATEGORY))
         print_result('cache.get() (string)', time_ms)
 
@@ -101,7 +101,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def cache_get_default():
             return cache.get('nonexistent', default=None)
 
-        time_ms = time_operation(cache_get_default, iterations=5000)
+        time_ms = time_operation(cache_get_default, iterations=5_000)
         results.append(BenchmarkResult('cache.get() miss (with default)', time_ms, category=CATEGORY))
         print_result('cache.get() miss (with default)', time_ms)
 
@@ -113,14 +113,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def cache_contains_hit():
             return 'test_key' in cache
 
-        time_ms = time_operation(cache_contains_hit, iterations=5000)
+        time_ms = time_operation(cache_contains_hit, iterations=5_000)
         results.append(BenchmarkResult('key in cache (hit)', time_ms, category=CATEGORY))
         print_result('key in cache (hit)', time_ms)
 
         def cache_contains_miss():
             return 'nonexistent_key' in cache
 
-        time_ms = time_operation(cache_contains_miss, iterations=5000)
+        time_ms = time_operation(cache_contains_miss, iterations=5_000)
         results.append(BenchmarkResult('key in cache (miss)', time_ms, category=CATEGORY))
         print_result('key in cache (miss)', time_ms)
 
@@ -137,7 +137,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             cache.delete('bench:delete')
             cache.set('bench:delete', 'value')
 
-        time_ms = time_operation(cache_delete, iterations=1000)
+        time_ms = time_operation(cache_delete, iterations=1_000)
         results.append(BenchmarkResult('cache.delete()', time_ms, category=CATEGORY))
         print_result('cache.delete()', time_ms)
 
@@ -150,7 +150,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             cache.set('bench:pop', USER_DATA)
             return result
 
-        time_ms = time_operation(cache_pop, iterations=1000)
+        time_ms = time_operation(cache_pop, iterations=1_000)
         results.append(BenchmarkResult('cache.pop() (get+delete)', time_ms, category=CATEGORY))
         print_result('cache.pop() (get+delete)', time_ms)
 

@@ -52,14 +52,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def pickle_dumps():
         return pickle.dumps(COMPLEX_OBJ)
 
-    time_ms = time_operation(pickle_dumps, iterations=5000)
+    time_ms = time_operation(pickle_dumps, iterations=5_000)
     results.append(BenchmarkResult('pickle.dumps()', time_ms, category=CATEGORY))
     print_result('pickle.dumps()', time_ms)
 
     def pickle_loads():
         return pickle.loads(PICKLE_DATA)
 
-    time_ms = time_operation(pickle_loads, iterations=5000)
+    time_ms = time_operation(pickle_loads, iterations=5_000)
     results.append(BenchmarkResult('pickle.loads()', time_ms, category=CATEGORY))
     print_result('pickle.loads()', time_ms)
 
@@ -67,14 +67,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def pickle_dumps_p4():
         return pickle.dumps(COMPLEX_OBJ, protocol=4)
 
-    time_ms = time_operation(pickle_dumps_p4, iterations=5000)
+    time_ms = time_operation(pickle_dumps_p4, iterations=5_000)
     results.append(BenchmarkResult('pickle.dumps() protocol=4', time_ms, category=CATEGORY))
     print_result('pickle.dumps() protocol=4', time_ms)
 
     def pickle_dumps_p5():
         return pickle.dumps(COMPLEX_OBJ, protocol=5)
 
-    time_ms = time_operation(pickle_dumps_p5, iterations=5000)
+    time_ms = time_operation(pickle_dumps_p5, iterations=5_000)
     results.append(BenchmarkResult('pickle.dumps() protocol=5', time_ms, category=CATEGORY))
     print_result('pickle.dumps() protocol=5', time_ms)
 
@@ -86,14 +86,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def json_dumps():
         return json.dumps(COMPLEX_OBJ)
 
-    time_ms = time_operation(json_dumps, iterations=5000)
+    time_ms = time_operation(json_dumps, iterations=5_000)
     results.append(BenchmarkResult('json.dumps()', time_ms, category=CATEGORY))
     print_result('json.dumps()', time_ms)
 
     def json_loads():
         return json.loads(JSON_DATA)
 
-    time_ms = time_operation(json_loads, iterations=5000)
+    time_ms = time_operation(json_loads, iterations=5_000)
     results.append(BenchmarkResult('json.loads()', time_ms, category=CATEGORY))
     print_result('json.loads()', time_ms)
 
@@ -108,14 +108,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def orjson_dumps():
             return orjson.dumps(COMPLEX_OBJ)
 
-        time_ms = time_operation(orjson_dumps, iterations=5000)
+        time_ms = time_operation(orjson_dumps, iterations=5_000)
         results.append(BenchmarkResult('orjson.dumps()', time_ms, category=CATEGORY))
         print_result('orjson.dumps()', time_ms)
 
         def orjson_loads():
             return orjson.loads(orjson_data)
 
-        time_ms = time_operation(orjson_loads, iterations=5000)
+        time_ms = time_operation(orjson_loads, iterations=5_000)
         results.append(BenchmarkResult('orjson.loads()', time_ms, category=CATEGORY))
         print_result('orjson.loads()', time_ms)
     else:
@@ -133,14 +133,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def msgspec_json_encode():
             return msgspec.json.encode(COMPLEX_OBJ)
 
-        time_ms = time_operation(msgspec_json_encode, iterations=5000)
+        time_ms = time_operation(msgspec_json_encode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.encode()', time_ms, category=CATEGORY))
         print_result('msgspec.json.encode()', time_ms)
 
         def msgspec_json_decode():
             return msgspec.json.decode(msgspec_json_data)
 
-        time_ms = time_operation(msgspec_json_decode, iterations=5000)
+        time_ms = time_operation(msgspec_json_decode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode()', time_ms, category=CATEGORY))
         print_result('msgspec.json.decode()', time_ms)
 
@@ -148,14 +148,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def msgspec_msgpack_encode():
             return msgspec.msgpack.encode(COMPLEX_OBJ)
 
-        time_ms = time_operation(msgspec_msgpack_encode, iterations=5000)
+        time_ms = time_operation(msgspec_msgpack_encode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.msgpack.encode()', time_ms, category=CATEGORY))
         print_result('msgspec.msgpack.encode()', time_ms)
 
         def msgspec_msgpack_decode():
             return msgspec.msgpack.decode(msgspec_msgpack_data)
 
-        time_ms = time_operation(msgspec_msgpack_decode, iterations=5000)
+        time_ms = time_operation(msgspec_msgpack_decode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.msgpack.decode()', time_ms, category=CATEGORY))
         print_result('msgspec.msgpack.decode()', time_ms)
     else:

@@ -31,14 +31,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     print_header('Collection Length Benchmarks')
 
     # Setup test data
-    test_list_1000 = list(range(1000))
-    test_dict_1000 = {f'key_{i}': i for i in range(1000)}
-    test_set_1000 = set(range(1000))
+    test_list_1000 = list(range(1_000))
+    test_dict_1000 = {f'key_{i}': i for i in range(1_000)}
+    test_set_1000 = set(range(1_000))
 
     # Also test with different sizes for comparison
     test_list_10 = list(range(10))
     test_list_100 = list(range(100))
-    test_list_10000 = list(range(10000))
+    test_list_10000 = list(range(10_000))
 
     # -------------------------------------------------------------------------
     # len() is O(1) - stored as attribute on collection
@@ -48,28 +48,28 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def len_list_10():
         return len(test_list_10)
 
-    time_ms = time_operation(len_list_10, iterations=10000)
+    time_ms = time_operation(len_list_10, iterations=10_000)
     results.append(BenchmarkResult('len(list) - 10 items', time_ms, category=CATEGORY))
     print_result('len(list) - 10 items', time_ms)
 
     def len_list_100():
         return len(test_list_100)
 
-    time_ms = time_operation(len_list_100, iterations=10000)
+    time_ms = time_operation(len_list_100, iterations=10_000)
     results.append(BenchmarkResult('len(list) - 100 items', time_ms, category=CATEGORY))
     print_result('len(list) - 100 items', time_ms)
 
     def len_list_1000():
         return len(test_list_1000)
 
-    time_ms = time_operation(len_list_1000, iterations=10000)
+    time_ms = time_operation(len_list_1000, iterations=10_000)
     results.append(BenchmarkResult('len(list) - 1000 items', time_ms, category=CATEGORY))
     print_result('len(list) - 1000 items', time_ms)
 
     def len_list_10000():
         return len(test_list_10000)
 
-    time_ms = time_operation(len_list_10000, iterations=10000)
+    time_ms = time_operation(len_list_10000, iterations=10_000)
     results.append(BenchmarkResult('len(list) - 10000 items', time_ms, category=CATEGORY))
     print_result('len(list) - 10000 items', time_ms)
 
@@ -81,7 +81,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def len_dict_1000():
         return len(test_dict_1000)
 
-    time_ms = time_operation(len_dict_1000, iterations=10000)
+    time_ms = time_operation(len_dict_1000, iterations=10_000)
     results.append(BenchmarkResult('len(dict) - 1000 items', time_ms, category=CATEGORY))
     print_result('len(dict) - 1000 items', time_ms)
 
@@ -93,7 +93,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def len_set_1000():
         return len(test_set_1000)
 
-    time_ms = time_operation(len_set_1000, iterations=10000)
+    time_ms = time_operation(len_set_1000, iterations=10_000)
     results.append(BenchmarkResult('len(set) - 1000 items', time_ms, category=CATEGORY))
     print_result('len(set) - 1000 items', time_ms)
 
@@ -102,12 +102,12 @@ def run_benchmarks() -> list[BenchmarkResult]:
     # -------------------------------------------------------------------------
     print_subheader('len() on String')
 
-    test_str_1000 = 'a' * 1000
+    test_str_1000 = 'a' * 1_000
 
     def len_str_1000():
         return len(test_str_1000)
 
-    time_ms = time_operation(len_str_1000, iterations=10000)
+    time_ms = time_operation(len_str_1000, iterations=10_000)
     results.append(BenchmarkResult('len(str) - 1000 chars', time_ms, category=CATEGORY))
     print_result('len(str) - 1000 chars', time_ms)
 
@@ -116,12 +116,12 @@ def run_benchmarks() -> list[BenchmarkResult]:
     # -------------------------------------------------------------------------
     print_subheader('len() on Tuple')
 
-    test_tuple_1000 = tuple(range(1000))
+    test_tuple_1000 = tuple(range(1_000))
 
     def len_tuple_1000():
         return len(test_tuple_1000)
 
-    time_ms = time_operation(len_tuple_1000, iterations=10000)
+    time_ms = time_operation(len_tuple_1000, iterations=10_000)
     results.append(BenchmarkResult('len(tuple) - 1000 items', time_ms, category=CATEGORY))
     print_result('len(tuple) - 1000 items', time_ms)
 
@@ -131,7 +131,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

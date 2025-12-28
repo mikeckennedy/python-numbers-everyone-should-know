@@ -148,12 +148,12 @@ def run_benchmarks() -> dict:
     # Lists of 1000 instances
     print_subheader('Lists of 1000 Instances')
 
-    regular_list = [RegularClass(1, 2, 3, 4, 5) for _ in range(1000)]
+    regular_list = [RegularClass(1, 2, 3, 4, 5) for _ in range(1_000)]
     size = measure_deep_size(regular_list)
     print_memory_result('List of 1000 regular class instances', size)
     results.append(MemoryResult(name='list_1000_regular_class', value=size, unit='bytes', category='memory'))
 
-    slots_list = [SlotsClass(1, 2, 3, 4, 5) for _ in range(1000)]
+    slots_list = [SlotsClass(1, 2, 3, 4, 5) for _ in range(1_000)]
     size = measure_deep_size(slots_list)
     print_memory_result('List of 1000 __slots__ class instances', size)
     results.append(MemoryResult(name='list_1000_slots_class', value=size, unit='bytes', category='memory'))

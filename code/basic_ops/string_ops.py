@@ -28,7 +28,7 @@ def run_benchmarks() -> dict:
 
     # String concatenation (small strings)
     s1, s2 = 'hello', 'world'
-    time_ns = time_operation_ns(lambda: s1 + ' ' + s2, iterations=100000)
+    time_ns = time_operation_ns(lambda: s1 + ' ' + s2, iterations=100_000)
     time_ms = ns_to_ms(time_ns)
     print_result('Concatenation (+) small strings', time_ms)
     results.append(BenchmarkResult(name='concat_small', value=time_ms, category='basic_ops'))
@@ -36,14 +36,14 @@ def run_benchmarks() -> dict:
     # String concatenation (medium strings)
     s1_med = 'hello' * 10
     s2_med = 'world' * 10
-    time_ns = time_operation_ns(lambda: s1_med + ' ' + s2_med, iterations=10000)
+    time_ns = time_operation_ns(lambda: s1_med + ' ' + s2_med, iterations=10_000)
     time_ms = ns_to_ms(time_ns)
     print_result('Concatenation (+) medium strings', time_ms)
     results.append(BenchmarkResult(name='concat_medium', value=time_ms, category='basic_ops'))
 
     # f-string formatting
     name, age = 'Alice', 30
-    time_ns = time_operation_ns(lambda: f'Hello {name}, you are {age} years old', iterations=100000)
+    time_ns = time_operation_ns(lambda: f'Hello {name}, you are {age} years old', iterations=100_000)
     time_ms = ns_to_ms(time_ns)
     print_result('f-string formatting', time_ms)
     results.append(BenchmarkResult(name='f_string', value=time_ms, category='basic_ops'))
@@ -51,28 +51,28 @@ def run_benchmarks() -> dict:
     # .format() method
     time_ns = time_operation_ns(
         lambda: 'Hello {}, you are {} years old'.format(name, age),
-        iterations=100000,
+        iterations=100_000,
     )
     time_ms = ns_to_ms(time_ns)
     print_result('.format() method', time_ms)
     results.append(BenchmarkResult(name='format_method', value=time_ms, category='basic_ops'))
 
     # % formatting
-    time_ns = time_operation_ns(lambda: 'Hello %s, you are %d years old' % (name, age), iterations=100000)
+    time_ns = time_operation_ns(lambda: 'Hello %s, you are %d years old' % (name, age), iterations=100_000)
     time_ms = ns_to_ms(time_ns)
     print_result('% formatting', time_ms)
     results.append(BenchmarkResult(name='percent_formatting', value=time_ms, category='basic_ops'))
 
     # String join (small list)
     words = ['hello', 'world', 'python', 'test']
-    time_ns = time_operation_ns(lambda: ' '.join(words), iterations=100000)
+    time_ns = time_operation_ns(lambda: ' '.join(words), iterations=100_000)
     time_ms = ns_to_ms(time_ns)
     print_result('Join small list', time_ms)
     results.append(BenchmarkResult(name='join_small', value=time_ms, category='basic_ops'))
 
     # String split
     sentence = 'hello world python test'
-    time_ns = time_operation_ns(lambda: sentence.split(), iterations=100000)
+    time_ns = time_operation_ns(lambda: sentence.split(), iterations=100_000)
     time_ms = ns_to_ms(time_ns)
     print_result('Split string', time_ms)
     results.append(BenchmarkResult(name='split', value=time_ms, category='basic_ops'))

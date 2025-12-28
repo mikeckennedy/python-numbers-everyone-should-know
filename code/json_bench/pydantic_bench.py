@@ -136,14 +136,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def model_dump_simple():
         return simple_instance.model_dump()
 
-    time_ms = time_operation(model_dump_simple, iterations=5000, warmup=500)
+    time_ms = time_operation(model_dump_simple, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_dump() - simple', time_ms, category=CATEGORY))
     print_result('model_dump() - simple', time_ms)
 
     def model_dump_complex():
         return complex_instance.model_dump()
 
-    time_ms = time_operation(model_dump_complex, iterations=5000, warmup=500)
+    time_ms = time_operation(model_dump_complex, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_dump() - complex', time_ms, category=CATEGORY))
     print_result('model_dump() - complex', time_ms)
 
@@ -155,14 +155,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def model_dump_json_simple():
         return simple_instance.model_dump_json()
 
-    time_ms = time_operation(model_dump_json_simple, iterations=5000, warmup=500)
+    time_ms = time_operation(model_dump_json_simple, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_dump_json() - simple', time_ms, category=CATEGORY))
     print_result('model_dump_json() - simple', time_ms)
 
     def model_dump_json_complex():
         return complex_instance.model_dump_json()
 
-    time_ms = time_operation(model_dump_json_complex, iterations=5000, warmup=500)
+    time_ms = time_operation(model_dump_json_complex, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_dump_json() - complex', time_ms, category=CATEGORY))
     print_result('model_dump_json() - complex', time_ms)
 
@@ -174,14 +174,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def model_validate_simple():
         return SimpleModel.model_validate(simple_dict)
 
-    time_ms = time_operation(model_validate_simple, iterations=5000, warmup=500)
+    time_ms = time_operation(model_validate_simple, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_validate() - simple', time_ms, category=CATEGORY))
     print_result('model_validate() - simple', time_ms)
 
     def model_validate_complex():
         return ComplexModel.model_validate(complex_dict)
 
-    time_ms = time_operation(model_validate_complex, iterations=5000, warmup=500)
+    time_ms = time_operation(model_validate_complex, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_validate() - complex', time_ms, category=CATEGORY))
     print_result('model_validate() - complex', time_ms)
 
@@ -193,14 +193,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def model_validate_json_simple():
         return SimpleModel.model_validate_json(simple_json)
 
-    time_ms = time_operation(model_validate_json_simple, iterations=5000, warmup=500)
+    time_ms = time_operation(model_validate_json_simple, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_validate_json() - simple', time_ms, category=CATEGORY))
     print_result('model_validate_json() - simple', time_ms)
 
     def model_validate_json_complex():
         return ComplexModel.model_validate_json(complex_json)
 
-    time_ms = time_operation(model_validate_json_complex, iterations=5000, warmup=500)
+    time_ms = time_operation(model_validate_json_complex, iterations=5_000, warmup=500)
     results.append(BenchmarkResult('model_validate_json() - complex', time_ms, category=CATEGORY))
     print_result('model_validate_json() - complex', time_ms)
 
@@ -213,7 +213,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def json_dumps_dict():
         return json.dumps(complex_dict)
 
-    time_ms = time_operation(json_dumps_dict, iterations=5000)
+    time_ms = time_operation(json_dumps_dict, iterations=5_000)
     results.append(BenchmarkResult('json.dumps(dict) - comparison', time_ms, category=CATEGORY))
     print_result('json.dumps(dict) - comparison', time_ms)
 

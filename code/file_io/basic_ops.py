@@ -61,7 +61,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             f = open(file_1kb, 'rb')
             f.close()
 
-        time_ms = time_operation(open_close_read, iterations=5000)
+        time_ms = time_operation(open_close_read, iterations=5_000)
         results.append(BenchmarkResult('open() + close() (read mode)', time_ms, category=CATEGORY))
         print_result('open() + close() (read mode)', time_ms)
 
@@ -69,7 +69,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             f = open(write_file_1kb, 'wb')
             f.close()
 
-        time_ms = time_operation(open_close_write, iterations=5000)
+        time_ms = time_operation(open_close_write, iterations=5_000)
         results.append(BenchmarkResult('open() + close() (write mode)', time_ms, category=CATEGORY))
         print_result('open() + close() (write mode)', time_ms)
 
@@ -77,7 +77,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             with open(file_1kb, 'rb'):
                 pass
 
-        time_ms = time_operation(open_close_context, iterations=5000)
+        time_ms = time_operation(open_close_context, iterations=5_000)
         results.append(BenchmarkResult('with open() (context manager)', time_ms, category=CATEGORY))
         print_result('with open() (context manager)', time_ms)
 
@@ -90,7 +90,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             with open(file_1kb, 'rb') as f:
                 return f.read()
 
-        time_ms = time_operation(read_1kb, iterations=5000)
+        time_ms = time_operation(read_1kb, iterations=5_000)
         results.append(BenchmarkResult('read 1KB file', time_ms, category=CATEGORY))
         print_result('read 1KB file', time_ms)
 
@@ -98,7 +98,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             with open(file_1mb, 'rb') as f:
                 return f.read()
 
-        time_ms = time_operation(read_1mb, iterations=1000)
+        time_ms = time_operation(read_1mb, iterations=1_000)
         results.append(BenchmarkResult('read 1MB file', time_ms, category=CATEGORY))
         print_result('read 1MB file', time_ms)
 
@@ -110,7 +110,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             with open(text_file, 'r') as f:
                 return f.read()
 
-        time_ms = time_operation(read_text, iterations=5000)
+        time_ms = time_operation(read_text, iterations=5_000)
         results.append(BenchmarkResult('read text file (1.4KB)', time_ms, category=CATEGORY))
         print_result('read text file (1.4KB)', time_ms)
 
@@ -119,7 +119,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             with open(text_file, 'r') as f:
                 return f.readlines()
 
-        time_ms = time_operation(read_lines, iterations=5000)
+        time_ms = time_operation(read_lines, iterations=5_000)
         results.append(BenchmarkResult('readlines() (100 lines)', time_ms, category=CATEGORY))
         print_result('readlines() (100 lines)', time_ms)
 
@@ -132,7 +132,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             with open(write_file_1kb, 'wb') as f:
                 f.write(DATA_1KB)
 
-        time_ms = time_operation(write_1kb, iterations=5000)
+        time_ms = time_operation(write_1kb, iterations=5_000)
         results.append(BenchmarkResult('write 1KB file', time_ms, category=CATEGORY))
         print_result('write 1KB file', time_ms)
 
@@ -150,7 +150,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
                 f.write(DATA_1KB)
                 f.flush()
 
-        time_ms = time_operation(write_1kb_flush, iterations=5000)
+        time_ms = time_operation(write_1kb_flush, iterations=5_000)
         results.append(BenchmarkResult('write 1KB + flush()', time_ms, category=CATEGORY))
         print_result('write 1KB + flush()', time_ms)
 
@@ -161,7 +161,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
                 f.flush()
                 os.fsync(f.fileno())
 
-        time_ms = time_operation(write_1kb_fsync, iterations=1000)
+        time_ms = time_operation(write_1kb_fsync, iterations=1_000)
         results.append(BenchmarkResult('write 1KB + fsync()', time_ms, category=CATEGORY))
         print_result('write 1KB + fsync()', time_ms)
 
@@ -173,21 +173,21 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def pathlib_read_bytes():
             return file_1kb.read_bytes()
 
-        time_ms = time_operation(pathlib_read_bytes, iterations=5000)
+        time_ms = time_operation(pathlib_read_bytes, iterations=5_000)
         results.append(BenchmarkResult('Path.read_bytes() 1KB', time_ms, category=CATEGORY))
         print_result('Path.read_bytes() 1KB', time_ms)
 
         def pathlib_write_bytes():
             write_file_1kb.write_bytes(DATA_1KB)
 
-        time_ms = time_operation(pathlib_write_bytes, iterations=5000)
+        time_ms = time_operation(pathlib_write_bytes, iterations=5_000)
         results.append(BenchmarkResult('Path.write_bytes() 1KB', time_ms, category=CATEGORY))
         print_result('Path.write_bytes() 1KB', time_ms)
 
         def pathlib_read_text():
             return text_file.read_text()
 
-        time_ms = time_operation(pathlib_read_text, iterations=5000)
+        time_ms = time_operation(pathlib_read_text, iterations=5_000)
         results.append(BenchmarkResult('Path.read_text()', time_ms, category=CATEGORY))
         print_result('Path.read_text()', time_ms)
 
@@ -199,21 +199,21 @@ def run_benchmarks() -> list[BenchmarkResult]:
         def exists_check():
             return file_1kb.exists()
 
-        time_ms = time_operation(exists_check, iterations=10000)
+        time_ms = time_operation(exists_check, iterations=1_0000)
         results.append(BenchmarkResult('Path.exists()', time_ms, category=CATEGORY))
         print_result('Path.exists()', time_ms)
 
         def is_file_check():
             return file_1kb.is_file()
 
-        time_ms = time_operation(is_file_check, iterations=10000)
+        time_ms = time_operation(is_file_check, iterations=1_0000)
         results.append(BenchmarkResult('Path.is_file()', time_ms, category=CATEGORY))
         print_result('Path.is_file()', time_ms)
 
         def os_path_exists():
             return os.path.exists(str(file_1kb))
 
-        time_ms = time_operation(os_path_exists, iterations=10000)
+        time_ms = time_operation(os_path_exists, iterations=1_0000)
         results.append(BenchmarkResult('os.path.exists()', time_ms, category=CATEGORY))
         print_result('os.path.exists()', time_ms)
 

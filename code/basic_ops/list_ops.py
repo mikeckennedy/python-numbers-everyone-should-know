@@ -25,14 +25,12 @@ def run_benchmarks() -> dict:
 
     results: list[BenchmarkResult] = []
 
-    lst = []
-        
     # List append (single item)
     def append_test():
-        lst.clear()
+        lst = []
         lst.append(1)
 
-    time_ms = time_operation(append_test, iterations=100000)
+    time_ms = time_operation(append_test, iterations=100_000)
     print_result('list.append() single item', time_ms)
     results.append(BenchmarkResult(name='list_append', value=time_ms, category='basic_ops'))
 
@@ -40,7 +38,7 @@ def run_benchmarks() -> dict:
     def list_comp_10():
         return [i for i in range(10)]
 
-    time_ms = time_operation(list_comp_10, iterations=10000)
+    time_ms = time_operation(list_comp_10, iterations=10_000)
     print_result('List comprehension (10 items)', time_ms)
     results.append(BenchmarkResult(name='list_comp_10', value=time_ms, category='basic_ops'))
 
@@ -51,7 +49,7 @@ def run_benchmarks() -> dict:
             lst.append(i)
         return lst
 
-    time_ms = time_operation(for_loop_10, iterations=10000)
+    time_ms = time_operation(for_loop_10, iterations=10_000)
     print_result('For-loop (10 items)', time_ms)
     results.append(BenchmarkResult(name='for_loop_10', value=time_ms, category='basic_ops'))
 
@@ -59,7 +57,7 @@ def run_benchmarks() -> dict:
     def list_comp_100():
         return [i for i in range(100)]
 
-    time_ms = time_operation(list_comp_100, iterations=10000)
+    time_ms = time_operation(list_comp_100, iterations=10_000)
     print_result('List comprehension (100 items)', time_ms)
     results.append(BenchmarkResult(name='list_comp_100', value=time_ms, category='basic_ops'))
 
@@ -70,26 +68,26 @@ def run_benchmarks() -> dict:
             lst.append(i)
         return lst
 
-    time_ms = time_operation(for_loop_100, iterations=10000)
+    time_ms = time_operation(for_loop_100, iterations=10_000)
     print_result('For-loop (100 items)', time_ms)
     results.append(BenchmarkResult(name='for_loop_100', value=time_ms, category='basic_ops'))
 
     # List comprehension (1000 items)
     def list_comp_1000():
-        return [i for i in range(1000)]
+        return [i for i in range(1_000)]
 
-    time_ms = time_operation(list_comp_1000, iterations=1000)
+    time_ms = time_operation(list_comp_1000, iterations=1_000)
     print_result('List comprehension (1000 items)', time_ms)
     results.append(BenchmarkResult(name='list_comp_1000', value=time_ms, category='basic_ops'))
 
     # For-loop (1000 items)
     def for_loop_1000():
         lst = []
-        for i in range(1000):
+        for i in range(1_000):
             lst.append(i)
         return lst
 
-    time_ms = time_operation(for_loop_1000, iterations=1000)
+    time_ms = time_operation(for_loop_1000, iterations=1_000)
     print_result('For-loop (1000 items)', time_ms)
     results.append(BenchmarkResult(name='for_loop_1000', value=time_ms, category='basic_ops'))
 
@@ -99,7 +97,7 @@ def run_benchmarks() -> dict:
         lst2 = [4, 5, 6]
         lst1.extend(lst2)
 
-    time_ms = time_operation(list_extend, iterations=100000)
+    time_ms = time_operation(list_extend, iterations=100_000)
     print_result('list.extend() 3 items', time_ms)
     results.append(BenchmarkResult(name='list_extend', value=time_ms, category='basic_ops'))
 
@@ -109,7 +107,7 @@ def run_benchmarks() -> dict:
     def list_copy():
         return original.copy()
 
-    time_ms = time_operation(list_copy, iterations=10000)
+    time_ms = time_operation(list_copy, iterations=10_000)
     print_result('list.copy() 100 items', time_ms)
     results.append(BenchmarkResult(name='list_copy_100', value=time_ms, category='basic_ops'))
 

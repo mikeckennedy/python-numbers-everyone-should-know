@@ -50,7 +50,7 @@ def run_benchmarks() -> dict:
     results.append(MemoryResult(name='100_char_string', value=size, unit='bytes', category='memory'))
 
     # 1000-character string
-    thousand_char = 'a' * 1000
+    thousand_char = 'a' * 1_000
     size = measure_size(thousand_char)
     print_memory_result('1000-char string', size)
     results.append(MemoryResult(name='1000_char_string', value=size, unit='bytes', category='memory'))

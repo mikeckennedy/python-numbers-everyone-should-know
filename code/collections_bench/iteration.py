@@ -4,7 +4,7 @@ Collection iteration benchmarks.
 Measures:
 - Iterate 1000-item list
 - Iterate 1000-item dict (keys)
-- Iterate range(1000)
+- Iterate range(1_000)
 - sum() of 1000 integers
 """
 
@@ -32,10 +32,10 @@ def run_benchmarks() -> list[BenchmarkResult]:
     print_header('Collection Iteration Benchmarks')
 
     # Setup test data
-    test_list = list(range(1000))
-    test_dict = {f'key_{i}': i for i in range(1000)}
-    test_set = set(range(1000))
-    test_tuple = tuple(range(1000))
+    test_list = list(range(1_000))
+    test_dict = {f'key_{i}': i for i in range(1_000)}
+    test_set = set(range(1_000))
+    test_tuple = tuple(range(1_000))
 
     # -------------------------------------------------------------------------
     # List Iteration
@@ -48,7 +48,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += item
         return total
 
-    time_ms = time_operation(iterate_list, iterations=1000)
+    time_ms = time_operation(iterate_list, iterations=1_000)
     results.append(BenchmarkResult('for item in list', time_ms, category=CATEGORY))
     print_result('for item in list', time_ms)
 
@@ -59,7 +59,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += item
         return total
 
-    time_ms = time_operation(iterate_list_enumerate, iterations=1000)
+    time_ms = time_operation(iterate_list_enumerate, iterations=1_000)
     results.append(BenchmarkResult('for i, item in enumerate(list)', time_ms, category=CATEGORY))
     print_result('for i, item in enumerate(list)', time_ms)
 
@@ -74,7 +74,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += 1
         return total
 
-    time_ms = time_operation(iterate_dict_keys, iterations=1000)
+    time_ms = time_operation(iterate_dict_keys, iterations=1_000)
     results.append(BenchmarkResult('for key in dict', time_ms, category=CATEGORY))
     print_result('for key in dict', time_ms)
 
@@ -84,7 +84,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += value
         return total
 
-    time_ms = time_operation(iterate_dict_values, iterations=1000)
+    time_ms = time_operation(iterate_dict_values, iterations=1_000)
     results.append(BenchmarkResult('for value in dict.values()', time_ms, category=CATEGORY))
     print_result('for value in dict.values()', time_ms)
 
@@ -94,7 +94,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += value
         return total
 
-    time_ms = time_operation(iterate_dict_items, iterations=1000)
+    time_ms = time_operation(iterate_dict_items, iterations=1_000)
     results.append(BenchmarkResult('for k, v in dict.items()', time_ms, category=CATEGORY))
     print_result('for k, v in dict.items()', time_ms)
 
@@ -109,7 +109,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += item
         return total
 
-    time_ms = time_operation(iterate_set, iterations=1000)
+    time_ms = time_operation(iterate_set, iterations=1_000)
     results.append(BenchmarkResult('for item in set', time_ms, category=CATEGORY))
     print_result('for item in set', time_ms)
 
@@ -124,7 +124,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
             total += item
         return total
 
-    time_ms = time_operation(iterate_tuple, iterations=1000)
+    time_ms = time_operation(iterate_tuple, iterations=1_000)
     results.append(BenchmarkResult('for item in tuple', time_ms, category=CATEGORY))
     print_result('for item in tuple', time_ms)
 
@@ -135,13 +135,13 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
     def iterate_range():
         total = 0
-        for i in range(1000):
+        for i in range(1_000):
             total += i
         return total
 
-    time_ms = time_operation(iterate_range, iterations=1000)
-    results.append(BenchmarkResult('for i in range(1000)', time_ms, category=CATEGORY))
-    print_result('for i in range(1000)', time_ms)
+    time_ms = time_operation(iterate_range, iterations=1_000)
+    results.append(BenchmarkResult('for i in range(1_000)', time_ms, category=CATEGORY))
+    print_result('for i in range(1_000)', time_ms)
 
     # -------------------------------------------------------------------------
     # sum() Built-in
@@ -151,21 +151,21 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def sum_list():
         return sum(test_list)
 
-    time_ms = time_operation(sum_list, iterations=1000)
+    time_ms = time_operation(sum_list, iterations=1_000)
     results.append(BenchmarkResult('sum(list)', time_ms, category=CATEGORY))
     print_result('sum(list)', time_ms)
 
     def sum_range():
-        return sum(range(1000))
+        return sum(range(1_000))
 
-    time_ms = time_operation(sum_range, iterations=1000)
-    results.append(BenchmarkResult('sum(range(1000))', time_ms, category=CATEGORY))
-    print_result('sum(range(1000))', time_ms)
+    time_ms = time_operation(sum_range, iterations=1_000)
+    results.append(BenchmarkResult('sum(range(1_000))', time_ms, category=CATEGORY))
+    print_result('sum(range(1_000))', time_ms)
 
     def sum_generator():
-        return sum(i for i in range(1000))
+        return sum(i for i in range(1_000))
 
-    time_ms = time_operation(sum_generator, iterations=1000)
+    time_ms = time_operation(sum_generator, iterations=1_000)
     results.append(BenchmarkResult('sum(generator)', time_ms, category=CATEGORY))
     print_result('sum(generator)', time_ms)
 
@@ -177,21 +177,21 @@ def run_benchmarks() -> list[BenchmarkResult]:
     def min_list():
         return min(test_list)
 
-    time_ms = time_operation(min_list, iterations=1000)
+    time_ms = time_operation(min_list, iterations=1_000)
     results.append(BenchmarkResult('min(list)', time_ms, category=CATEGORY))
     print_result('min(list)', time_ms)
 
     def max_list():
         return max(test_list)
 
-    time_ms = time_operation(max_list, iterations=1000)
+    time_ms = time_operation(max_list, iterations=1_000)
     results.append(BenchmarkResult('max(list)', time_ms, category=CATEGORY))
     print_result('max(list)', time_ms)
 
     def any_list():
         return any(test_list)
 
-    time_ms = time_operation(any_list, iterations=1000)
+    time_ms = time_operation(any_list, iterations=1_000)
     results.append(BenchmarkResult('any(list)', time_ms, category=CATEGORY))
     print_result('any(list)', time_ms)
 
@@ -199,7 +199,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
         # Use a list where all are truthy
         return all(test_list[1:])  # Skip 0 which is falsy
 
-    time_ms = time_operation(all_list, iterations=1000)
+    time_ms = time_operation(all_list, iterations=1_000)
     results.append(BenchmarkResult('all(list)', time_ms, category=CATEGORY))
     print_result('all(list)', time_ms)
 
@@ -209,7 +209,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')
