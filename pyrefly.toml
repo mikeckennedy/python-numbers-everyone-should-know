@@ -32,7 +32,7 @@ skip-interpreter-query = false
 # wildcards for which Pyrefly will unconditionally replace the import with `typing.Any`
 replace-imports-with-any = []
 # wildcards for which Pyrefly will replace the import with `typing.Any` if it can't be found
-ignore-missing-imports = ["orjson.*", "ujson.*", "msgspec.*", "pydantic.*", "diskcache.*", "pymongo.*", "flask.*", "django.*", "fastapi.*", "starlette.*", "litestar.*", "uvicorn.*", "gunicorn.*", "colorama.*"]
+ignore-missing-imports = ["diskcache.*", "uvicorn.*", "gunicorn.*"]
 # should Pyrefly skip type checking if we find a generated file?
 ignore-errors-in-generated-code = false
 # should Pyrefly do a check to see if a `<library>-stubs` library also has `<library>` installed?

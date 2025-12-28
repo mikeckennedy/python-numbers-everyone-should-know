@@ -24,5 +24,10 @@ granian
 
 # Utilities
 colorama
+
+# Type stubs (for packages without built-in type hints)
 types-colorama
+types-flask
+types-ujson
+django-stubs
 
