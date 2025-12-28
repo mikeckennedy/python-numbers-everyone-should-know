@@ -4,8 +4,8 @@ __generated_with = "0.18.4"
 app = marimo.App(width="full")
 
 
-@app.cell
-def __():
+@app.cell(hide_code=True)
+def _():
     import marimo as mo
     import json
     import pandas as pd
@@ -13,12 +13,11 @@ def __():
     import plotly.graph_objects as go
     from pathlib import Path
     from datetime import datetime
+    return Path, go, json, mo, pd, px
 
-    return Path, datetime, go, json, mo, pd, px
 
-
-@app.cell
-def __(Path, json):
+@app.cell(hide_code=True)
+def _(Path, json):
     # Load benchmark results
     def load_results():
         results_path = Path("results.json")
@@ -28,11 +27,11 @@ def __(Path, json):
     data = load_results()
     metadata = data["metadata"]
     categories = data["categories"]
-    return categories, data, load_results, metadata
+    return categories, metadata
 
 
-@app.cell
-def __():
+@app.cell(hide_code=True)
+def _():
     # Helper functions for data formatting
     def format_time(ms_value):
         """Convert milliseconds to appropriate unit with ops/sec"""
@@ -77,67 +76,53 @@ def __():
             return ms_to_us(ms_value), "μs"
         else:
             return ms_value, "ms"
-
-    return (
-        format_memory,
-        format_time,
-        get_best_unit,
-        ms_to_ns,
-        ms_to_us,
-        ops_per_sec,
-    )
+    return (format_time,)
 
 
-@app.cell
-def __(mo):
-    mo.md(
-        """
-        # 🐍 Python Numbers Every Programmer Should Know
-        ## Interactive Performance Benchmark Dashboard
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    # 🐍 Python Numbers Every Programmer Should Know
+    ## Interactive Performance Benchmark Dashboard
 
-        *Inspired by "Latency Numbers Every Programmer Should Know" -- but for Python.*
+    *Inspired by "Latency Numbers Every Programmer Should Know" -- but for Python.*
 
-        This interactive notebook visualizes comprehensive benchmarks of common Python operations, 
-        helping you understand the real cost of different programming choices.
-        """
-    )
+    This interactive notebook visualizes comprehensive benchmarks of common Python operations,
+    helping you understand the real cost of different programming choices.
+    """)
     return
 
 
-@app.cell
-def __(metadata, mo):
-    mo.md(
-        f"""
-        ## 📊 System Information
+@app.cell(hide_code=True)
+def _(metadata, mo):
+    mo.md(f"""
+    ## 📊 System Information
 
-        | Property | Value |
-        |----------|-------|
-        | **Python Version** | {metadata['python_version']} ({metadata['python_implementation']}) |
-        | **Platform** | {metadata['platform']} |
-        | **Processor** | {metadata['processor']} |
-        | **CPU Cores** | {metadata['cpu_cores_physical']} physical / {metadata['cpu_cores_logical']} logical |
-        | **RAM** | {metadata['ram_gb']} GB |
-        | **Timestamp** | {metadata['timestamp'][:10]} |
-        """
-    )
+    | Property | Value |
+    |----------|-------|
+    | **Python Version** | {metadata['python_version']} ({metadata['python_implementation']}) |
+    | **Platform** | {metadata['platform']} |
+    | **Processor** | {metadata['processor']} |
+    | **CPU Cores** | {metadata['cpu_cores_physical']} physical / {metadata['cpu_cores_logical']} logical |
+    | **RAM** | {metadata['ram_gb']} GB |
+    | **Timestamp** | {metadata['timestamp'][:10]} |
+    """)
     return
 
 
-@app.cell
-def __(mo):
-    mo.md(
-        """
-        ---
-        ## 🎯 Quick Reference Dashboard
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
+    ## 🎯 Quick Reference Dashboard
 
-        Navigate to any section to explore detailed visualizations:
-        """
-    )
+    Navigate to any section to explore detailed visualizations:
+    """)
     return
 
 
-@app.cell
-def __(categories, mo):
+@app.cell(hide_code=True)
+def _(categories, mo):
     category_options = {
         "Memory Costs": "memory",
         "Basic Operations": "basic_ops",
@@ -168,24 +153,22 @@ def __(categories, mo):
 
     **Total Benchmarks:** {sum(benchmark_counts.values())} across {len(categories)} categories
     """)
-    return benchmark_counts, category_options, category_selector
-
-
-@app.cell
-def __(mo):
-    mo.md(
-        """
-        ---
-        ## 💾 Memory Costs
-
-        Understanding how much memory different Python objects consume.
-        """
-    )
     return
 
 
 @app.cell
-def __(categories, mo):
+def _(mo):
+    mo.md("""
+    ---
+    ## 💾 Memory Costs
+
+    Understanding how much memory different Python objects consume.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, mo):
     memory_results = categories["memory"]["results"]
     empty_process = next(_r for _r in memory_results if _r["name"] == "empty_process")
 
@@ -196,11 +179,11 @@ def __(categories, mo):
         """),
         kind="info"
     )
-    return empty_process, memory_results
+    return (memory_results,)
 
 
-@app.cell
-def __(memory_results, pd, px):
+@app.cell(hide_code=True)
+def _(memory_results, pd, px):
     string_data = [_r for _r in memory_results if "string" in _r["name"]]
     string_df = pd.DataFrame(string_data)
     string_df["_size"] = string_df["name"].str.extract(r'(\d+)').fillna("0").astype(int)
@@ -219,11 +202,11 @@ def __(memory_results, pd, px):
     fig_strings.update_traces(texttemplate='%{text} bytes', textposition='outside')
     fig_strings.update_layout(showlegend=False, height=400)
     fig_strings
-    return fig_strings, string_data, string_df
+    return
 
 
 @app.cell
-def __(memory_results, pd, px):
+def _(memory_results, pd, px):
     number_data = [_r for _r in memory_results if "int" in _r["name"] or "float" in _r["name"]]
     number_df = pd.DataFrame(number_data)
 
@@ -240,11 +223,11 @@ def __(memory_results, pd, px):
     fig_numbers.update_traces(texttemplate='%{text} bytes', textposition='outside')
     fig_numbers.update_layout(showlegend=False, height=400)
     fig_numbers
-    return fig_numbers, number_data, number_df
+    return
 
 
 @app.cell
-def __(memory_results, pd, px):
+def _(memory_results, pd, px):
     empty_collections = [
         _r for _r in memory_results 
         if _r["name"] in ["empty_list", "empty_dict", "empty_set"]
@@ -265,11 +248,11 @@ def __(memory_results, pd, px):
     fig_empty_coll.update_traces(texttemplate='%{text} bytes', textposition='outside')
     fig_empty_coll.update_layout(showlegend=False, height=300)
     fig_empty_coll
-    return empty_coll_df, empty_collections, fig_empty_coll
+    return
 
 
 @app.cell
-def __(memory_results, pd, px):
+def _(memory_results, pd, px):
     growth_data = [
         _r for _r in memory_results 
         if any(_size in _r["name"] for _size in ["_10_", "_100_", "_1000_"])
@@ -319,11 +302,11 @@ def __(memory_results, pd, px):
     )
     fig_growth.update_layout(height=500)
     fig_growth
-    return coll_type, fig_growth, growth_data, growth_df, growth_records
+    return
 
 
 @app.cell
-def __(memory_results, pd, px):
+def _(memory_results, pd, px):
     class_data = [
         _r for _r in memory_results 
         if "class" in _r["name"] and "5attr" in _r["name"] or "namedtuple" in _r["name"]
@@ -343,11 +326,11 @@ def __(memory_results, pd, px):
     fig_classes.update_traces(texttemplate='%{text} bytes', textposition='outside')
     fig_classes.update_layout(showlegend=False, height=400)
     fig_classes
-    return class_data, class_df, fig_classes
+    return
 
 
 @app.cell
-def __(memory_results, mo, pd, px):
+def _(memory_results, mo, pd, px):
     aggregate_data = [
         _r for _r in memory_results 
         if "list_1000" in _r["name"] and "class" in _r["name"]
@@ -386,31 +369,22 @@ def __(memory_results, mo, pd, px):
             kind="success"
         )
     ])
-    return (
-        agg_df,
-        aggregate_data,
-        fig_aggregate,
-        regular_mem,
-        savings,
-        slots_mem,
-    )
-
-
-@app.cell
-def __(mo):
-    mo.md(
-        """
-        ---
-        ## ⚡ Basic Operations
-
-        The cost of fundamental Python operations.
-        """
-    )
     return
 
 
 @app.cell
-def __(categories, format_time, pd, px):
+def _(mo):
+    mo.md("""
+    ---
+    ## ⚡ Basic Operations
+
+    The cost of fundamental Python operations.
+    """)
+    return
+
+
+@app.cell
+def _(categories, format_time, pd, px):
     basic_results = categories["basic_ops"]["results"]
     arithmetic_data = [
         _r for _r in basic_results 
@@ -441,17 +415,11 @@ def __(categories, format_time, pd, px):
     fig_arithmetic.update_traces(textposition='outside')
     fig_arithmetic.update_layout(showlegend=False, height=400)
     fig_arithmetic
-    return (
-        arith_df,
-        arith_records,
-        arithmetic_data,
-        basic_results,
-        fig_arithmetic,
-    )
+    return (basic_results,)
 
 
 @app.cell
-def __(basic_results, format_time, pd, px):
+def _(basic_results, format_time, pd, px):
     string_ops_data = [
         _r for _r in basic_results 
         if any(op in _r["name"] for op in ["concat_small", "f_string", "format_method", "percent_formatting"])
@@ -492,18 +460,11 @@ def __(basic_results, format_time, pd, px):
     fig_string_ops.update_traces(textposition='outside')
     fig_string_ops.update_layout(height=400)
     fig_string_ops
-    return (
-        fastest,
-        fig_string_ops,
-        name_map,
-        string_ops_data,
-        string_ops_df,
-        string_ops_records,
-    )
+    return
 
 
 @app.cell
-def __(basic_results, format_time, go):
+def _(basic_results, format_time, go):
     list_comp_data = [_r for _r in basic_results if "1000" in _r["name"] and ("comp" in _r["name"] or "loop" in _r["name"])]
 
     list_comp_df_data = [
@@ -537,51 +498,45 @@ def __(basic_results, format_time, go):
         height=400
     )
     fig_list_comp
-    return fig_list_comp, list_comp_data, list_comp_df_data
-
-
-@app.cell
-def __(mo):
-    mo.md(
-        """
-        ---
-        ## 📦 Collection Access and Iteration
-
-        How fast can you get data out of Python's built-in collections?
-        """
-    )
     return
 
 
 @app.cell
-def __(categories, format_time, mo):
-    mo.md(
-        """
-        ### Key Takeaway: Use dict/set for membership checks!
-        
-        Dictionary and set lookups are O(1) - extremely fast.
-        List membership checks are O(n) - slow for large lists.
-        """
-    )
+def _(mo):
+    mo.md("""
+    ---
+    ## 📦 Collection Access and Iteration
+
+    How fast can you get data out of Python's built-in collections?
+    """)
     return
 
 
 @app.cell
-def __(mo):
-    mo.md(
-        """
-        ---
-        
-        *Note: This is a simplified version. The full notebook with all visualizations 
-        for collections, JSON, web frameworks, database, functions, async, and imports
-        would continue here with similar patterns.*
-        
-        **To view the complete interactive notebook, run:**
-        ```bash
-        marimo edit marimo-notebook.py
-        ```
-        """
-    )
+def _(mo):
+    mo.md("""
+    ### Key Takeaway: Use dict/set for membership checks!
+
+    Dictionary and set lookups are O(1) - extremely fast.
+    List membership checks are O(n) - slow for large lists.
+    """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    ---
+
+    *Note: This is a simplified version. The full notebook with all visualizations
+    for collections, JSON, web frameworks, database, functions, async, and imports
+    would continue here with similar patterns.*
+
+    **To view the complete interactive notebook, run:**
+    ```bash
+    marimo edit marimo-notebook.py
+    ```
+    """)
     return
 
 
