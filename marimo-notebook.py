@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.18.4"
-app = marimo.App(width="full")
+__generated_with = '0.18.4'
+app = marimo.App(width='full')
 
 
 @app.cell(hide_code=True)
@@ -13,6 +13,7 @@ def _():
     import pandas as pd
     import plotly.express as px
     import plotly.graph_objects as go
+
     return Path, go, json, mo, pd, px
 
 
@@ -76,6 +77,7 @@ def _():
             return ms_to_us(ms_value), 'μs'
         else:
             return ms_value, 'ms'
+
     return (format_time,)
 
 
@@ -194,17 +196,17 @@ def _(memory_results, pd, px):
         text='value',
     )
     fig_strings.update_traces(
-        texttemplate='%{text} bytes', 
+        texttemplate='%{text} bytes',
         textposition='outside',
         marker_color='#1565C0',  # Solid dark blue
-        textfont_size=14
+        textfont_size=14,
     )
     fig_strings.update_layout(
-        showlegend=False, 
+        showlegend=False,
         height=500,
         yaxis=dict(range=[0, string_df['value'].max() * 1.2]),
         margin=dict(t=50, b=100),
-        xaxis_tickangle=-45
+        xaxis_tickangle=-45,
     )
     fig_strings
     return
@@ -230,17 +232,17 @@ def _(memory_results, pd, px):
     )
     # Use solid colors instead of gradient for better contrast
     fig_individual_numbers.update_traces(
-        texttemplate='%{text} bytes', 
+        texttemplate='%{text} bytes',
         textposition='outside',
         marker_color='#2E7D32',  # Solid dark green for good contrast
-        textfont_size=14
+        textfont_size=14,
     )
     fig_individual_numbers.update_layout(
-        showlegend=False, 
+        showlegend=False,
         height=500,
         yaxis=dict(range=[0, individual_number_df['value'].max() * 1.2]),  # Add 20% padding for labels
         margin=dict(t=50, b=100),  # More bottom margin for x-axis labels
-        xaxis_tickangle=-45  # Angle the labels for better readability
+        xaxis_tickangle=-45,  # Angle the labels for better readability
     )
     fig_individual_numbers
     return
@@ -265,17 +267,17 @@ def _(memory_results, pd, px):
         text='value',
     )
     fig_number_lists.update_traces(
-        texttemplate='%{text:,.0f} bytes', 
+        texttemplate='%{text:,.0f} bytes',
         textposition='outside',
         marker_color='#00838F',  # Solid dark teal
-        textfont_size=14
+        textfont_size=14,
     )
     fig_number_lists.update_layout(
-        showlegend=False, 
+        showlegend=False,
         height=500,
         yaxis=dict(range=[0, number_list_df['value'].max() * 1.2]),
         margin=dict(t=50, b=120),
-        xaxis_tickangle=-45
+        xaxis_tickangle=-45,
     )
     fig_number_lists
     return
@@ -296,16 +298,16 @@ def _(memory_results, pd, px):
         text='value',
     )
     fig_empty_coll.update_traces(
-        texttemplate='%{text} bytes', 
+        texttemplate='%{text} bytes',
         textposition='outside',
         marker_color='#E65100',  # Solid dark orange
-        textfont_size=14
+        textfont_size=14,
     )
     fig_empty_coll.update_layout(
-        showlegend=False, 
+        showlegend=False,
         height=400,
         xaxis=dict(range=[0, empty_coll_df['value'].max() * 1.2]),
-        margin=dict(l=150)  # More left margin for labels
+        margin=dict(l=150),  # More left margin for labels
     )
     fig_empty_coll
     return
@@ -316,7 +318,7 @@ def _(memory_results, pd, px):
     growth_data = [
         _r
         for _r in memory_results
-        if any(_size in _r['name'] for _size in ['_10_', '_100_', '_1000_']) 
+        if any(_size in _r['name'] for _size in ['_10_', '_100_', '_1000_'])
         and 'container' in _r['name']
         and 'floats' not in _r['name']  # Exclude floats - only have data at 1000 level
     ]
@@ -378,17 +380,17 @@ def _(memory_results, pd, px):
     )
     # Use solid purple with good contrast
     fig_classes.update_traces(
-        texttemplate='%{text} bytes', 
+        texttemplate='%{text} bytes',
         textposition='outside',
         marker_color='#6A1B9A',  # Solid dark purple for good contrast
-        textfont_size=14
+        textfont_size=14,
     )
     fig_classes.update_layout(
-        showlegend=False, 
+        showlegend=False,
         height=500,
         yaxis=dict(range=[0, class_df['value'].max() * 1.2]),  # Add 20% padding for labels
         margin=dict(t=50, b=120),  # Extra bottom margin for long labels
-        xaxis_tickangle=-45  # Angle the labels for better readability
+        xaxis_tickangle=-45,  # Angle the labels for better readability
     )
     fig_classes
     return
@@ -413,14 +415,14 @@ def _(memory_results, mo, pd, px):
         textposition='outside',
         customdata=[[f'{v / 1024:.1f} KB'] for v in agg_df['value']],
         marker_color='#C62828',  # Solid dark red
-        textfont_size=14
+        textfont_size=14,
     )
     fig_aggregate.update_layout(
-        showlegend=False, 
+        showlegend=False,
         height=500,
         yaxis=dict(range=[0, agg_df['value'].max() * 1.2]),
         margin=dict(t=50, b=120),
-        xaxis_tickangle=-45
+        xaxis_tickangle=-45,
     )
 
     regular_mem = next(_r['value'] for _r in aggregate_data if 'regular' in _r['name'])
@@ -484,13 +486,10 @@ def _(categories, format_time, pd, px):
     fig_arithmetic.update_traces(
         textposition='outside',
         marker_color='#1976D2',  # Solid blue
-        textfont_size=14
+        textfont_size=14,
     )
     fig_arithmetic.update_layout(
-        showlegend=False, 
-        height=500,
-        yaxis=dict(range=[0, arith_df['Time'].max() * 1.2]),
-        margin=dict(t=50, b=100)
+        showlegend=False, height=500, yaxis=dict(range=[0, arith_df['Time'].max() * 1.2]), margin=dict(t=50, b=100)
     )
     fig_arithmetic
     return (basic_results,)
@@ -526,7 +525,7 @@ def _(basic_results, format_time, pd, px):
 
     fastest = string_ops_df['Time'].min()
     string_ops_df['Relative'] = string_ops_df['Time'] / fastest
-    
+
     # Create custom colors based on speed (fastest = green, slowest = red)
     colors = []
     for rel in string_ops_df['Relative']:
@@ -548,15 +547,9 @@ def _(basic_results, format_time, pd, px):
         orientation='h',
         text='Display',
     )
-    fig_string_ops.update_traces(
-        textposition='outside',
-        marker_color=colors,
-        textfont_size=14
-    )
+    fig_string_ops.update_traces(textposition='outside', marker_color=colors, textfont_size=14)
     fig_string_ops.update_layout(
-        height=500,
-        xaxis=dict(range=[0, string_ops_df['Time'].max() * 1.2]),
-        margin=dict(l=150, t=50)
+        height=500, xaxis=dict(range=[0, string_ops_df['Time'].max() * 1.2]), margin=dict(l=150, t=50)
     )
     fig_string_ops
     return
@@ -640,5 +633,5 @@ def _(mo):
     return
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()

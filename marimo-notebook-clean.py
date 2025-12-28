@@ -1,20 +1,17 @@
 import marimo
 
-__generated_with = "0.18.4"
-app = marimo.App(width="full")
+__generated_with = '0.18.4'
+app = marimo.App(width='full')
 
 
 @app.cell(hide_code=True)
 def _():
     import marimo as mo
+
     import notebook_utils as utils
-    return mo, utils
 
-
-@app.cell(hide_code=True)
-def _(utils):
     metadata, categories = utils.load_benchmark_results()
-    return categories, metadata
+    return categories, metadata, mo, utils
 
 
 @app.cell(hide_code=True)
@@ -182,6 +179,19 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
+def _(categories, utils):
+    coll_results = categories['collections']['results']
+    utils.create_collection_access_chart(coll_results)
+    return (coll_results,)
+
+
+@app.cell(hide_code=True)
+def _(coll_results, utils):
+    utils.create_collection_iteration_chart(coll_results)
+    return
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""
     ### Key Takeaway: Use dict/set for membership checks!
@@ -196,12 +206,229 @@ def _(mo):
 def _(mo):
     mo.md("""
     ---
+    ## 🔄 JSON and Serialization
 
-    *This is a streamlined version of the notebook focused on memory and basic operations.*
+    Comparing standard library JSON with optimized alternatives.
+    """)
+    return
 
-    **The full notebook with all visualizations for collections, JSON, web frameworks,
-    database, functions, async, and imports can be expanded as needed.**
 
+@app.cell(hide_code=True)
+def _(categories, mo, utils):
+    json_results = categories['json']['results']
+    fig_ser, ser_df = utils.create_json_serialization_chart(json_results)
+
+    orjson_speedup = ser_df[ser_df['Library'] == 'orjson']['Speedup'].iloc[0]
+    msgspec_speedup = ser_df[ser_df['Library'] == 'msgspec']['Speedup'].iloc[0]
+
+    mo.vstack(
+        [
+            fig_ser,
+            mo.callout(
+                mo.md(f"""
+            **Performance Gains:** orjson is {orjson_speedup:.1f}x faster, msgspec is {msgspec_speedup:.1f}x faster than stdlib json
+            """),
+                kind='success',
+            ),
+        ]
+    )
+    return (json_results,)
+
+
+@app.cell(hide_code=True)
+def _(json_results, mo, utils):
+    fig_deser, deser_df = utils.create_json_deserialization_chart(json_results)
+
+    orjson_speedup_deser = deser_df[deser_df['Library'] == 'orjson']['Speedup'].iloc[0]
+    msgspec_speedup_deser = deser_df[deser_df['Library'] == 'msgspec']['Speedup'].iloc[0]
+
+    mo.vstack(
+        [
+            fig_deser,
+            mo.callout(
+                mo.md(f"""
+            **Deserialization:** orjson is {orjson_speedup_deser:.1f}x faster, msgspec is {msgspec_speedup_deser:.1f}x faster
+            """),
+                kind='success',
+            ),
+        ]
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
+    ## 📁 File I/O
+
+    Reading and writing files of various sizes.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, utils):
+    file_results = categories['file_io']['results']
+    utils.create_file_io_chart(file_results)
+    return (file_results,)
+
+
+@app.cell(hide_code=True)
+def _(file_results, mo, utils):
+    fig_pickle = utils.create_pickle_vs_json_chart(file_results)
+    if fig_pickle:
+        mo.vstack(
+            [
+                fig_pickle,
+                mo.callout(
+                    mo.md(
+                        '**Pickle is faster** than JSON for Python-specific serialization, but JSON is more portable.'
+                    ),
+                    kind='info',
+                ),
+            ]
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
+    ## 🗄️ Database and Persistence
+
+    Comparing SQLite, diskcache, and MongoDB performance.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, mo, utils):
+    db_results = categories['database']['results']
+    fig_db = utils.create_database_comparison_chart(db_results)
+    if fig_db:
+        mo.vstack(
+            [
+                fig_db,
+                mo.callout(
+                    mo.md("""
+                **Key Insight:** SQLite is faster for reads, diskcache is faster for writes.
+                Choose based on your read/write patterns.
+                """),
+                    kind='info',
+                ),
+            ]
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
+    ## 🔧 Function and Call Overhead
+
+    The hidden cost of function calls and exceptions.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, utils):
+    func_results = categories['functions']['results']
+    utils.create_function_calls_chart(func_results)
+    return (func_results,)
+
+
+@app.cell(hide_code=True)
+def _(func_results, mo, utils):
+    fig_exc, exc_overhead = utils.create_exception_cost_chart(func_results)
+    if fig_exc:
+        mo.vstack(
+            [
+                fig_exc,
+                mo.callout(
+                    mo.md(f"""
+                **⚠️ Exception Performance Impact:** Exceptions are {exc_overhead:.0f}x slower!
+                Don't use exceptions for control flow in hot paths.
+                """),
+                    kind='warn',
+                ),
+            ]
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
+    ## ⚡ Async Overhead
+
+    Understanding the cost of async machinery.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, mo, utils):
+    async_results = categories['async']['results']
+    fig_async, async_overhead = utils.create_async_overhead_chart(async_results)
+    if fig_async:
+        mo.vstack(
+            [
+                fig_async,
+                mo.callout(
+                    mo.md(f"""
+                **Async adds ~{async_overhead:.0f}x overhead** for simple operations.
+                
+                Use async only for I/O-bound work (network, disk, database).
+                Avoid for CPU-bound or simple synchronous operations.
+                """),
+                    kind='warn',
+                ),
+            ]
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
+    ## 📦 Import Times
+
+    The cost of importing modules and packages.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, mo, utils):
+    import_results = categories['imports']['results']
+    fig_imports = utils.create_import_times_chart(import_results)
+
+    mo.vstack(
+        [
+            fig_imports,
+            mo.callout(
+                mo.md("""
+            **Import Optimization Tips:**
+            - FastAPI and Litestar have significant import overhead
+            - Import expensive modules lazily (inside functions when needed)
+            - Consider startup time impact for CLI tools
+            """),
+                kind='info',
+            ),
+        ]
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ---
 
     ## 🎓 Key Takeaways
@@ -317,5 +544,5 @@ def _(mo):
     return
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()

@@ -5,11 +5,11 @@ to keep the notebook clean and report-focused.
 """
 
 import json
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from pathlib import Path
-
 
 # ============================================================================
 # Data Loading
@@ -425,3 +425,404 @@ def get_category_options():
 def get_benchmark_counts(categories):
     """Get benchmark counts per category"""
     return {name: cat['benchmark_count'] for name, cat in categories.items()}
+
+
+# ============================================================================
+# Chart Creation - Collections
+# ============================================================================
+
+
+def create_collection_access_chart(coll_results):
+    """Create collection access speed comparison"""
+    data = [
+        r
+        for r in coll_results
+        if r.get('category') == 'collections_access'
+        and r['name'] in ['dict[key] (existing)', 'item in set (existing)', 'list[index]', 'item in list (last)']
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records).sort_values('Time')
+
+    fig = px.bar(
+        df,
+        y='Operation',
+        x='Time',
+        title='Collection Access Speed (note: list membership is O(n) for 1000 items)',
+        labels={'Time': 'Time (ms)'},
+        orientation='h',
+        text='Display',
+        log_x=True,
+    )
+    fig.update_traces(textposition='outside', marker_color='#1976D2', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=200, t=50))
+    return fig
+
+
+def create_collection_iteration_chart(coll_results):
+    """Create collection iteration speed comparison"""
+    data = [
+        r
+        for r in coll_results
+        if r.get('category') == 'collections_iteration'
+        and any(
+            pattern in r['name']
+            for pattern in ['for item in list', 'for key in dict', 'for item in set', 'for i in range']
+        )
+        and 'enumerate' not in r['name']
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records).sort_values('Time')
+
+    fig = px.bar(
+        df,
+        y='Operation',
+        x='Time',
+        title='Iteration Speed Comparison (1,000 items)',
+        labels={'Time': 'Time (ms)'},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#00838F', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=200, t=50))
+    return fig
+
+
+# ============================================================================
+# Chart Creation - JSON & Serialization
+# ============================================================================
+
+
+def create_json_serialization_chart(json_results):
+    """Create JSON serialization comparison (complex object)"""
+    data = [
+        r
+        for r in json_results
+        if ('dumps' in r['name'] or 'encode' in r['name']) and 'complex' in r['name'] and 'no ascii' not in r['name']
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        library = r['name'].split('.')[0].split('(')[0]
+        records.append({'Library': library, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records).sort_values('Time')
+    json_time = df[df['Library'] == 'json']['Time'].iloc[0]
+    df['Speedup'] = json_time / df['Time']
+
+    fig = px.bar(
+        df,
+        y='Library',
+        x='Time',
+        title='JSON Serialization Speed (Complex Object)',
+        labels={'Time': 'Time (ms)'},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#4CAF50', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=150, t=50))
+    return fig, df
+
+
+def create_json_deserialization_chart(json_results):
+    """Create JSON deserialization comparison (complex object)"""
+    data = [
+        r
+        for r in json_results
+        if ('loads' in r['name'] or 'decode' in r['name']) and 'complex' in r['name'] and 'str' not in r['name']
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        library = r['name'].split('.')[0].split('(')[0]
+        records.append({'Library': library, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records).sort_values('Time')
+    json_time = df[df['Library'] == 'json']['Time'].iloc[0]
+    df['Speedup'] = json_time / df['Time']
+
+    fig = px.bar(
+        df,
+        y='Library',
+        x='Time',
+        title='JSON Deserialization Speed (Complex Object)',
+        labels={'Time': 'Time (ms)'},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#FF9800', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=150, t=50))
+    return fig, df
+
+
+# ============================================================================
+# Chart Creation - Database
+# ============================================================================
+
+
+def create_database_comparison_chart(db_results):
+    """Create database write/read performance comparison"""
+    sqlite_insert = next((r for r in db_results if 'INSERT (JSON blob)' in r['name']), None)
+    sqlite_select = next((r for r in db_results if 'SELECT by primary key' in r['name']), None)
+    diskcache_set = next((r for r in db_results if 'cache.set() (complex obj)' in r['name']), None)
+    diskcache_get = next((r for r in db_results if 'cache.get() (complex obj)' in r['name']), None)
+
+    if not all([sqlite_insert, sqlite_select, diskcache_set, diskcache_get]):
+        return None
+
+    records = []
+    for name, val in [
+        ('SQLite Write', sqlite_insert['value']),
+        ('SQLite Read', sqlite_select['value']),
+        ('diskcache Write', diskcache_set['value']),
+        ('diskcache Read', diskcache_get['value']),
+    ]:
+        time_str, ops_str = format_time(val)
+        records.append({'Operation': name, 'Time': val, 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records)
+
+    fig = px.bar(
+        df,
+        x='Operation',
+        y='Time',
+        title='Database Performance: SQLite vs diskcache',
+        labels={'Time': 'Time (ms)'},
+        text='Display',
+        log_y=True,
+    )
+    fig.update_traces(textposition='outside', marker_color='#9C27B0', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(t=50, b=100))
+    return fig
+
+
+# ============================================================================
+# Chart Creation - File I/O
+# ============================================================================
+
+
+def create_file_io_chart(file_results):
+    """Create file I/O operations chart"""
+    data = [
+        r
+        for r in file_results
+        if r.get('category') == 'file_io_basic'
+        and any(op in r['name'] for op in ['open() + close()', 'read 1KB', 'read 1MB', 'write 1KB', 'write 1MB'])
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str}'})
+
+    df = pd.DataFrame(records)
+
+    fig = px.bar(
+        df,
+        x='Operation',
+        y='Time',
+        title='File I/O Performance',
+        labels={'Time': 'Time (ms)'},
+        text='Display',
+        log_y=True,
+    )
+    fig.update_traces(textposition='outside', marker_color='#795548', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(t=50, b=120), xaxis_tickangle=-45)
+    return fig
+
+
+def create_pickle_vs_json_chart(file_results):
+    """Create pickle vs JSON comparison"""
+    pickle_dumps = next((r for r in file_results if r['name'] == 'pickle.dumps()'), None)
+    pickle_loads = next((r for r in file_results if r['name'] == 'pickle.loads()'), None)
+    json_dumps = next((r for r in file_results if r['name'] == 'json.dumps()'), None)
+    json_loads = next((r for r in file_results if r['name'] == 'json.loads()'), None)
+
+    if not all([pickle_dumps, pickle_loads, json_dumps, json_loads]):
+        return None
+
+    fig = go.Figure()
+
+    operations = ['Serialize (dumps)', 'Deserialize (loads)']
+    pickle_times = [pickle_dumps['value'], pickle_loads['value']]
+    json_times = [json_dumps['value'], json_loads['value']]
+
+    fig.add_trace(
+        go.Bar(
+            name='Pickle',
+            x=operations,
+            y=pickle_times,
+            text=[format_time(t)[0] for t in pickle_times],
+            textposition='outside',
+            marker_color='#8b5cf6',
+            textfont_size=14,
+        )
+    )
+
+    fig.add_trace(
+        go.Bar(
+            name='JSON',
+            x=operations,
+            y=json_times,
+            text=[format_time(t)[0] for t in json_times],
+            textposition='outside',
+            marker_color='#f59e0b',
+            textfont_size=14,
+        )
+    )
+
+    fig.update_layout(
+        title='Pickle vs JSON Serialization (Complex Object)',
+        yaxis_title='Time (ms)',
+        barmode='group',
+        height=500,
+        margin=dict(t=50, b=100),
+    )
+    return fig
+
+
+# ============================================================================
+# Chart Creation - Functions & Async
+# ============================================================================
+
+
+def create_function_calls_chart(func_results):
+    """Create function call overhead chart"""
+    data = [
+        r
+        for r in func_results
+        if r.get('category') == 'functions_calls'
+        and any(
+            name in r['name']
+            for name in ['empty function', 'function with 5 args', 'instance method', 'lambda call (no', 'len() on']
+        )
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str}'})
+
+    df = pd.DataFrame(records).sort_values('Time')
+
+    fig = px.bar(
+        df,
+        y='Operation',
+        x='Time',
+        title='Function Call Overhead Comparison',
+        labels={'Time': 'Time (ms)'},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#607D8B', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=200, t=50))
+    return fig
+
+
+def create_exception_cost_chart(func_results):
+    """Create exception cost comparison"""
+    no_exception = next((r for r in func_results if 'try/except (no exception raised)' in r['name']), None)
+    with_exception = next((r for r in func_results if 'raise + catch ValueError' == r['name']), None)
+
+    if not all([no_exception, with_exception]):
+        return None, None
+
+    fig = go.Figure()
+
+    exception_types = ['No Exception', 'Exception Raised']
+    exception_times = [no_exception['value'], with_exception['value']]
+
+    fig.add_trace(
+        go.Bar(
+            x=exception_types,
+            y=exception_times,
+            text=[format_time(t)[0] for t in exception_times],
+            textposition='outside',
+            marker_color=['#10b981', '#ef4444'],
+            textfont_size=14,
+        )
+    )
+
+    exception_overhead = with_exception['value'] / no_exception['value']
+
+    fig.update_layout(
+        title=f'Exception Cost: {exception_overhead:.0f}x Overhead When Raised',
+        yaxis_title='Time (ms)',
+        showlegend=False,
+        height=500,
+        margin=dict(t=50, b=100),
+    )
+
+    return fig, exception_overhead
+
+
+def create_async_overhead_chart(async_results):
+    """Create async vs sync comparison"""
+    sync_func = next((r for r in async_results if 'sync function call' in r['name']), None)
+    async_func = next((r for r in async_results if 'async equivalent' in r['name']), None)
+
+    if not all([sync_func, async_func]):
+        return None, None
+
+    fig = go.Figure()
+
+    func_types = ['Sync Function', 'Async Function']
+    func_times = [sync_func['value'], async_func['value']]
+
+    fig.add_trace(
+        go.Bar(
+            x=func_types,
+            y=func_times,
+            text=[format_time(t)[0] for t in func_times],
+            textposition='outside',
+            marker_color=['#3b82f6', '#f59e0b'],
+            textfont_size=14,
+        )
+    )
+
+    async_overhead = async_func['value'] / sync_func['value']
+
+    fig.update_layout(
+        title=f'Async Overhead: {async_overhead:.0f}x Slower for Simple Operations',
+        yaxis_title='Time (ms)',
+        showlegend=False,
+        height=500,
+        yaxis_type='log',
+        margin=dict(t=50, b=100),
+    )
+
+    return fig, async_overhead
+
+
+# ============================================================================
+# Chart Creation - Imports
+# ============================================================================
+
+
+def create_import_times_chart(import_results):
+    """Create import times comparison (top slowest)"""
+    df = pd.DataFrame(import_results).sort_values('value', ascending=False).head(12)
+
+    fig = px.bar(
+        df,
+        y='name',
+        x='value',
+        title='Import Times (Top 12 Slowest)',
+        labels={'name': 'Module', 'value': 'Time (ms)'},
+        orientation='h',
+        text='value',
+    )
+    fig.update_traces(texttemplate='%{text:.1f} ms', textposition='outside', marker_color='#E91E63', textfont_size=14)
+    fig.update_layout(height=600, margin=dict(l=200, t=50))
+    return fig
