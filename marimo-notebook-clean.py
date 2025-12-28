@@ -219,8 +219,8 @@ def _(attr_results, utils):
 def _(mo):
     mo.callout(
         mo.md("""
-        **Performance Insight:** `__slots__` provides minimal speed improvement (~3-5%) but significant memory savings.
-        The real benefit is in memory usage when you have many instances.
+        **Performance Insight:** `__slots__` provides minimal speed difference (mixed results for reads vs writes)
+        but significant memory savings at scale. The real benefit is reduced memory when you have many instances.
         """),
         kind='info',
     )
@@ -297,7 +297,7 @@ def _(json_results, mo, utils):
                 mo.callout(
                     mo.md("""
                 **Pydantic Performance:** Model validation adds overhead but provides type safety and data validation.
-                Use `model_dump_json()` for the fastest JSON serialization from Pydantic models.
+                For complex objects, `model_dump_json()` is faster than `model_dump()` + `json.dumps()`.
                 """),
                     kind='info',
                 ),
@@ -652,10 +652,14 @@ def _(memory_results, mo):
     regular_1000 = next(r['value'] for r in memory_results if r['name'] == 'list_1000_regular_class')
     slots_1000 = next(r['value'] for r in memory_results if r['name'] == 'list_1000_slots_class')
 
-    single_savings = ((regular_5attr - slots_5attr) / regular_5attr) * 100
     aggregate_savings = ((regular_1000 - slots_1000) / regular_1000) * 100
     slots_savings_kb = (regular_1000 - slots_1000) / 1024
-    direction = 'more' if single_savings < 0 else 'less'
+
+    # Determine if slots saves or costs memory per instance
+    if slots_5attr <= regular_5attr:
+        per_instance_note = f"Memory saved per instance: **{regular_5attr - slots_5attr} bytes**"
+    else:
+        per_instance_note = f"Per-instance overhead: **+{slots_5attr - regular_5attr} bytes** (but saves at scale!)"
 
     mo.md(f"""
     ### 3. 📦 Use __slots__ for Many Instances
@@ -663,17 +667,20 @@ def _(memory_results, mo):
     **The Data (5 attributes per instance):**
     - Regular class: **{regular_5attr} bytes** per instance
     - `__slots__` class: **{slots_5attr} bytes** per instance
-    - Memory saved per instance: **{regular_5attr - slots_5attr} bytes** ({abs(single_savings):.1f}% {direction})
+    - {per_instance_note}
 
     **At Scale (1,000 instances):**
     - Regular classes: **{regular_1000 / 1024:.1f} KB**
     - `__slots__` classes: **{slots_1000 / 1024:.1f} KB**
     - Total savings: **{slots_savings_kb:.1f} KB** ({aggregate_savings:.1f}% reduction)
 
-    **Why the difference?** Regular classes store attributes in a `__dict__` (64 bytes + hash table overhead).
-    `__slots__` classes use a fixed array of attribute descriptors - no dict required!
+    **Why the difference at scale?** With Python 3.14's optimized dict sharing, individual `__slots__` instances
+    may use similar (or even slightly more) memory. However, when you create many instances, `__slots__` wins
+    because it eliminates per-instance `__dict__` hash table allocations and enables better memory sharing
+    through type descriptors.
 
-    **Speed difference:** Only ~3-5% faster attribute access. The real win is memory.
+    **Speed difference:** Minimal and mixed - writes may be slightly faster, reads about the same.
+    The real win is memory at scale.
 
     **When it matters:**
     - Loading 10,000 database records as objects? Save ~{slots_savings_kb * 10:.0f} KB
