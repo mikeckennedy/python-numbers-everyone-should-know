@@ -978,7 +978,9 @@ def create_attribute_access_chart(attr_results):
         r
         for r in attr_results
         if r.get('category') == 'attribute_access'
-        and any(pattern in r['name'] for pattern in ['regular class', '__slots__ class'])
+        and any(pattern in r['name'] for pattern in ['regular class', 'slots class'])
+        and 'dataclass' not in r['name']
+        and 'dict' not in r['name']
     ]
 
     records = []
@@ -991,7 +993,7 @@ def create_attribute_access_chart(attr_results):
                 display_name = 'Regular: Read'
             else:
                 display_name = 'Regular: Write'
-        else:  # __slots__ class
+        else:  # slots class
             if 'read' in name:
                 display_name = '__slots__: Read'
             else:
