@@ -40,7 +40,7 @@ COMPLEX_JSON_BYTES = COMPLEX_JSON.encode('utf-8')
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all JSON deserialization benchmarks."""
-    results = []
+    results: list[BenchmarkResult] = []
 
     print_header('JSON Deserialization Benchmarks')
 
@@ -76,14 +76,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     if orjson:
 
         def orjson_loads_simple():
-            return orjson.loads(SIMPLE_JSON_BYTES)
+            return orjson.loads(SIMPLE_JSON_BYTES)  # type: ignore
 
         time_ms = time_operation(orjson_loads_simple, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.loads() - simple', time_ms, category=CATEGORY))
         print_result('orjson.loads() - simple', time_ms)
 
         def orjson_loads_complex():
-            return orjson.loads(COMPLEX_JSON_BYTES)
+            return orjson.loads(COMPLEX_JSON_BYTES)  # type: ignore
 
         time_ms = time_operation(orjson_loads_complex, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.loads() - complex', time_ms, category=CATEGORY))
@@ -91,7 +91,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
         # orjson also accepts str
         def orjson_loads_str():
-            return orjson.loads(COMPLEX_JSON)
+            return orjson.loads(COMPLEX_JSON)  # type: ignore
 
         time_ms = time_operation(orjson_loads_str, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.loads() - complex (str)', time_ms, category=CATEGORY))
@@ -107,14 +107,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     if ujson:
 
         def ujson_loads_simple():
-            return ujson.loads(SIMPLE_JSON)
+            return ujson.loads(SIMPLE_JSON)  # type: ignore
 
         time_ms = time_operation(ujson_loads_simple, iterations=5_000)
         results.append(BenchmarkResult('ujson.loads() - simple', time_ms, category=CATEGORY))
         print_result('ujson.loads() - simple', time_ms)
 
         def ujson_loads_complex():
-            return ujson.loads(COMPLEX_JSON)
+            return ujson.loads(COMPLEX_JSON)  # type: ignore
 
         time_ms = time_operation(ujson_loads_complex, iterations=5_000)
         results.append(BenchmarkResult('ujson.loads() - complex', time_ms, category=CATEGORY))
@@ -130,14 +130,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     if msgspec:
 
         def msgspec_decode_simple():
-            return msgspec.json.decode(SIMPLE_JSON_BYTES)
+            return msgspec.json.decode(SIMPLE_JSON_BYTES)  # type: ignore
 
         time_ms = time_operation(msgspec_decode_simple, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode() - simple', time_ms, category=CATEGORY))
         print_result('msgspec.json.decode() - simple', time_ms)
 
         def msgspec_decode_complex():
-            return msgspec.json.decode(COMPLEX_JSON_BYTES)
+            return msgspec.json.decode(COMPLEX_JSON_BYTES)  # type: ignore
 
         time_ms = time_operation(msgspec_decode_complex, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode() - complex', time_ms, category=CATEGORY))
@@ -145,7 +145,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
         # msgspec also accepts str
         def msgspec_decode_str():
-            return msgspec.json.decode(COMPLEX_JSON)
+            return msgspec.json.decode(COMPLEX_JSON)  # type: ignore
 
         time_ms = time_operation(msgspec_decode_str, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode() - complex (str)', time_ms, category=CATEGORY))
@@ -159,7 +159,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

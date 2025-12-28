@@ -27,7 +27,7 @@ CATEGORY = 'collections_access'
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all collection access benchmarks."""
-    results = []
+    results: list[BenchmarkResult] = []
 
     print_header('Collection Access Benchmarks')
 

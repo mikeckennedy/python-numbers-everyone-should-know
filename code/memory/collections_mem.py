@@ -24,7 +24,7 @@ def run_benchmarks() -> dict:
     """Run collection memory benchmarks."""
     print_header('Collection Memory Sizes')
 
-    results = []
+    results: list[MemoryResult] = []
 
     # Lists
     print_subheader('Lists')

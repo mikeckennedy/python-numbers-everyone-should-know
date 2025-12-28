@@ -5,6 +5,7 @@ Minimal endpoint returning JSON payload for benchmarking.
 Run with: uvicorn litestar_app:app --host 127.0.0.1 --port 8005 --workers 4
 """
 
+import uvicorn
 from litestar import Litestar, get
 
 # Standard response payload
@@ -35,6 +36,4 @@ app = Litestar([index, health])
 
 
 if __name__ == '__main__':
-    import uvicorn
-
     uvicorn.run(app, host='127.0.0.1', port=8005)

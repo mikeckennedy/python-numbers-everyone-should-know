@@ -76,14 +76,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     if orjson:
 
         def orjson_dumps_simple():
-            return orjson.dumps(SIMPLE_OBJ)
+            return orjson.dumps(SIMPLE_OBJ)  # type: ignore
 
         time_ms = time_operation(orjson_dumps_simple, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.dumps() - simple', time_ms, category=CATEGORY))
         print_result('orjson.dumps() - simple', time_ms)
 
         def orjson_dumps_complex():
-            return orjson.dumps(COMPLEX_OBJ)
+            return orjson.dumps(COMPLEX_OBJ)  # type: ignore
 
         time_ms = time_operation(orjson_dumps_complex, iterations=5_000, warmup=500)
         results.append(BenchmarkResult('orjson.dumps() - complex', time_ms, category=CATEGORY))
@@ -99,14 +99,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     if ujson:
 
         def ujson_dumps_simple():
-            return ujson.dumps(SIMPLE_OBJ)
+            return ujson.dumps(SIMPLE_OBJ)  # type: ignore
 
         time_ms = time_operation(ujson_dumps_simple, iterations=5_000)
         results.append(BenchmarkResult('ujson.dumps() - simple', time_ms, category=CATEGORY))
         print_result('ujson.dumps() - simple', time_ms)
 
         def ujson_dumps_complex():
-            return ujson.dumps(COMPLEX_OBJ)
+            return ujson.dumps(COMPLEX_OBJ)  # type: ignore
 
         time_ms = time_operation(ujson_dumps_complex, iterations=5_000)
         results.append(BenchmarkResult('ujson.dumps() - complex', time_ms, category=CATEGORY))
@@ -122,14 +122,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     if msgspec:
 
         def msgspec_encode_simple():
-            return msgspec.json.encode(SIMPLE_OBJ)
+            return msgspec.json.encode(SIMPLE_OBJ)  # type: ignore
 
         time_ms = time_operation(msgspec_encode_simple, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.encode() - simple', time_ms, category=CATEGORY))
         print_result('msgspec.json.encode() - simple', time_ms)
 
         def msgspec_encode_complex():
-            return msgspec.json.encode(COMPLEX_OBJ)
+            return msgspec.json.encode(COMPLEX_OBJ)  # type: ignore
 
         time_ms = time_operation(msgspec_encode_complex, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.encode() - complex', time_ms, category=CATEGORY))
@@ -143,7 +143,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

@@ -9,6 +9,8 @@ This is a minimal Django setup without a full project structure.
 
 import django
 from django.conf import settings
+from django.core.management import execute_from_command_line
+from django.core.wsgi import get_wsgi_application
 from django.http import JsonResponse
 from django.urls import path
 
@@ -51,13 +53,9 @@ urlpatterns = [
     path('health', health),
 ]
 
-# WSGI application
-from django.core.wsgi import get_wsgi_application  # noqa: E402
 
 application = get_wsgi_application()
 
 
 if __name__ == '__main__':
-    from django.core.management import execute_from_command_line
-
     execute_from_command_line(['manage.py', 'runserver', '127.0.0.1:8002', '--noreload'])

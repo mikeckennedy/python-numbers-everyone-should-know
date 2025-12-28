@@ -54,7 +54,7 @@ class CustomError(Exception):
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all exception handling benchmarks."""
-    results = []
+    results: list[BenchmarkResult] = []
 
     print_header('Exception Handling Benchmarks')
 

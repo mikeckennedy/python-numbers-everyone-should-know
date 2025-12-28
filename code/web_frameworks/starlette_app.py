@@ -5,6 +5,7 @@ Minimal endpoint returning JSON payload for benchmarking.
 Run with: uvicorn starlette_app:app --host 127.0.0.1 --port 8004 --workers 4
 """
 
+import uvicorn
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse
 from starlette.routing import Route
@@ -40,6 +41,4 @@ app = Starlette(routes=routes)
 
 
 if __name__ == '__main__':
-    import uvicorn
-
     uvicorn.run(app, host='127.0.0.1', port=8004)

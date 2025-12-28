@@ -31,7 +31,7 @@ CATEGORY = 'database_diskcache'
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all DiskCache benchmarks."""
-    results = []
+    results: list[BenchmarkResult] = []
 
     print_header('DiskCache Benchmarks')
 

@@ -34,7 +34,7 @@ DATA_1MB = b'x' * (1024 * 1024)
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all basic file I/O benchmarks."""
-    results = []
+    results: list[BenchmarkResult] = []
 
     print_header('File I/O Benchmarks')
 
@@ -223,7 +223,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

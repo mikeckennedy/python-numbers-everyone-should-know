@@ -5,6 +5,7 @@ Minimal endpoint returning JSON payload for benchmarking.
 Run with: uvicorn fastapi_app:app --host 127.0.0.1 --port 8003 --workers 4
 """
 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
@@ -47,6 +48,4 @@ def health():
 
 
 if __name__ == '__main__':
-    import uvicorn
-
     uvicorn.run(app, host='127.0.0.1', port=8003)

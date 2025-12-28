@@ -36,7 +36,7 @@ ITERATIONS = 10
 WARMUP = 2
 
 
-def time_import_subprocess(module_name: str, from_import: str = None) -> float | None:
+def time_import_subprocess(module_name: str, from_import: str | None = None) -> float | None:
     """
     Time an import by running it in a fresh subprocess.
 
@@ -273,7 +273,7 @@ print((end - start) / 1_000_000)
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

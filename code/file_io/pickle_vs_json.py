@@ -106,14 +106,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         orjson_data = orjson.dumps(COMPLEX_OBJ)
 
         def orjson_dumps():
-            return orjson.dumps(COMPLEX_OBJ)
+            return orjson.dumps(COMPLEX_OBJ)  # type: ignore
 
         time_ms = time_operation(orjson_dumps, iterations=5_000)
         results.append(BenchmarkResult('orjson.dumps()', time_ms, category=CATEGORY))
         print_result('orjson.dumps()', time_ms)
 
         def orjson_loads():
-            return orjson.loads(orjson_data)
+            return orjson.loads(orjson_data)  # type: ignore
 
         time_ms = time_operation(orjson_loads, iterations=5_000)
         results.append(BenchmarkResult('orjson.loads()', time_ms, category=CATEGORY))
@@ -131,14 +131,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
         msgspec_msgpack_data = msgspec.msgpack.encode(COMPLEX_OBJ)
 
         def msgspec_json_encode():
-            return msgspec.json.encode(COMPLEX_OBJ)
+            return msgspec.json.encode(COMPLEX_OBJ)  # type: ignore
 
         time_ms = time_operation(msgspec_json_encode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.encode()', time_ms, category=CATEGORY))
         print_result('msgspec.json.encode()', time_ms)
 
         def msgspec_json_decode():
-            return msgspec.json.decode(msgspec_json_data)
+            return msgspec.json.decode(msgspec_json_data)  # type: ignore
 
         time_ms = time_operation(msgspec_json_decode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.json.decode()', time_ms, category=CATEGORY))
@@ -146,14 +146,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
         # msgpack (binary format like pickle)
         def msgspec_msgpack_encode():
-            return msgspec.msgpack.encode(COMPLEX_OBJ)
+            return msgspec.msgpack.encode(COMPLEX_OBJ)  # type: ignore
 
         time_ms = time_operation(msgspec_msgpack_encode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.msgpack.encode()', time_ms, category=CATEGORY))
         print_result('msgspec.msgpack.encode()', time_ms)
 
         def msgspec_msgpack_decode():
-            return msgspec.msgpack.decode(msgspec_msgpack_data)
+            return msgspec.msgpack.decode(msgspec_msgpack_data)  # type: ignore
 
         time_ms = time_operation(msgspec_msgpack_decode, iterations=5_000)
         results.append(BenchmarkResult('msgspec.msgpack.decode()', time_ms, category=CATEGORY))
@@ -181,7 +181,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

@@ -33,7 +33,7 @@ CATEGORY = 'database_mongodb'
 
 def run_benchmarks() -> list[BenchmarkResult]:
     """Run all MongoDB benchmarks."""
-    results = []
+    results: list[BenchmarkResult] = []
 
     print_header('MongoDB Benchmarks')
 

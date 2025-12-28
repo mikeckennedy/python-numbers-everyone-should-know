@@ -24,7 +24,7 @@ def run_benchmarks() -> dict:
     """Run number memory benchmarks."""
     print_header('Number Memory Sizes')
 
-    results = []
+    results: list[MemoryResult] = []
 
     # Integers
     print_subheader('Integers')
@@ -42,9 +42,9 @@ def run_benchmarks() -> dict:
     results.append(MemoryResult(name='boundary_int', value=size, unit='bytes', category='memory'))
 
     # Large int
-    large_int = 1000
+    large_int = 1_000
     size = measure_size(large_int)
-    print_memory_result('Large int (1000)', size)
+    print_memory_result('Large int (1,000)', size)
     results.append(MemoryResult(name='large_int', value=size, unit='bytes', category='memory'))
 
     # Very large int

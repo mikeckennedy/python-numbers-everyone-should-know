@@ -23,7 +23,7 @@ def run_benchmarks() -> dict:
     """Run string memory benchmarks."""
     print_header('String Memory Sizes')
 
-    results = []
+    results: list[MemoryResult] = []
 
     # Empty string
     empty_str = ''
