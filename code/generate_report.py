@@ -67,7 +67,7 @@ def format_value(value: float, unit: str) -> str:
             if ns_value < 100:
                 return f'{ns_value:.1f} ns'
             else:
-                return f'{ns_value:.0f} ns'
+                return f'{ns_value:,.0f} ns'
         elif value < 1:
             # Convert to microseconds
             us_value = value * 1_000
@@ -76,7 +76,7 @@ def format_value(value: float, unit: str) -> str:
             elif us_value < 100:
                 return f'{us_value:.1f} μs'
             else:
-                return f'{us_value:.0f} μs'
+                return f'{us_value:,.0f} μs'
         else:
             # Keep as milliseconds
             if value < 10:
@@ -84,23 +84,23 @@ def format_value(value: float, unit: str) -> str:
             elif value < 100:
                 return f'{value:.2f} ms'
             else:
-                return f'{value:.1f} ms'
+                return f'{value:,.1f} ms'
 
     elif unit == 'bytes':
         if value < 1024:
-            return f'{int(value)} bytes'
+            return f'{int(value):,} bytes'
         elif value < 1024 * 1024:
             kb_value = value / 1024
             if kb_value < 10:
                 return f'{kb_value:.2f} KB'
             else:
-                return f'{kb_value:.1f} KB'
+                return f'{kb_value:,.1f} KB'
         else:
             mb_value = value / (1024 * 1024)
-            return f'{mb_value:.2f} MB'
+            return f'{mb_value:,.2f} MB'
 
     elif unit == 'MB':
-        return f'{value:.2f} MB'
+        return f'{value:,.2f} MB'
 
     # Fallback for unknown units
     return f'{value} {unit}'

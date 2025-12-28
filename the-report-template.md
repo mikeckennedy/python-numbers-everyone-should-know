@@ -23,6 +23,8 @@ A practical reference for understanding the cost of common Python operations. Al
 | | Empty set | — | {{MEMORY.EMPTY_SET}} |
 | | Regular class instance (5 attrs) | — | {{MEMORY.REGULAR_CLASS_5ATTR}} |
 | | `__slots__` class instance (5 attrs) | — | {{MEMORY.SLOTS_CLASS_5ATTR}} |
+| | List of 1000 regular class instances | — | {{MEMORY.LIST_1000_REGULAR_CLASS}} |
+| | List of 1000 `__slots__` class instances | — | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
 | | dataclass instance | — | {{MEMORY.DATACLASS_5ATTR}} |
 | | namedtuple instance | — | {{MEMORY.NAMEDTUPLE_5ATTR}} |
 | **Basic Ops** | Add two integers | {{BASIC_OPS.INT_ADD}} | — |
@@ -142,6 +144,13 @@ Understanding how much memory different Python objects consume.
 | dataclass | — | {{MEMORY.DATACLASS_5ATTR}} |
 | `@dataclass(slots=True)` | — | {{MEMORY.SLOTS_DATACLASS_5ATTR}} |
 | namedtuple | — | {{MEMORY.NAMEDTUPLE_5ATTR}} |
+
+**Aggregate Memory Usage (1000 instances):**
+
+| Type | Total Memory |
+|------|--------------|
+| List of 1000 regular class instances | {{MEMORY.LIST_1000_REGULAR_CLASS}} |
+| List of 1000 `__slots__` class instances | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
 
 ---
 
