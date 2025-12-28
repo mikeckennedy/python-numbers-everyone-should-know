@@ -48,43 +48,71 @@ def normalize_name(name: str) -> str:
     return name.upper()
 
 
+def format_ops_per_sec(ms_value: float) -> str:
+    """Format operations per second from millisecond value.
+
+    Args:
+        ms_value: Time in milliseconds
+
+    Returns:
+        Formatted ops/sec string like "53.5M ops/sec" or "1.6k ops/sec"
+    """
+    # Calculate ops/sec: 1 second = 1000 ms, so ops/sec = 1000 / ms
+    ops_per_sec = 1000 / ms_value
+
+    if ops_per_sec < 1_000:
+        return f'{ops_per_sec:.1f} ops/sec'
+    elif ops_per_sec < 1_000_000:
+        k_ops = ops_per_sec / 1_000
+        return f'{k_ops:.1f}k ops/sec'
+    elif ops_per_sec < 1_000_000_000:
+        m_ops = ops_per_sec / 1_000_000
+        return f'{m_ops:.1f}M ops/sec'
+    else:
+        g_ops = ops_per_sec / 1_000_000_000
+        return f'{g_ops:.1f}G ops/sec'
+
+
 def format_value(value: float, unit: str) -> str:
     """Format value with appropriate unit conversion.
 
     Time values (ms):
-        < 0.001 ms → nanoseconds (ns)
-        < 1 ms → microseconds (μs)
-        >= 1 ms → milliseconds (ms)
+        < 0.001 ms → nanoseconds (ns) + ops/sec
+        < 1 ms → microseconds (μs) + ops/sec
+        >= 1 ms → milliseconds (ms) + ops/sec
 
     Memory values:
         bytes → bytes/KB/MB based on magnitude
         MB → MB
     """
     if unit == 'ms':
+        # Calculate ops/sec for all time values
+        ops_suffix = f' ({format_ops_per_sec(value)})'
+
         if value < 0.001:
             # Convert to nanoseconds
             ns_value = value * 1_000_000
             if ns_value < 100:
-                return f'{ns_value:.1f} ns'
+                return f'{ns_value:.1f} ns{ops_suffix}'
             else:
-                return f'{ns_value:,.0f} ns'
+                return f'{ns_value:,.0f} ns{ops_suffix}'
         elif value < 1:
             # Convert to microseconds
             us_value = value * 1_000
             if us_value < 10:
-                return f'{us_value:.2f} μs'
+                return f'{us_value:.2f} μs{ops_suffix}'
             elif us_value < 100:
-                return f'{us_value:.1f} μs'
+                return f'{us_value:.1f} μs{ops_suffix}'
             else:
-                return f'{us_value:,.0f} μs'
+                return f'{us_value:,.0f} μs{ops_suffix}'
         else:
             # Keep as milliseconds
             if value < 10:
-                return f'{value:.3f} ms'
+                return f'{value:.3f} ms{ops_suffix}'
             elif value < 100:
-                return f'{value:.2f} ms'
+                return f'{value:.2f} ms{ops_suffix}'
             else:
-                return f'{value:,.1f} ms'
+                return f'{value:,.1f} ms{ops_suffix}'
 
     elif unit == 'bytes':
         if value < 1024:
