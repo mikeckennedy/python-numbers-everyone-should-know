@@ -206,6 +206,42 @@ def _(mo):
 def _(mo):
     mo.md("""
     ---
+    ## 🏷️ Class and Object Attributes
+
+    The cost of reading and writing attributes, and how `__slots__` changes things.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(categories, utils):
+    attr_results = categories['attributes']['results']
+    utils.create_attribute_access_chart(attr_results)
+    return (attr_results,)
+
+
+@app.cell(hide_code=True)
+def _(attr_results, utils):
+    utils.create_other_attribute_ops_chart(attr_results)
+    return
+
+
+@app.cell(hide_code=True)
+def _(attr_results, mo):
+    mo.callout(
+        mo.md("""
+        **Performance Insight:** `__slots__` provides minimal speed improvement (~3-5%) but significant memory savings.
+        The real benefit is in memory usage when you have many instances.
+        """),
+        kind='info',
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ---
     ## 🔄 JSON and Serialization
 
     Comparing standard library JSON with optimized alternatives.
@@ -225,9 +261,12 @@ def _(categories, mo, utils):
         [
             fig_ser,
             mo.callout(
-                mo.md(f"""
-            **Performance Gains:** orjson is {orjson_speedup:.1f}x faster, msgspec is {msgspec_speedup:.1f}x faster than stdlib json
-            """),
+                mo.md(
+                    f"""
+                **Performance Gains:** orjson is {orjson_speedup:.1f}x faster, 
+                msgspec is {msgspec_speedup:.1f}x faster than stdlib json
+                """
+                ),
                 kind='success',
             ),
         ]
@@ -246,13 +285,35 @@ def _(json_results, mo, utils):
         [
             fig_deser,
             mo.callout(
-                mo.md(f"""
-            **Deserialization:** orjson is {orjson_speedup_deser:.1f}x faster, msgspec is {msgspec_speedup_deser:.1f}x faster
-            """),
+                mo.md(
+                    f"""
+                **Deserialization:** orjson is {orjson_speedup_deser:.1f}x faster, 
+                msgspec is {msgspec_speedup_deser:.1f}x faster
+                """
+                ),
                 kind='success',
             ),
         ]
     )
+    return
+
+
+@app.cell(hide_code=True)
+def _(json_results, mo, utils):
+    fig_pydantic = utils.create_pydantic_comparison_chart(json_results)
+    if fig_pydantic:
+        mo.vstack(
+            [
+                fig_pydantic,
+                mo.callout(
+                    mo.md("""
+                **Pydantic Performance:** Model validation adds overhead but provides type safety and data validation.
+                Use `model_dump_json()` for the fastest JSON serialization from Pydantic models.
+                """),
+                    kind='info',
+                ),
+            ]
+        )
     return
 
 

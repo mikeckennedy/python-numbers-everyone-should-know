@@ -29,6 +29,167 @@ def load_benchmark_results():
 # ============================================================================
 
 
+def clean_label(name, context=None):
+    """Clean up benchmark names for better display on axes
+
+    Args:
+        name: Raw benchmark name (e.g., 'empty_string', '100_char_string')
+        context: Context hint to help clean labels (e.g., 'string', 'collection', 'class')
+
+    Returns:
+        Cleaned, human-readable label
+    """
+    # Handle specific cases first
+    if name == 'empty_string':
+        return 'empty'
+    if name == 'small_string':
+        return 'small (5 chars)'
+    if name == '100_char_string':
+        return '100 chars'
+    if name == '1000_char_string':
+        return '1000 chars'
+
+    # Integer and float handling
+    if name == 'small_int':
+        return 'small int (0)'
+    if name == 'large_int':
+        return 'large int (10^20)'
+    if name == 'small_float':
+        return 'small float (0.0)'
+    if name == 'large_float':
+        return 'large float (10^20)'
+
+    # List containers
+    if 'list_container' in name:
+        if 'ints' in name:
+            size = name.split('_')[2] if len(name.split('_')) > 2 else ''
+            return f'List of {size} ints' if size else 'List of ints'
+        if 'floats' in name:
+            size = name.split('_')[2] if len(name.split('_')) > 2 else ''
+            return f'List of {size} floats' if size else 'List of floats'
+
+    # Empty collections
+    if name == 'empty_list':
+        return 'list'
+    if name == 'empty_dict':
+        return 'dict'
+    if name == 'empty_set':
+        return 'set'
+
+    # Class types
+    if 'class' in name:
+        if 'regular_class_5attr' in name:
+            return 'Regular class'
+        if 'slots_class_5attr' in name:
+            return '__slots__ class'
+        if 'dataclass_5attr' in name:
+            return 'dataclass'
+        if 'frozen_dataclass_5attr' in name:
+            return 'frozen dataclass'
+        if 'namedtuple_5attr' in name:
+            return 'namedtuple'
+        # Aggregate (1000 instances)
+        if 'list_1000_regular_class' in name:
+            return 'Regular class (×1000)'
+        if 'list_1000_slots_class' in name:
+            return '__slots__ class (×1000)'
+        if 'list_1000_dataclass' in name:
+            return 'dataclass (×1000)'
+
+    # Arithmetic operations
+    if name == 'int_add':
+        return 'Integer addition'
+    if name == 'float_add':
+        return 'Float addition'
+    if name == 'int_multiply':
+        return 'Integer multiply'
+
+    # String operations
+    if name == 'concat_small':
+        return '+ concatenation'
+    if name == 'f_string':
+        return 'f-string'
+    if name == 'format_method':
+        return '.format()'
+    if name == 'percent_formatting':
+        return '% formatting'
+
+    # List operations
+    if 'list_comp' in name and '1000' in name:
+        return 'List comprehension'
+    if 'for_loop_append' in name and '1000' in name:
+        return 'For loop + append'
+
+    # Function operations
+    if name == 'empty function call':
+        return 'Empty function'
+    if name == 'function with 5 args':
+        return 'Function (5 args)'
+    if name == 'instance method call':
+        return 'Instance method'
+    if 'lambda call' in name and 'no capture' in name:
+        return 'Lambda call'
+    if 'len() on list' in name:
+        return 'len() builtin'
+
+    # Collection access
+    if name == 'dict[key] (existing)':
+        return 'dict[key]'
+    if name == 'item in set (existing)':
+        return 'item in set'
+    if name == 'list[index]':
+        return 'list[index]'
+    if name == 'item in list (last)':
+        return 'item in list'
+
+    # Iteration
+    if name == 'for item in list (1000 items)':
+        return 'for item in list'
+    if name == 'for key in dict (1000 items)':
+        return 'for key in dict'
+    if name == 'for item in set (1000 items)':
+        return 'for item in set'
+    if name == 'for i in range(1000)':
+        return 'for i in range(N)'
+
+    # File I/O
+    if 'open()' in name and 'close()' in name:
+        return 'open() + close()'
+    if name == 'read 1KB file':
+        return 'read 1KB'
+    if name == 'read 1MB file':
+        return 'read 1MB'
+    if name == 'write 1KB file':
+        return 'write 1KB'
+    if name == 'write 1MB file':
+        return 'write 1MB'
+
+    # Exceptions
+    if 'try/except (no exception' in name:
+        return 'try/except (no error)'
+    if name == 'raise + catch ValueError':
+        return 'raise + catch exception'
+
+    # Async
+    if 'sync function call' in name:
+        return 'Sync function'
+    if 'async equivalent' in name:
+        return 'Async function'
+
+    # Database
+    if 'INSERT (JSON blob)' in name:
+        return 'INSERT'
+    if 'SELECT by primary key' in name:
+        return 'SELECT by PK'
+    if 'cache.set()' in name:
+        return 'set()'
+    if 'cache.get()' in name:
+        return 'get()'
+
+    # Default: capitalize and replace underscores
+    return name.replace('_', ' ').title()
+
+
 def format_time(ms_value):
     """Convert milliseconds to appropriate unit with ops/sec"""
     if ms_value < 0.001:
@@ -65,13 +226,14 @@ def create_string_memory_chart(memory_results):
     string_df = pd.DataFrame(string_data)
     string_df['_size'] = string_df['name'].str.extract(r'(\d+)').fillna('0').astype(int)
     string_df = string_df.sort_values('_size')
+    string_df['clean_name'] = string_df['name'].apply(clean_label)
 
     fig = px.bar(
         string_df,
-        x='name',
+        x='clean_name',
         y='value',
         title='String Memory Usage by Size (up to 100 chars)',
-        labels={'name': 'String Type', 'value': 'Bytes'},
+        labels={'clean_name': 'String Type', 'value': 'Bytes'},
         text='value',
     )
     fig.update_traces(texttemplate='%{text} bytes', textposition='outside', marker_color='#1565C0', textfont_size=14)
@@ -93,13 +255,14 @@ def create_individual_numbers_chart(memory_results):
         if ('int' in r['name'] or 'float' in r['name']) and 'list' not in r['name'] and 'container' not in r['name']
     ]
     df = pd.DataFrame(data)
+    df['clean_name'] = df['name'].apply(clean_label)
 
     fig = px.bar(
         df,
-        x='name',
+        x='clean_name',
         y='value',
         title='Individual Integer and Float Memory Usage',
-        labels={'name': 'Type', 'value': 'Bytes'},
+        labels={'clean_name': 'Type', 'value': 'Bytes'},
         text='value',
     )
     fig.update_traces(texttemplate='%{text} bytes', textposition='outside', marker_color='#2E7D32', textfont_size=14)
@@ -121,13 +284,14 @@ def create_number_lists_chart(memory_results):
         if '_1000_' in r['name'] and 'container' in r['name'] and 'list' in r['name'] and 'class' not in r['name']
     ]
     df = pd.DataFrame(data)
+    df['clean_name'] = df['name'].apply(clean_label)
 
     fig = px.bar(
         df,
-        x='name',
+        x='clean_name',
         y='value',
         title='List Memory Usage (1,000 items: ints vs floats)',
-        labels={'name': 'List Type', 'value': 'Bytes'},
+        labels={'clean_name': 'List Type', 'value': 'Bytes'},
         text='value',
     )
     fig.update_traces(
@@ -147,13 +311,14 @@ def create_empty_collections_chart(memory_results):
     """Create empty collection overhead chart"""
     data = [r for r in memory_results if r['name'] in ['empty_list', 'empty_dict', 'empty_set']]
     df = pd.DataFrame(data)
+    df['clean_name'] = df['name'].apply(clean_label)
 
     fig = px.bar(
         df,
-        y='name',
+        y='clean_name',
         x='value',
         title='Empty Collection Memory Overhead',
-        labels={'name': 'Collection Type', 'value': 'Bytes'},
+        labels={'clean_name': 'Collection Type', 'value': 'Bytes'},
         orientation='h',
         text='value',
     )
@@ -215,13 +380,14 @@ def create_class_memory_chart(memory_results):
     """Create class instance memory chart"""
     data = [r for r in memory_results if 'class' in r['name'] and '5attr' in r['name'] or 'namedtuple' in r['name']]
     df = pd.DataFrame(data)
+    df['clean_name'] = df['name'].apply(clean_label)
 
     fig = px.bar(
         df,
-        x='name',
+        x='clean_name',
         y='value',
         title='Class Instance Memory (5 attributes)',
-        labels={'name': 'Class Type', 'value': 'Bytes'},
+        labels={'clean_name': 'Class Type', 'value': 'Bytes'},
         text='value',
     )
     fig.update_traces(texttemplate='%{text} bytes', textposition='outside', marker_color='#6A1B9A', textfont_size=14)
@@ -239,13 +405,14 @@ def create_aggregate_class_memory_chart(memory_results):
     """Create aggregate class memory chart (1000 instances) and calculate savings"""
     data = [r for r in memory_results if 'list_1000' in r['name'] and 'class' in r['name']]
     df = pd.DataFrame(data)
+    df['clean_name'] = df['name'].apply(clean_label)
 
     fig = px.bar(
         df,
-        x='name',
+        x='clean_name',
         y='value',
         title='Memory for 1,000 Class Instances',
-        labels={'name': 'Class Type', 'value': 'Bytes'},
+        labels={'clean_name': 'Class Type', 'value': 'Bytes'},
         text='value',
     )
     fig.update_traces(
@@ -286,7 +453,7 @@ def create_arithmetic_chart(basic_results):
         time_str, ops_str = format_time(r['value'])
         records.append(
             {
-                'Operation': r['name'].replace('_', ' ').title(),
+                'Operation': clean_label(r['name']),
                 'Time': r['value'],
                 'Display': f'{time_str} ({ops_str})',
             }
@@ -317,19 +484,12 @@ def create_string_operations_chart(basic_results):
         if any(op in r['name'] for op in ['concat_small', 'f_string', 'format_method', 'percent_formatting'])
     ]
 
-    name_map = {
-        'concat_small': 'Concatenation (+)',
-        'f_string': 'f-string',
-        'format_method': '.format()',
-        'percent_formatting': '% formatting',
-    }
-
     records = []
     for r in data:
         time_str, ops_str = format_time(r['value'])
         records.append(
             {
-                'Operation': name_map.get(r['name'], r['name']),
+                'Operation': clean_label(r['name']),
                 'Time': r['value'],
                 'Display': f'{time_str}',
             }
@@ -375,7 +535,7 @@ def create_list_comp_vs_loop_chart(basic_results):
 
     fig = go.Figure()
 
-    for idx, (method, time_val) in enumerate([('List Comprehension', comp_time), ('For Loop', loop_time)]):
+    for idx, (method, time_val) in enumerate([('List Comprehension', comp_time), ('For Loop + append', loop_time)]):
         time_str, ops_str = format_time(time_val)
         fig.add_trace(
             go.Bar(
@@ -444,7 +604,7 @@ def create_collection_access_chart(coll_results):
     records = []
     for r in data:
         time_str, ops_str = format_time(r['value'])
-        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+        records.append({'Operation': clean_label(r['name']), 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
 
     df = pd.DataFrame(records).sort_values('Time')
 
@@ -452,8 +612,8 @@ def create_collection_access_chart(coll_results):
         df,
         y='Operation',
         x='Time',
-        title='Collection Access Speed (note: list membership is O(n) for 1000 items)',
-        labels={'Time': 'Time (ms)'},
+        title='Collection Access Speed (1,000 items)',
+        labels={'Time': 'Time (ms)', 'Operation': ''},
         orientation='h',
         text='Display',
         log_x=True,
@@ -479,7 +639,7 @@ def create_collection_iteration_chart(coll_results):
     records = []
     for r in data:
         time_str, ops_str = format_time(r['value'])
-        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+        records.append({'Operation': clean_label(r['name']), 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
 
     df = pd.DataFrame(records).sort_values('Time')
 
@@ -488,7 +648,7 @@ def create_collection_iteration_chart(coll_results):
         y='Operation',
         x='Time',
         title='Iteration Speed Comparison (1,000 items)',
-        labels={'Time': 'Time (ms)'},
+        labels={'Time': 'Time (ms)', 'Operation': ''},
         orientation='h',
         text='Display',
     )
@@ -583,10 +743,10 @@ def create_database_comparison_chart(db_results):
 
     records = []
     for name, val in [
-        ('SQLite Write', sqlite_insert['value']),
-        ('SQLite Read', sqlite_select['value']),
-        ('diskcache Write', diskcache_set['value']),
-        ('diskcache Read', diskcache_get['value']),
+        ('SQLite INSERT', sqlite_insert['value']),
+        ('SQLite SELECT', sqlite_select['value']),
+        ('diskcache set()', diskcache_set['value']),
+        ('diskcache get()', diskcache_get['value']),
     ]:
         time_str, ops_str = format_time(val)
         records.append({'Operation': name, 'Time': val, 'Display': f'{time_str} ({ops_str})'})
@@ -598,7 +758,7 @@ def create_database_comparison_chart(db_results):
         x='Operation',
         y='Time',
         title='Database Performance: SQLite vs diskcache',
-        labels={'Time': 'Time (ms)'},
+        labels={'Time': 'Time (ms)', 'Operation': ''},
         text='Display',
         log_y=True,
     )
@@ -624,7 +784,7 @@ def create_file_io_chart(file_results):
     records = []
     for r in data:
         time_str, ops_str = format_time(r['value'])
-        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str}'})
+        records.append({'Operation': clean_label(r['name']), 'Time': r['value'], 'Display': f'{time_str}'})
 
     df = pd.DataFrame(records)
 
@@ -633,7 +793,7 @@ def create_file_io_chart(file_results):
         x='Operation',
         y='Time',
         title='File I/O Performance',
-        labels={'Time': 'Time (ms)'},
+        labels={'Time': 'Time (ms)', 'Operation': ''},
         text='Display',
         log_y=True,
     )
@@ -712,7 +872,7 @@ def create_function_calls_chart(func_results):
     records = []
     for r in data:
         time_str, ops_str = format_time(r['value'])
-        records.append({'Operation': r['name'], 'Time': r['value'], 'Display': f'{time_str}'})
+        records.append({'Operation': clean_label(r['name']), 'Time': r['value'], 'Display': f'{time_str}'})
 
     df = pd.DataFrame(records).sort_values('Time')
 
@@ -721,7 +881,7 @@ def create_function_calls_chart(func_results):
         y='Operation',
         x='Time',
         title='Function Call Overhead Comparison',
-        labels={'Time': 'Time (ms)'},
+        labels={'Time': 'Time (ms)', 'Operation': ''},
         orientation='h',
         text='Display',
     )
@@ -740,7 +900,7 @@ def create_exception_cost_chart(func_results):
 
     fig = go.Figure()
 
-    exception_types = ['No Exception', 'Exception Raised']
+    exception_types = [clean_label(no_exception['name']), clean_label(with_exception['name'])]
     exception_times = [no_exception['value'], with_exception['value']]
 
     fig.add_trace(
@@ -759,6 +919,7 @@ def create_exception_cost_chart(func_results):
     fig.update_layout(
         title=f'Exception Cost: {exception_overhead:.0f}x Overhead When Raised',
         yaxis_title='Time (ms)',
+        xaxis_title='',
         showlegend=False,
         height=500,
         margin=dict(t=50, b=100),
@@ -777,7 +938,7 @@ def create_async_overhead_chart(async_results):
 
     fig = go.Figure()
 
-    func_types = ['Sync Function', 'Async Function']
+    func_types = [clean_label(sync_func['name']), clean_label(async_func['name'])]
     func_times = [sync_func['value'], async_func['value']]
 
     fig.add_trace(
@@ -796,6 +957,7 @@ def create_async_overhead_chart(async_results):
     fig.update_layout(
         title=f'Async Overhead: {async_overhead:.0f}x Slower for Simple Operations',
         yaxis_title='Time (ms)',
+        xaxis_title='',
         showlegend=False,
         height=500,
         yaxis_type='log',
@@ -803,6 +965,148 @@ def create_async_overhead_chart(async_results):
     )
 
     return fig, async_overhead
+
+
+# ============================================================================
+# Chart Creation - Attributes
+# ============================================================================
+
+
+def create_attribute_access_chart(attr_results):
+    """Create attribute access speed comparison (regular vs __slots__)"""
+    data = [
+        r
+        for r in attr_results
+        if r.get('category') == 'attribute_access'
+        and any(pattern in r['name'] for pattern in ['regular class', '__slots__ class'])
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        # Clean up the name
+        name = r['name']
+        if 'regular class' in name:
+            if 'read' in name:
+                display_name = 'Regular: Read'
+            else:
+                display_name = 'Regular: Write'
+        else:  # __slots__ class
+            if 'read' in name:
+                display_name = '__slots__: Read'
+            else:
+                display_name = '__slots__: Write'
+
+        records.append({'Operation': display_name, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records)
+
+    fig = px.bar(
+        df,
+        x='Operation',
+        y='Time',
+        title='Attribute Access: Regular vs __slots__ Classes',
+        labels={'Time': 'Time (ms)', 'Operation': ''},
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#5E35B1', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(t=50, b=100))
+    return fig
+
+
+def create_other_attribute_ops_chart(attr_results):
+    """Create chart for @property, getattr, hasattr"""
+    data = [
+        r
+        for r in attr_results
+        if r.get('category') == 'attribute_other_ops'
+        and any(pattern in r['name'] for pattern in ['@property: read', 'getattr()', 'hasattr()'])
+    ]
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        # Clean up names
+        name = r['name']
+        if '@property: read' in name:
+            display_name = '@property'
+        elif 'getattr()' in name:
+            display_name = 'getattr()'
+        elif 'hasattr()' in name:
+            display_name = 'hasattr()'
+        else:
+            display_name = name
+
+        records.append({'Operation': display_name, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    df = pd.DataFrame(records).sort_values('Time')
+
+    fig = px.bar(
+        df,
+        y='Operation',
+        x='Time',
+        title='Other Attribute Operations',
+        labels={'Time': 'Time (ms)', 'Operation': ''},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#7B1FA2', textfont_size=14)
+    fig.update_layout(height=400, margin=dict(l=150, t=50))
+    return fig
+
+
+def create_pydantic_comparison_chart(json_results):
+    """Create Pydantic validation/serialization comparison chart"""
+    # Look for Pydantic results in json category
+    data = [r for r in json_results if r.get('category') == 'pydantic_serialization']
+
+    if not data:
+        return None
+
+    records = []
+    for r in data:
+        time_str, ops_str = format_time(r['value'])
+        # Simplify names
+        name = r['name']
+        if 'model_dump_json()' in name:
+            if 'simple' in name:
+                display_name = 'dump_json (simple)'
+            else:
+                display_name = 'dump_json (complex)'
+        elif 'model_dump()' in name:
+            if 'simple' in name:
+                display_name = 'dump (simple)'
+            else:
+                display_name = 'dump (complex)'
+        elif 'model_validate()' in name:
+            if 'simple' in name:
+                display_name = 'validate (simple)'
+            else:
+                display_name = 'validate (complex)'
+        elif 'construct' in name.lower():
+            display_name = 'construct (no validation)'
+        else:
+            display_name = name
+
+        records.append({'Operation': display_name, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+
+    if not records:
+        return None
+
+    df = pd.DataFrame(records).sort_values('Time')
+
+    fig = px.bar(
+        df,
+        y='Operation',
+        x='Time',
+        title='Pydantic Model Operations',
+        labels={'Time': 'Time (ms)', 'Operation': ''},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#E91E63', textfont_size=14)
+    fig.update_layout(height=500, margin=dict(l=200, t=50))
+    return fig
 
 
 # ============================================================================
