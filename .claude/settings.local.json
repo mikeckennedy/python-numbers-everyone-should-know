@@ -15,7 +15,10 @@
       "Bash(./venv/bin/python:*)",
       "Bash(../../venv/bin/python:*)",
       "Bash(../venv/bin/python:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Bash(uv pip compile:*)",
+      "Bash(venv/bin/uv pip install:*)",
+      "Bash(/Users/michaelkennedy/.local/bin/uv pip install:*)"
     ]
   }
 }

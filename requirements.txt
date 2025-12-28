@@ -28,7 +28,14 @@ colorama==0.4.6
 diskcache==5.6.3
     # via -r requirements.piptools
 django==6.0
+    # via
+    #   -r requirements.piptools
+    #   django-stubs
+    #   django-stubs-ext
+django-stubs==5.2.8
     # via -r requirements.piptools
+django-stubs-ext==5.2.8
+    # via django-stubs
 dnspython==2.8.0
     # via pymongo
 faker==39.0.0
@@ -78,6 +85,8 @@ orjson==3.11.5
     # via -r requirements.piptools
 polyfactory==3.1.0
     # via litestar
+psutil==7.1.3
+    # via -r requirements.piptools
 pydantic==2.12.5
     # via
     #   -r requirements.piptools
@@ -104,10 +113,28 @@ starlette==0.50.0
     # via
     #   -r requirements.piptools
     #   fastapi
+types-click==7.1.8
+    # via types-flask
 types-colorama==0.4.15.20250801
     # via -r requirements.piptools
+types-flask==1.1.6
+    # via -r requirements.piptools
+types-jinja2==2.11.9
+    # via types-flask
+types-markupsafe==1.1.10
+    # via types-jinja2
+types-psutil==7.1.3.20251211
+    # via -r requirements.piptools
+types-pyyaml==6.0.12.20250915
+    # via django-stubs
+types-ujson==5.10.0.20250822
+    # via -r requirements.piptools
+types-werkzeug==1.0.9
+    # via types-flask
 typing-extensions==4.15.0
     # via
+    #   django-stubs
+    #   django-stubs-ext
     #   fastapi
     #   litestar
     #   polyfactory

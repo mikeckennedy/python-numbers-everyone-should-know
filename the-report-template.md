@@ -502,7 +502,7 @@ The cost of async machinery.
 
 - **OS:** {{METADATA.PLATFORM}}
 - **Python:** {{METADATA.PYTHON_VERSION}} ({{METADATA.PYTHON_IMPLEMENTATION}})
-- **CPU:** {{METADATA.PROCESSOR}}
+- **CPU:** {{METADATA.PROCESSOR}} - {{SYSTEM.CPU_CORES}}
 - **RAM:** {{SYSTEM.RAM}}
 
 ### Code Repository

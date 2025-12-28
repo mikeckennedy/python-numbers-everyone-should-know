@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "python_version": "3.14.2",
+    "python_implementation": "CPython",
+    "platform": "macOS-26.2-arm64-arm-64bit-Mach-O",
+    "processor": "arm",
+    "ram_gb": 16.0,
+    "timestamp": "2025-12-27T17:16:34.636319"
+  },
+  "categories": {
+    "memory": {
+      "name": "Memory Sizes",
+      "benchmark_count": 35,
+      "results": [
+        {
+          "name": "regular_class_empty",
+          "value": 48,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "regular_class_5attr",
+          "value": 48,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "slots_class_empty",
+          "value": 32,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "slots_class_5attr",
+          "value": 72,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dataclass_5attr",
+          "value": 48,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "slots_dataclass_5attr",
+          "value": 72,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "namedtuple_5attr",
+          "value": 88,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_regular_class",
+          "value": 169206,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_slots_class",
+          "value": 80996,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_process",
+          "value": 27.265625,
+          "unit": "MB",
+          "category": "memory"
+        },
+        {
+          "name": "empty_string",
+          "value": 41,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "1_char_string",
+          "value": 42,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "10_char_string",
+          "value": 51,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "100_char_string",
+          "value": 141,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "1000_char_string",
+          "value": 1041,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "small_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "boundary_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "very_large_int_20",
+          "value": 36,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "huge_int_100",
+          "value": 72,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "float",
+          "value": 24,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_float",
+          "value": 24,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_list",
+          "value": 56,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_10_container",
+          "value": 136,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_100_container",
+          "value": 856,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_container",
+          "value": 8056,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_floats_container",
+          "value": 8856,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_dict",
+          "value": 64,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_10_container",
+          "value": 352,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_100_container",
+          "value": 4688,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_1000_container",
+          "value": 36952,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_set",
+          "value": 216,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_10_container",
+          "value": 728,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_100_container",
+          "value": 8408,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_1000_container",
+          "value": 32984,
+          "unit": "bytes",
+          "category": "memory"
+        }
+      ]
+    }
+  }
+}

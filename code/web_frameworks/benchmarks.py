@@ -11,6 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from utils.benchmark import BenchmarkResult
+
 from web_frameworks.benchmark_servers import run_benchmarks as run_server_benchmarks
 
 
@@ -61,6 +62,17 @@ def run_benchmarks() -> list[BenchmarkResult]:
         latency_avg_ms = parse_latency_to_ms(bench_result.latency_avg)
         latency_p99_ms = parse_latency_to_ms(bench_result.latency_p99)
 
+        # Main metric for quick reference table: requests per second
+        results.append(
+            BenchmarkResult(
+                name=f'{framework_name}_return_json',
+                value=bench_result.requests_per_sec,
+                unit='req/sec',
+                category='web',
+            )
+        )
+
+        # Detailed metrics
         # Requests per second
         results.append(
             BenchmarkResult(
@@ -76,16 +88,6 @@ def run_benchmarks() -> list[BenchmarkResult]:
             results.append(
                 BenchmarkResult(
                     name=f'{framework_name}_latency_p50',
-                    value=latency_avg_ms,
-                    unit='ms',
-                    category='web',
-                )
-            )
-
-            # Combined metric for quick reference table
-            results.append(
-                BenchmarkResult(
-                    name=f'{framework_name}_return_json',
                     value=latency_avg_ms,
                     unit='ms',
                     category='web',

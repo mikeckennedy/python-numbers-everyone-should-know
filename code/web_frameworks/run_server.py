@@ -60,6 +60,8 @@ def run_server(framework: str, port: int = 8000, workers: int = 4):
         '--workers',
         str(workers),
         '--no-ws',
+        # '--loop',
+        # 'uvloop',
         config.module,
     ]
 

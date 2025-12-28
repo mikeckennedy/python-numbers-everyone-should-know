@@ -130,6 +130,17 @@ def format_value(value: float, unit: str) -> str:
     elif unit == 'MB':
         return f'{value:,.2f} MB'
 
+    elif unit == 'req/sec':
+        # Format requests per second
+        if value < 1_000:
+            return f'{value:.1f} req/sec'
+        elif value < 1_000_000:
+            k_req = value / 1_000
+            return f'{k_req:.1f}k req/sec'
+        else:
+            m_req = value / 1_000_000
+            return f'{m_req:.2f}M req/sec'
+
     # Fallback for unknown units
     return f'{value} {unit}'
 
@@ -164,6 +175,22 @@ def create_placeholder_map(results: dict) -> dict[str, str]:
             placeholder_map['METADATA.TIMESTAMP'] = timestamp
     else:
         placeholder_map['METADATA.TIMESTAMP'] = 'Unknown'
+
+    # Add system info placeholders
+    ram_gb = metadata.get('ram_gb', 0)
+    if ram_gb:
+        placeholder_map['SYSTEM.RAM'] = f'{ram_gb:.1f} GB'
+    else:
+        placeholder_map['SYSTEM.RAM'] = 'Unknown'
+
+    cpu_cores_physical = metadata.get('cpu_cores_physical', 0)
+    cpu_cores_logical = metadata.get('cpu_cores_logical', 0)
+    if cpu_cores_physical and cpu_cores_logical:
+        placeholder_map['SYSTEM.CPU_CORES'] = f'{cpu_cores_physical} cores ({cpu_cores_logical} logical)'
+    elif cpu_cores_logical:
+        placeholder_map['SYSTEM.CPU_CORES'] = f'{cpu_cores_logical} cores'
+    else:
+        placeholder_map['SYSTEM.CPU_CORES'] = 'Unknown'
 
     # Add benchmark results
     categories = results.get('categories', {})

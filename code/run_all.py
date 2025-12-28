@@ -20,6 +20,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import psutil
 from colorama import Fore, Style, init
 
 # Initialize colorama
@@ -130,11 +131,21 @@ QUICK_CATEGORIES = ['basic_ops', 'collections', 'functions']
 
 def get_metadata() -> dict[str, Any]:
     """Collect system metadata."""
+    # Get system RAM in GB
+    ram_gb = psutil.virtual_memory().total / (1024**3)
+
+    # Get CPU core counts
+    cpu_cores_physical = psutil.cpu_count(logical=False) or 0
+    cpu_cores_logical = psutil.cpu_count(logical=True) or 0
+
     return {
         'python_version': platform.python_version(),
         'python_implementation': platform.python_implementation(),
         'platform': platform.platform(),
         'processor': platform.processor(),
+        'ram_gb': round(ram_gb, 1),
+        'cpu_cores_physical': cpu_cores_physical,
+        'cpu_cores_logical': cpu_cores_logical,
         'timestamp': datetime.datetime.now().isoformat(),
     }
 
