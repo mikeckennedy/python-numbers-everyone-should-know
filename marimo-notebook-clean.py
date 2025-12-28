@@ -445,8 +445,12 @@ def _(categories, mo, utils):
                 fig_db,
                 mo.callout(
                     mo.md("""
-                **Key Insight:** SQLite is faster for reads, diskcache is faster for writes.
-                Choose based on your read/write patterns.
+                **Key Insights:** 
+                - SQLite is fastest for reads (~4μs)
+                - diskcache is faster for writes (~30μs vs SQLite's ~200μs)
+                - MongoDB adds network overhead (~100-120μs for both operations)
+                
+                Choose based on your read/write patterns and whether you need distributed access.
                 """),
                     kind='info',
                 ),

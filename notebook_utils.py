@@ -737,7 +737,10 @@ def create_database_comparison_chart(db_results):
     sqlite_select = next((r for r in db_results if 'SELECT by primary key' in r['name']), None)
     diskcache_set = next((r for r in db_results if 'cache.set() (complex obj)' in r['name']), None)
     diskcache_get = next((r for r in db_results if 'cache.get() (complex obj)' in r['name']), None)
+    mongodb_insert = next((r for r in db_results if 'insert_one()' in r['name']), None)
+    mongodb_find = next((r for r in db_results if 'find_one() by _id' in r['name']), None)
 
+    # Need at least SQLite and diskcache to show the chart
     if not all([sqlite_insert, sqlite_select, diskcache_set, diskcache_get]):
         return None
 
@@ -751,13 +754,26 @@ def create_database_comparison_chart(db_results):
         time_str, ops_str = format_time(val)
         records.append({'Operation': name, 'Time': val, 'Display': f'{time_str} ({ops_str})'})
 
+    # Add MongoDB if available
+    if mongodb_insert:
+        time_str, ops_str = format_time(mongodb_insert['value'])
+        records.append(
+            {'Operation': 'MongoDB insert', 'Time': mongodb_insert['value'], 'Display': f'{time_str} ({ops_str})'}
+        )
+
+    if mongodb_find:
+        time_str, ops_str = format_time(mongodb_find['value'])
+        records.append(
+            {'Operation': 'MongoDB find', 'Time': mongodb_find['value'], 'Display': f'{time_str} ({ops_str})'}
+        )
+
     df = pd.DataFrame(records)
 
     fig = px.bar(
         df,
         x='Operation',
         y='Time',
-        title='Database Performance: SQLite vs diskcache',
+        title='Database Performance: SQLite vs diskcache vs MongoDB',
         labels={'Time': 'Time (ms)', 'Operation': ''},
         text='Display',
         log_y=True,
