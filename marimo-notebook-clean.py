@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = '0.18.4'
-app = marimo.App(width='full')
+__generated_with = "0.18.4"
+app = marimo.App(width="full")
 
 
 @app.cell(hide_code=True)
@@ -311,7 +311,7 @@ def _(mo):
     mo.md("""
     ---
     ## 🌐 Web Frameworks
-    
+
     Comparing request handling performance across popular Python web frameworks.
     """)
     return
@@ -320,6 +320,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(categories, mo, utils):
     web_results = categories['web']['results']
+    output = None
     if web_results:
         result = utils.create_web_framework_chart(web_results)
         if result:
@@ -328,7 +329,7 @@ def _(categories, mo, utils):
             slowest = web_df.iloc[-1]['Framework']
             web_speedup = web_df.iloc[-1]['Time'] / web_df.iloc[0]['Time']
 
-            mo.vstack(
+            output = mo.vstack(
                 [
                     fig_web,
                     mo.callout(
@@ -344,17 +345,17 @@ def _(categories, mo, utils):
                 ]
             )
         else:
-            mo.callout(
+            output = mo.callout(
                 mo.md(
                     """
                 **Web framework benchmarks not yet run.** 
-                
+
                 To run these benchmarks, you need `wrk` installed:
-                
+
                 ```bash
                 # macOS
                 brew install wrk
-                
+
                 # Then run:
                 python code/run_all.py --category web
                 ```
@@ -363,17 +364,17 @@ def _(categories, mo, utils):
                 kind='warn',
             )
     else:
-        mo.callout(
+        output = mo.callout(
             mo.md(
                 """
             **Web framework benchmarks not yet run.** 
-            
+
             To run these benchmarks, you need `wrk` installed:
-            
+
             ```bash
             # macOS
             brew install wrk
-            
+
             # Then run:
             python code/run_all.py --category web
             ```
@@ -381,6 +382,7 @@ def _(categories, mo, utils):
             ),
             kind='warn',
         )
+    output
     return
 
 
@@ -448,7 +450,7 @@ def _(categories, mo, utils):
                 ),
             ]
         )
-    return (db_results,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -866,5 +868,5 @@ def _(mo):
     return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
