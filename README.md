@@ -165,7 +165,30 @@ python3 code/imports/import_times.py
 
 ## Generating the Report
 
-After running benchmarks, generate the formatted report from the results:
+After running benchmarks, you have two options for viewing the results:
+
+### Option 1: Interactive Notebook (Recommended)
+
+View results in an interactive marimo notebook with visualizations:
+
+```bash
+# Run the marimo notebook
+marimo edit marimo-notebook.py
+
+# Or run it as an app
+marimo run marimo-notebook.py
+```
+
+The notebook includes:
+- **Interactive Charts**: Plotly visualizations for all benchmark categories
+- **Comparisons**: Side-by-side performance comparisons
+- **Insights**: Key takeaways and performance recommendations
+- **Live Data**: Automatically loads from `results.json`
+- **Easy Updates**: Just re-run benchmarks and refresh the notebook
+
+### Option 2: Markdown Report
+
+Generate a static markdown report from the results:
 
 ```bash
 # Generate the-report.md from results.json
