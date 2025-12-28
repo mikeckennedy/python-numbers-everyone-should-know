@@ -208,14 +208,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     # -------------------------------------------------------------------------
     print_subheader('Other Type Checks')
 
-    def callable_check_func():
+    def callable_check_func():  # type: ignore
         return callable(run_benchmarks)
 
     time_ms = time_operation(callable_check_func, iterations=100_000)
     results.append(BenchmarkResult('callable() on function', time_ms, category=CATEGORY))
     print_result('callable() on function', time_ms)
 
-    def callable_check_obj():
+    def callable_check_obj():  # type: ignore
         return callable(test_str)
 
     time_ms = time_operation(callable_check_obj, iterations=100_000)
