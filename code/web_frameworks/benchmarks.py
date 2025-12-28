@@ -62,7 +62,8 @@ def run_benchmarks() -> list[BenchmarkResult]:
         latency_avg_ms = parse_latency_to_ms(bench_result.latency_avg)
         latency_p99_ms = parse_latency_to_ms(bench_result.latency_p99)
 
-        # Main metric for quick reference table: requests per second
+        # Quick reference metric: actual requests per second (not latency)
+        # We show req/sec because latency-to-ops/sec calculation doesn't work for concurrent benchmarks
         results.append(
             BenchmarkResult(
                 name=f'{framework_name}_return_json',
@@ -82,17 +83,6 @@ def run_benchmarks() -> list[BenchmarkResult]:
                 category='web',
             )
         )
-
-        # Latency p50 (using avg)
-        if latency_avg_ms:
-            results.append(
-                BenchmarkResult(
-                    name=f'{framework_name}_latency_p50',
-                    value=latency_avg_ms,
-                    unit='ms',
-                    category='web',
-                )
-            )
 
         # Latency p99
         if latency_p99_ms:
