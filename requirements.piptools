@@ -1,5 +1,7 @@
 # Python Numbers Everyone Should Know - Dependencies
 
+uvloop
+
 # JSON libraries
 orjson
 ujson

@@ -99,7 +99,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     """Run all async overhead benchmarks."""
     results = []
 
-    print_header('Async Overhead Benchmarks')
+    # Try to use uvloop if available
+    try:
+        import uvloop
+
+        uvloop.install()
+        print_header('Async Overhead Benchmarks (with uvloop)')
+    except ImportError:
+        print_header('Async Overhead Benchmarks (standard asyncio)')
 
     # Get or create event loop
     try:

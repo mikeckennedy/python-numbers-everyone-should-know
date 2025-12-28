@@ -8,7 +8,10 @@
       "Bash(python3:*)",
       "Bash(find:*)",
       "Bash(ruff format:*)",
-      "Bash(ruff check:*)"
+      "Bash(ruff check:*)",
+      "Bash(ls:*)",
+      "Bash(uv pip install:*)",
+      "Bash(venv/bin/python:*)"
     ]
   }
 }

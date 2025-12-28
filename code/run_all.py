@@ -40,8 +40,8 @@ BENCHMARK_CATEGORIES = {
         'modules': [
             ('memory.empty_process', 'run_benchmarks'),
             ('memory.strings', 'run_benchmarks'),
-            ('memory.numbers', 'run_benchmarks'),
-            ('memory.collections', 'run_benchmarks'),
+            ('memory.numbers_mem', 'run_benchmarks'),
+            ('memory.collections_mem', 'run_benchmarks'),
             ('memory.classes', 'run_benchmarks'),
         ],
     },
