@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.18.4"
-app = marimo.App(width="full")
+__generated_with = '0.18.4'
+app = marimo.App(width='full')
 
 
 @app.cell(hide_code=True)
@@ -320,35 +320,39 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(categories, mo, utils):
     web_results = categories['web']['results']
-    output = None
     if web_results:
-        result = utils.create_web_framework_chart(web_results)
-        if result:
-            fig_web, web_df = result
-            fastest = web_df.iloc[0]['Framework']
-            slowest = web_df.iloc[-1]['Framework']
-            web_speedup = web_df.iloc[-1]['Time'] / web_df.iloc[0]['Time']
+        throughput_result = utils.create_web_framework_throughput_chart(web_results)
+        latency_result = utils.create_web_framework_latency_chart(web_results)
+
+        if throughput_result and latency_result:
+            fig_throughput, throughput_df = throughput_result
+            fig_latency, latency_df = latency_result
+
+            fastest_throughput = throughput_df.iloc[-1]['Framework']
+            slowest_throughput = throughput_df.iloc[0]['Framework']
+            fastest_latency = latency_df.iloc[-1]['Framework']
 
             output = mo.vstack(
                 [
-                    fig_web,
+                    fig_throughput,
+                    fig_latency,
                     mo.callout(
-                        mo.md(
-                            f"""
-                    **Framework Performance:** {fastest} is the fastest, handling requests {web_speedup:.1f}x 
-                    faster than {slowest}. Choose based on your needs: async frameworks (Starlette, FastAPI, 
-                    Litestar) excel at I/O-bound workloads with many concurrent connections.
-                    """
-                        ),
+                        mo.md(f"""
+                **Performance Insights:**
+                - **Highest throughput:** {fastest_throughput} ({throughput_df.iloc[-1]['RPS']:,.0f} req/s)
+                - **Lowest latency:** {fastest_latency} ({latency_df.iloc[-1]['Latency']:.2f}ms P99)
+                
+                Async frameworks (Starlette, FastAPI, Litestar) excel at I/O-bound workloads 
+                with many concurrent connections.
+                """),
                         kind='success',
                     ),
                 ]
             )
         else:
             output = mo.callout(
-                mo.md(
-                    """
-                **Web framework benchmarks not yet run.** 
+                mo.md("""
+                **Web framework benchmarks not yet run.**
 
                 To run these benchmarks, you need `wrk` installed:
 
@@ -359,15 +363,13 @@ def _(categories, mo, utils):
                 # Then run:
                 python code/run_all.py --category web
                 ```
-                """
-                ),
+                """),
                 kind='warn',
             )
     else:
         output = mo.callout(
-            mo.md(
-                """
-            **Web framework benchmarks not yet run.** 
+            mo.md("""
+            **Web framework benchmarks not yet run.**
 
             To run these benchmarks, you need `wrk` installed:
 
@@ -378,8 +380,7 @@ def _(categories, mo, utils):
             # Then run:
             python code/run_all.py --category web
             ```
-            """
-            ),
+            """),
             kind='warn',
         )
     output
@@ -868,5 +869,5 @@ def _(mo):
     return
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()

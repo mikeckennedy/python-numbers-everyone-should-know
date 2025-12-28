@@ -1139,49 +1139,108 @@ def create_import_times_chart(import_results):
 # ============================================================================
 
 
-def create_web_framework_chart(web_results):
-    """Create web framework request handling comparison"""
+def create_web_framework_throughput_chart(web_results):
+    """Create web framework throughput comparison (requests/sec)"""
     if not web_results:
         return None
 
+    # Get only the requests_per_sec metrics
+    throughput_data = [r for r in web_results if 'requests_per_sec' in r['name']]
+
+    if not throughput_data:
+        return None
+
     records = []
-    for r in web_results:
-        time_str, ops_str = format_time(r['value'])
-        # Extract framework name from benchmark name
+    for r in throughput_data:
+        # Extract framework name
         name = r['name']
-        if 'Flask' in name:
+        if 'flask' in name.lower():
             framework = 'Flask'
-        elif 'Django' in name:
+        elif 'django' in name.lower():
             framework = 'Django'
-        elif 'FastAPI' in name:
+        elif 'fastapi' in name.lower():
             framework = 'FastAPI'
-        elif 'Starlette' in name:
+        elif 'starlette' in name.lower():
             framework = 'Starlette'
-        elif 'Litestar' in name:
+        elif 'litestar' in name.lower():
             framework = 'Litestar'
         else:
             framework = name
 
-        records.append({'Framework': framework, 'Time': r['value'], 'Display': f'{time_str} ({ops_str})'})
+        # Value is in req/sec
+        rps = r['value']
+        records.append({'Framework': framework, 'RPS': rps, 'Display': f'{rps:,.0f} req/s'})
 
     if not records:
         return None
 
-    df = pd.DataFrame(records).sort_values('Time')
-
-    # Calculate speedup relative to slowest
-    slowest_time = df['Time'].max()
-    df['Speedup'] = slowest_time / df['Time']
+    df = pd.DataFrame(records).sort_values('RPS', ascending=True)
 
     fig = px.bar(
         df,
         y='Framework',
-        x='Time',
-        title='Web Framework Request Handling Performance',
-        labels={'Time': 'Time per Request (ms)', 'Framework': ''},
+        x='RPS',
+        title='Web Framework Throughput',
+        labels={'RPS': 'Requests per Second', 'Framework': ''},
         orientation='h',
         text='Display',
     )
     fig.update_traces(textposition='outside', marker_color='#00897B', textfont_size=14)
-    fig.update_layout(height=500, margin=dict(l=150, t=50))
+    fig.update_layout(height=400, margin=dict(l=100, t=50))
     return fig, df
+
+
+def create_web_framework_latency_chart(web_results):
+    """Create web framework latency comparison (p99 latency in ms)"""
+    if not web_results:
+        return None
+
+    # Get only the latency_p99 metrics
+    latency_data = [r for r in web_results if 'latency_p99' in r['name']]
+
+    if not latency_data:
+        return None
+
+    records = []
+    for r in latency_data:
+        # Extract framework name
+        name = r['name']
+        if 'flask' in name.lower():
+            framework = 'Flask'
+        elif 'django' in name.lower():
+            framework = 'Django'
+        elif 'fastapi' in name.lower():
+            framework = 'FastAPI'
+        elif 'starlette' in name.lower():
+            framework = 'Starlette'
+        elif 'litestar' in name.lower():
+            framework = 'Litestar'
+        else:
+            framework = name
+
+        # Value is in ms
+        latency_ms = r['value']
+        records.append({'Framework': framework, 'Latency': latency_ms, 'Display': f'{latency_ms:.2f} ms'})
+
+    if not records:
+        return None
+
+    df = pd.DataFrame(records).sort_values('Latency', ascending=False)
+
+    fig = px.bar(
+        df,
+        y='Framework',
+        x='Latency',
+        title='Web Framework P99 Latency (lower is better)',
+        labels={'Latency': 'P99 Latency (ms)', 'Framework': ''},
+        orientation='h',
+        text='Display',
+    )
+    fig.update_traces(textposition='outside', marker_color='#1976D2', textfont_size=14)
+    fig.update_layout(height=400, margin=dict(l=100, t=50))
+    return fig, df
+
+
+def create_web_framework_chart(web_results):
+    """Legacy function - kept for backwards compatibility, delegates to throughput chart"""
+    return create_web_framework_throughput_chart(web_results)
