@@ -12,7 +12,10 @@
       "Bash(ls:*)",
       "Bash(uv pip install:*)",
       "Bash(venv/bin/python:*)",
-      "Bash(./venv/bin/python:*)"
+      "Bash(./venv/bin/python:*)",
+      "Bash(../../venv/bin/python:*)",
+      "Bash(../venv/bin/python:*)",
+      "Bash(tee:*)"
     ]
   }
 }

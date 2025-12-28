@@ -1,4 +1,4 @@
-# Python Numbers Programmer Should Know
+# Python Numbers Every Programmer Should Know
 
 *Inspired by "Latency Numbers Every Programmer Should Know" -- but for Python.*
 
@@ -10,7 +10,7 @@ A practical reference for understanding the cost of common Python operations. Al
 
 | Category | Operation | Time | Memory |
 |----------|-----------|------|--------|
-| **Memory** | Empty Python process | — | {{MEMORY.EMPTY_PROCESS}} |
+| [**Memory**](#memory-costs) | Empty Python process | — | {{MEMORY.EMPTY_PROCESS}} |
 | | Empty string | — | {{MEMORY.EMPTY_STRING}} |
 | | 100-char string | — | {{MEMORY.100_CHAR_STRING}} |
 | | Small int (0-256) | — | {{MEMORY.SMALL_INT}} |
@@ -29,7 +29,7 @@ A practical reference for understanding the cost of common Python operations. Al
 | | List of 1,000 `__slots__` class instances | — | {{MEMORY.LIST_1000_SLOTS_CLASS}} |
 | | dataclass instance | — | {{MEMORY.DATACLASS_5ATTR}} |
 | | namedtuple instance | — | {{MEMORY.NAMEDTUPLE_5ATTR}} |
-| **Basic Ops** | Add two integers | {{BASIC_OPS.INT_ADD}} | — |
+| [**Basic Ops**](#basic-operations) | Add two integers | {{BASIC_OPS.INT_ADD}} | — |
 | | Add two floats | {{BASIC_OPS.FLOAT_ADD}} | — |
 | | String concatenation (small) | {{BASIC_OPS.CONCAT_SMALL}} | — |
 | | f-string formatting | {{BASIC_OPS.F_STRING}} | — |
@@ -38,7 +38,7 @@ A practical reference for understanding the cost of common Python operations. Al
 | | List append | {{BASIC_OPS.LIST_APPEND}} | — |
 | | List comprehension (1,000 items) | {{BASIC_OPS.LIST_COMP_1000}} | — |
 | | Equivalent for-loop (1,000 items) | {{BASIC_OPS.FOR_LOOP_1000}} | — |
-| **Collections** | Dict lookup by key | {{COLLECTIONS.DICT_KEY_EXISTING}} | — |
+| [**Collections**](#collection-access-and-iteration) | Dict lookup by key | {{COLLECTIONS.DICT_KEY_EXISTING}} | — |
 | | Set membership check | {{COLLECTIONS.ITEM_IN_SET_EXISTING}} | — |
 | | List index access | {{COLLECTIONS.LIST_INDEX}} | — |
 | | List membership check (1,000 items) | {{COLLECTIONS.ITEM_IN_LIST_LAST}} | — |
@@ -47,14 +47,14 @@ A practical reference for understanding the cost of common Python operations. Al
 | | Iterate 1,000-item dict | {{COLLECTIONS.FOR_KEY_IN_DICT}} | — |
 | | `range(1000)` iteration | {{COLLECTIONS.FOR_I_IN_RANGE_1000}} | — |
 | | `sum()` of 1,000 ints | {{COLLECTIONS.SUM_LIST}} | — |
-| **Attributes** | Read from regular class | {{ATTRIBUTES.REGULAR_CLASS_READ_ATTR}} | — |
+| [**Attributes**](#class-and-object-attributes) | Read from regular class | {{ATTRIBUTES.REGULAR_CLASS_READ_ATTR}} | — |
 | | Write to regular class | {{ATTRIBUTES.REGULAR_CLASS_WRITE_ATTR}} | — |
 | | Read from `__slots__` class | {{ATTRIBUTES.SLOTS_CLASS_READ_ATTR}} | — |
 | | Write to `__slots__` class | {{ATTRIBUTES.SLOTS_CLASS_WRITE_ATTR}} | — |
 | | Read from `@property` | {{ATTRIBUTES.PROPERTY_READ}} | — |
 | | `getattr()` | {{ATTRIBUTES.GETATTR_OBJ_ATTR}} | — |
 | | `hasattr()` | {{ATTRIBUTES.HASATTR_OBJ_EXISTING}} | — |
-| **JSON** | `json.dumps()` (simple) | {{JSON.JSON_DUMPS_SIMPLE}} | — |
+| [**JSON**](#json-and-serialization) | `json.dumps()` (simple) | {{JSON.JSON_DUMPS_SIMPLE}} | — |
 | | `json.loads()` (simple) | {{JSON.JSON_LOADS_SIMPLE}} | — |
 | | `json.dumps()` (complex) | {{JSON.JSON_DUMPS_COMPLEX}} | — |
 | | `json.loads()` (complex) | {{JSON.JSON_LOADS_COMPLEX}} | — |
@@ -64,18 +64,18 @@ A practical reference for understanding the cost of common Python operations. Al
 | | `msgspec` encode (complex) | {{JSON.MSGSPEC_JSON_ENCODE_COMPLEX}} | — |
 | | Pydantic `model_dump_json()` | {{JSON.MODEL_DUMP_JSON_COMPLEX}} | — |
 | | Pydantic `model_validate_json()` | {{JSON.MODEL_VALIDATE_JSON_COMPLEX}} | — |
-| **Web Frameworks** | Flask (return JSON) | {{WEB.FLASK_RETURN_JSON}} | — |
+| [**Web Frameworks**](#web-frameworks) | Flask (return JSON) | {{WEB.FLASK_RETURN_JSON}} | — |
 | | Django (return JSON) | {{WEB.DJANGO_RETURN_JSON}} | — |
-| | FastAPI async (return JSON) | {{WEB.FASTAPI_ASYNC_RETURN_JSON}} | — |
-| | FastAPI sync (return JSON) | {{WEB.FASTAPI_SYNC_RETURN_JSON}} | — |
+| | FastAPI (return JSON) | {{WEB.FASTAPI_RETURN_JSON}} | — |
 | | Starlette (return JSON) | {{WEB.STARLETTE_RETURN_JSON}} | — |
-| **File I/O** | Open and close file | {{FILE_IO.OPEN_CLOSE_READ_MODE}} | — |
+| | Litestar (return JSON) | {{WEB.LITESTAR_RETURN_JSON}} | — |
+| [**File I/O**](#file-io) | Open and close file | {{FILE_IO.OPEN_CLOSE_READ_MODE}} | — |
 | | Read 1KB file | {{FILE_IO.READ_1KB_FILE}} | — |
 | | Write 1KB file | {{FILE_IO.WRITE_1KB_FILE}} | — |
 | | Write 1MB file | {{FILE_IO.WRITE_1MB_FILE}} | — |
 | | `pickle.dumps()` | {{FILE_IO.PICKLE_DUMPS}} | — |
 | | `pickle.loads()` | {{FILE_IO.PICKLE_LOADS}} | — |
-| **Database** | SQLite insert (JSON blob) | {{DATABASE.INSERT_JSON_BLOB}} | — |
+| [**Database**](#database-and-persistence) | SQLite insert (JSON blob) | {{DATABASE.INSERT_JSON_BLOB}} | — |
 | | SQLite select by PK | {{DATABASE.SELECT_BY_PRIMARY_KEY}} | — |
 | | SQLite update one field | {{DATABASE.UPDATE_FULL_JSON}} | — |
 | | diskcache set | {{DATABASE.CACHE_SET_COMPLEX_OBJ}} | — |
@@ -83,14 +83,14 @@ A practical reference for understanding the cost of common Python operations. Al
 | | MongoDB insert_one | {{DATABASE.INSERT_ONE}} | — |
 | | MongoDB find_one by _id | {{DATABASE.FIND_ONE_BY_ID}} | — |
 | | MongoDB find_one by nested field | {{DATABASE.FIND_ONE_BY_NESTED_FIELD_INDEXED}} | — |
-| **Functions** | Empty function call | {{FUNCTIONS.EMPTY_FUNCTION_CALL}} | — |
+| [**Functions**](#function-and-call-overhead) | Empty function call | {{FUNCTIONS.EMPTY_FUNCTION_CALL}} | — |
 | | Function with 5 args | {{FUNCTIONS.FUNCTION_WITH_5_ARGS}} | — |
 | | Method call | {{FUNCTIONS.INSTANCE_METHOD_CALL}} | — |
 | | Lambda call | {{FUNCTIONS.LAMBDA_CALL_NO_ARGS}} | — |
 | | try/except (no exception) | {{FUNCTIONS.TRY_EXCEPT_NO_EXCEPTION_RAISED}} | — |
 | | try/except (exception raised) | {{FUNCTIONS.RAISE_CATCH_VALUEERROR}} | — |
 | | `isinstance()` check | {{FUNCTIONS.ISINSTANCE_EXACT_MATCH}} | — |
-| **Async** | `await` completed coroutine | {{ASYNC.RUN_UNTIL_COMPLETE_EMPTY}} | — |
+| [**Async**](#async-overhead) | `await` completed coroutine | {{ASYNC.RUN_UNTIL_COMPLETE_EMPTY}} | — |
 | | Create coroutine object | {{ASYNC.CREATE_COROUTINE_OBJECT}} | — |
 | | `asyncio.sleep(0)` | {{ASYNC.ASYNCIO_SLEEP_0}} | — |
 
@@ -332,10 +332,9 @@ Each framework returns the same JSON payload from a minimal endpoint.
 |-----------|--------------|---------------|---------------|
 | Flask | {{WEB.FLASK_REQUESTS_PER_SEC}} | {{WEB.FLASK_LATENCY_P50}} | {{WEB.FLASK_LATENCY_P99}} |
 | Django | {{WEB.DJANGO_REQUESTS_PER_SEC}} | {{WEB.DJANGO_LATENCY_P50}} | {{WEB.DJANGO_LATENCY_P99}} |
-| FastAPI (async) | {{WEB.FASTAPI_ASYNC_REQUESTS_PER_SEC}} | {{WEB.FASTAPI_ASYNC_LATENCY_P50}} | {{WEB.FASTAPI_ASYNC_LATENCY_P99}} |
-| FastAPI (sync) | {{WEB.FASTAPI_SYNC_REQUESTS_PER_SEC}} | {{WEB.FASTAPI_SYNC_LATENCY_P50}} | {{WEB.FASTAPI_SYNC_LATENCY_P99}} |
+| FastAPI | {{WEB.FASTAPI_REQUESTS_PER_SEC}} | {{WEB.FASTAPI_LATENCY_P50}} | {{WEB.FASTAPI_LATENCY_P99}} |
 | Starlette | {{WEB.STARLETTE_REQUESTS_PER_SEC}} | {{WEB.STARLETTE_LATENCY_P50}} | {{WEB.STARLETTE_LATENCY_P99}} |
-| Falcon | {{WEB.FALCON_REQUESTS_PER_SEC}} | {{WEB.FALCON_LATENCY_P50}} | {{WEB.FALCON_LATENCY_P99}} |
+| Litestar | {{WEB.LITESTAR_REQUESTS_PER_SEC}} | {{WEB.LITESTAR_LATENCY_P50}} | {{WEB.LITESTAR_LATENCY_P99}} |
 
 ---
 

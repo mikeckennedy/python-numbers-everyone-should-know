@@ -76,6 +76,12 @@ BENCHMARK_CATEGORIES = {
             ('json_bench.pydantic_bench', 'run_benchmarks'),
         ],
     },
+    'web': {
+        'name': 'Web Frameworks',
+        'modules': [
+            ('web_frameworks.benchmarks', 'run_benchmarks'),
+        ],
+    },
     'file_io': {
         'name': 'File I/O',
         'modules': [
