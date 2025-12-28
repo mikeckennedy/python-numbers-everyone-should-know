@@ -332,7 +332,7 @@ def _(categories, mo, utils):
             slowest_throughput = throughput_df.iloc[0]['Framework']
             fastest_latency = latency_df.iloc[-1]['Framework']
 
-            output = mo.vstack(
+            web_output = mo.vstack(
                 [
                     fig_throughput,
                     fig_latency,
@@ -341,8 +341,8 @@ def _(categories, mo, utils):
                 **Performance Insights:**
                 - **Highest throughput:** {fastest_throughput} ({throughput_df.iloc[-1]['RPS']:,.0f} req/s)
                 - **Lowest latency:** {fastest_latency} ({latency_df.iloc[-1]['Latency']:.2f}ms P99)
-                
-                Async frameworks (Starlette, FastAPI, Litestar) excel at I/O-bound workloads 
+
+                Async frameworks (Starlette, FastAPI, Litestar) excel at I/O-bound workloads
                 with many concurrent connections.
                 """),
                         kind='success',
@@ -350,7 +350,7 @@ def _(categories, mo, utils):
                 ]
             )
         else:
-            output = mo.callout(
+            web_output = mo.callout(
                 mo.md("""
                 **Web framework benchmarks not yet run.**
 
@@ -367,7 +367,7 @@ def _(categories, mo, utils):
                 kind='warn',
             )
     else:
-        output = mo.callout(
+        web_output = mo.callout(
             mo.md("""
             **Web framework benchmarks not yet run.**
 
@@ -383,7 +383,7 @@ def _(categories, mo, utils):
             """),
             kind='warn',
         )
-    output
+    web_output
     return
 
 
@@ -438,9 +438,9 @@ def _(mo):
 def _(categories, mo, utils):
     db_results = categories['database']['results']
     fig_db = utils.create_database_comparison_chart(db_results)
-    output = None
+    db_output = None
     if fig_db:
-        output = mo.vstack(
+        db_output = mo.vstack(
             [
                 fig_db,
                 mo.callout(
@@ -452,7 +452,7 @@ def _(categories, mo, utils):
                 ),
             ]
         )
-    output
+    db_output
     return
 
 
@@ -508,9 +508,9 @@ def _(mo):
 def _(categories, mo, utils):
     async_results = categories['async']['results']
     fig_async, async_overhead_value = utils.create_async_overhead_chart(async_results)
-    output = None
+    async_output = None
     if fig_async:
-        output = mo.vstack(
+        async_output = mo.vstack(
             [
                 fig_async,
                 mo.callout(
@@ -524,7 +524,7 @@ def _(categories, mo, utils):
                 ),
             ]
         )
-    output
+    async_output
     return (async_results,)
 
 
