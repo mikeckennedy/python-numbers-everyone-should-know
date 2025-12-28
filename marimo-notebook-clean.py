@@ -326,7 +326,7 @@ def _(categories, mo, utils):
             fig_web, web_df = result
             fastest = web_df.iloc[0]['Framework']
             slowest = web_df.iloc[-1]['Framework']
-            speedup = web_df.iloc[-1]['Time'] / web_df.iloc[0]['Time']
+            web_speedup = web_df.iloc[-1]['Time'] / web_df.iloc[0]['Time']
 
             mo.vstack(
                 [
@@ -334,7 +334,7 @@ def _(categories, mo, utils):
                     mo.callout(
                         mo.md(
                             f"""
-                    **Framework Performance:** {fastest} is the fastest, handling requests {speedup:.1f}x 
+                    **Framework Performance:** {fastest} is the fastest, handling requests {web_speedup:.1f}x 
                     faster than {slowest}. Choose based on your needs: async frameworks (Starlette, FastAPI, 
                     Litestar) excel at I/O-bound workloads with many concurrent connections.
                     """
@@ -448,7 +448,7 @@ def _(categories, mo, utils):
                 ),
             ]
         )
-    return
+    return (db_results,)
 
 
 @app.cell(hide_code=True)
@@ -502,14 +502,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(categories, mo, utils):
     async_results = categories['async']['results']
-    fig_async, async_overhead = utils.create_async_overhead_chart(async_results)
+    fig_async, async_overhead_value = utils.create_async_overhead_chart(async_results)
     if fig_async:
         mo.vstack(
             [
                 fig_async,
                 mo.callout(
                     mo.md(f"""
-                **Async adds ~{async_overhead:.0f}x overhead** for simple operations.
+                **Async adds ~{async_overhead_value:.0f}x overhead** for simple operations.
 
                 Use async only for I/O-bound work (network, disk, database).
                 Avoid for CPU-bound or simple synchronous operations.
@@ -792,8 +792,8 @@ def _(basic_results, mo):
     list_comp_1000 = next(r['value'] for r in basic_results if r['name'] == 'list_comp_1000')
     for_loop_1000 = next(r['value'] for r in basic_results if r['name'] == 'for_loop_1000')
 
-    speedup = ((for_loop_1000 - list_comp_1000) / for_loop_1000) * 100
-    speedup_ratio = for_loop_1000 / list_comp_1000
+    listcomp_speedup = ((for_loop_1000 - list_comp_1000) / for_loop_1000) * 100
+    listcomp_speedup_ratio = for_loop_1000 / list_comp_1000
 
     mo.md(f"""
     ### 6. 📝 List Comprehensions Are Faster
@@ -801,7 +801,7 @@ def _(basic_results, mo):
     **The Data (building 1000-item list):**
     - List comprehension: **{list_comp_1000 * 1000:.2f}μs**
     - For-loop + append: **{for_loop_1000 * 1000:.2f}μs**
-    - Speedup: **{speedup:.1f}% faster** ({speedup_ratio:.2f}x)
+    - Speedup: **{listcomp_speedup:.1f}% faster** ({listcomp_speedup_ratio:.2f}x)
 
     **Why are comprehensions faster?**
     1. **Optimized C implementation** - the interpreter recognizes comprehensions and uses fast paths
@@ -827,7 +827,7 @@ def _(basic_results, mo):
     - Real-time data processing: every microsecond counts
 
     **Don't overdo it:** Keep comprehensions readable. If you need multiple lines or complex logic, 
-    a regular for-loop is fine (and only ~{speedup:.0f}% slower).
+    a regular for-loop is fine (and only ~{listcomp_speedup:.0f}% slower).
 
     **Rule:** Use comprehensions when appropriate - they're both faster and more Pythonic. 
     But readability still trumps micro-optimization.
