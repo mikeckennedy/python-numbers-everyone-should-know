@@ -438,8 +438,9 @@ def _(mo):
 def _(categories, mo, utils):
     db_results = categories['database']['results']
     fig_db = utils.create_database_comparison_chart(db_results)
+    output = None
     if fig_db:
-        mo.vstack(
+        output = mo.vstack(
             [
                 fig_db,
                 mo.callout(
@@ -451,6 +452,7 @@ def _(categories, mo, utils):
                 ),
             ]
         )
+    output
     return
 
 
@@ -506,8 +508,9 @@ def _(mo):
 def _(categories, mo, utils):
     async_results = categories['async']['results']
     fig_async, async_overhead_value = utils.create_async_overhead_chart(async_results)
+    output = None
     if fig_async:
-        mo.vstack(
+        output = mo.vstack(
             [
                 fig_async,
                 mo.callout(
@@ -521,6 +524,7 @@ def _(categories, mo, utils):
                 ),
             ]
         )
+    output
     return (async_results,)
 
 
