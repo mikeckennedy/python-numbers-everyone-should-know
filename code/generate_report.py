@@ -131,15 +131,40 @@ def format_value(value: float, unit: str) -> str:
         return f'{value:,.2f} MB'
 
     elif unit == 'req/sec':
-        # Format requests per second
+        # Convert req/sec to time per request + req/sec in parentheses
+        # Time per request = 1 / req_per_sec (in seconds), then convert to appropriate unit
+        time_per_req_sec = 1.0 / value
+        time_per_req_ms = time_per_req_sec * 1000
+
+        # Format req/sec portion
         if value < 1_000:
-            return f'{value:.1f} req/sec'
+            req_suffix = f'{value:.1f} req/sec'
         elif value < 1_000_000:
             k_req = value / 1_000
-            return f'{k_req:.1f}k req/sec'
+            req_suffix = f'{k_req:.1f}k req/sec'
         else:
             m_req = value / 1_000_000
-            return f'{m_req:.2f}M req/sec'
+            req_suffix = f'{m_req:.2f}M req/sec'
+
+        # Format time portion (similar to ms handling)
+        if time_per_req_ms < 0.001:
+            ns_value = time_per_req_ms * 1_000_000
+            return f'{ns_value:.1f} ns ({req_suffix})'
+        elif time_per_req_ms < 1:
+            us_value = time_per_req_ms * 1_000
+            if us_value < 10:
+                return f'{us_value:.2f} μs ({req_suffix})'
+            elif us_value < 100:
+                return f'{us_value:.1f} μs ({req_suffix})'
+            else:
+                return f'{us_value:,.0f} μs ({req_suffix})'
+        else:
+            if time_per_req_ms < 10:
+                return f'{time_per_req_ms:.3f} ms ({req_suffix})'
+            elif time_per_req_ms < 100:
+                return f'{time_per_req_ms:.2f} ms ({req_suffix})'
+            else:
+                return f'{time_per_req_ms:,.1f} ms ({req_suffix})'
 
     # Fallback for unknown units
     return f'{value} {unit}'

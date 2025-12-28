@@ -64,11 +64,11 @@ A practical reference for understanding the cost of common Python operations. Al
 | | `msgspec` encode (complex) | 414 ns (2.4M ops/sec) | — |
 | | Pydantic `model_dump_json()` | 1.58 μs (634.8k ops/sec) | — |
 | | Pydantic `model_validate_json()` | 2.86 μs (350.0k ops/sec) | — |
-| [**🌐 Web Frameworks**](#web-frameworks) | Flask (return JSON) | 52.8k req/sec | — |
-| | Django (return JSON) | 46.6k req/sec | — |
-| | FastAPI (return JSON) | 27.9k req/sec | — |
-| | Starlette (return JSON) | 154.2k req/sec | — |
-| | Litestar (return JSON) | 124.3k req/sec | — |
+| [**🌐 Web Frameworks**](#web-frameworks) | Flask (return JSON) | 18.9 μs (52.8k req/sec) | — |
+| | Django (return JSON) | 21.5 μs (46.6k req/sec) | — |
+| | FastAPI (return JSON) | 35.8 μs (27.9k req/sec) | — |
+| | Starlette (return JSON) | 6.48 μs (154.2k req/sec) | — |
+| | Litestar (return JSON) | 8.05 μs (124.3k req/sec) | — |
 | [**📁 File I/O**](#file-io) | Open and close file | 9.14 μs (109.4k ops/sec) | — |
 | | Read 1KB file | 10.1 μs (99.1k ops/sec) | — |
 | | Write 1KB file | 29.6 μs (33.7k ops/sec) | — |
@@ -330,11 +330,11 @@ Each framework returns the same JSON payload from a minimal endpoint.
 
 | Framework | Requests/sec | Latency (p50) | Latency (p99) |
 |-----------|--------------|---------------|---------------|
-| Flask | 52.8k req/sec | {{WEB.FLASK_LATENCY_P50}} | 432.6 ms (2.3 ops/sec) |
-| Django | 46.6k req/sec | {{WEB.DJANGO_LATENCY_P50}} | 10.10 ms (99.0 ops/sec) |
-| FastAPI | 27.9k req/sec | {{WEB.FASTAPI_LATENCY_P50}} | 7.680 ms (130.2 ops/sec) |
-| Starlette | 154.2k req/sec | {{WEB.STARLETTE_LATENCY_P50}} | 1.670 ms (598.8 ops/sec) |
-| Litestar | 124.3k req/sec | {{WEB.LITESTAR_LATENCY_P50}} | 2.770 ms (361.0 ops/sec) |
+| Flask | 18.9 μs (52.8k req/sec) | {{WEB.FLASK_LATENCY_P50}} | 432.6 ms (2.3 ops/sec) |
+| Django | 21.5 μs (46.6k req/sec) | {{WEB.DJANGO_LATENCY_P50}} | 10.10 ms (99.0 ops/sec) |
+| FastAPI | 35.8 μs (27.9k req/sec) | {{WEB.FASTAPI_LATENCY_P50}} | 7.680 ms (130.2 ops/sec) |
+| Starlette | 6.48 μs (154.2k req/sec) | {{WEB.STARLETTE_LATENCY_P50}} | 1.670 ms (598.8 ops/sec) |
+| Litestar | 8.05 μs (124.3k req/sec) | {{WEB.LITESTAR_LATENCY_P50}} | 2.770 ms (361.0 ops/sec) |
 
 ---
 
