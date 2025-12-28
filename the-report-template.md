@@ -90,9 +90,12 @@ A practical reference for understanding the cost of common Python operations. Al
 | | try/except (no exception) | {{FUNCTIONS.TRY_EXCEPT_NO_EXCEPTION_RAISED}} | — |
 | | try/except (exception raised) | {{FUNCTIONS.RAISE_CATCH_VALUEERROR}} | — |
 | | `isinstance()` check | {{FUNCTIONS.ISINSTANCE_EXACT_MATCH}} | — |
-| [**⏱️ Async**](#async-overhead) | `await` completed coroutine | {{ASYNC.RUN_UNTIL_COMPLETE_EMPTY}} | — |
-| | Create coroutine object | {{ASYNC.CREATE_COROUTINE_OBJECT}} | — |
+| [**⏱️ Async**](#async-overhead) | Create coroutine object | {{ASYNC.CREATE_COROUTINE_OBJECT}} | — |
+| | `run_until_complete(empty)` | {{ASYNC.RUN_UNTIL_COMPLETE_EMPTY}} | — |
 | | `asyncio.sleep(0)` | {{ASYNC.ASYNCIO_SLEEP_0}} | — |
+| | `gather()` 10 coroutines | {{ASYNC.GATHER_10_COROUTINES}} | — |
+| | `create_task()` + await | {{ASYNC.CREATE_TASK_AWAIT}} | — |
+| | `async with` (context manager) | {{ASYNC.ASYNC_WITH_CONTEXT_MANAGER}} | — |
 
 ---
 
@@ -480,12 +483,70 @@ The hidden cost of function calls, exceptions, and async.
 
 The cost of async machinery.
 
+### Coroutine Creation
+
 | Operation | Time |
 |-----------|------|
-| `await` already-completed coroutine | {{ASYNC.RUN_UNTIL_COMPLETE_EMPTY}} |
 | Create coroutine object (no await) | {{ASYNC.CREATE_COROUTINE_OBJECT}} |
+| Create coroutine (with return value) | {{ASYNC.CREATE_COROUTINE_WITH_RETURN}} |
+
+---
+
+### Running Coroutines
+
+| Operation | Time |
+|-----------|------|
+| `run_until_complete(empty)` | {{ASYNC.RUN_UNTIL_COMPLETE_EMPTY}} |
+| `run_until_complete(return value)` | {{ASYNC.RUN_UNTIL_COMPLETE_RETURN_VALUE}} |
+| Run nested await | {{ASYNC.RUN_NESTED_AWAIT}} |
+| Run 3 sequential awaits | {{ASYNC.RUN_3_SEQUENTIAL_AWAITS}} |
+
+---
+
+### asyncio.sleep()
+
+| Operation | Time |
+|-----------|------|
 | `asyncio.sleep(0)` | {{ASYNC.ASYNCIO_SLEEP_0}} |
-| `asyncio.gather()` on 10 completed | {{ASYNC.GATHER_10_COROUTINES}} |
+| Coroutine with `sleep(0)` | {{ASYNC.COROUTINE_WITH_SLEEP_0}} |
+
+---
+
+### asyncio.gather()
+
+| Operation | Time |
+|-----------|------|
+| `gather()` 5 coroutines | {{ASYNC.GATHER_5_COROUTINES}} |
+| `gather()` 10 coroutines | {{ASYNC.GATHER_10_COROUTINES}} |
+| `gather()` 100 coroutines | {{ASYNC.GATHER_100_COROUTINES}} |
+
+---
+
+### Task Creation
+
+| Operation | Time |
+|-----------|------|
+| `create_task()` + await | {{ASYNC.CREATE_TASK_AWAIT}} |
+| Create 10 tasks + gather | {{ASYNC.CREATE_10_TASKS_GATHER}} |
+
+---
+
+### Async Context Managers & Iteration
+
+| Operation | Time |
+|-----------|------|
+| `async with` (context manager) | {{ASYNC.ASYNC_WITH_CONTEXT_MANAGER}} |
+| `async for` (5 items) | {{ASYNC.ASYNC_FOR_5_ITEMS}} |
+| `async for` (100 items) | {{ASYNC.ASYNC_FOR_100_ITEMS}} |
+
+---
+
+### Sync vs Async Comparison
+
+| Operation | Time |
+|-----------|------|
+| Sync function call | {{ASYNC.SYNC_FUNCTION_CALL}} |
+| Async equivalent (`run_until_complete`) | {{ASYNC.ASYNC_EQUIVALENT_RUN_UNTIL_COMPLETE}} |
 
 ---
 

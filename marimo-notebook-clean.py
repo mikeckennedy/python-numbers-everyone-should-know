@@ -329,7 +329,7 @@ def _(categories, mo, utils):
             fig_latency, latency_df = latency_result
 
             fastest_throughput = throughput_df.iloc[-1]['Framework']
-            slowest_throughput = throughput_df.iloc[0]['Framework']
+            slowest_throughput = throughput_df.iloc[0]['Framework']  # noqa
             fastest_latency = latency_df.iloc[-1]['Framework']
 
             web_output = mo.vstack(

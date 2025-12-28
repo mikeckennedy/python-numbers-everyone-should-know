@@ -59,7 +59,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 
     # Convert to standard format
     for framework_name, bench_result in server_results.items():
-        latency_avg_ms = parse_latency_to_ms(bench_result.latency_avg)
+        latency_avg_ms = parse_latency_to_ms(bench_result.latency_avg)  # noqa
         latency_p99_ms = parse_latency_to_ms(bench_result.latency_p99)
 
         # Quick reference metric: actual requests per second (not latency)

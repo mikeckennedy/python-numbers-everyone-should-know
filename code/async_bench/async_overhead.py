@@ -100,13 +100,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     results = []
 
     # Try to use uvloop if available
-    try:
-        import uvloop
+    # try:
+    #     import uvloop
 
-        uvloop.install()
-        print_header('Async Overhead Benchmarks (with uvloop)')
-    except ImportError:
-        print_header('Async Overhead Benchmarks (standard asyncio)')
+    #     uvloop.install()
+    #     print_header('Async Overhead Benchmarks (with uvloop)')
+    # except ImportError:
+    #     print_header('Async Overhead Benchmarks (standard asyncio)')
+    print_header('Async Overhead Benchmarks (standard asyncio)')
 
     # Get or create event loop
     try:
@@ -209,14 +210,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     print_result('gather() 5 coroutines', time_ms)
 
     def run_gather_10():
-        loop.run_until_complete(asyncio.gather(*[return_value_coro() for _ in range(10)]))
+        loop.run_until_complete(asyncio.gather(*[return_value_coro() for _ in range(10)]))  # type: ignore
 
     time_ms = time_operation(run_gather_10, iterations=5000)
     results.append(BenchmarkResult('gather() 10 coroutines', time_ms, category=CATEGORY))
     print_result('gather() 10 coroutines', time_ms)
 
     def run_gather_100():
-        loop.run_until_complete(asyncio.gather(*[return_value_coro() for _ in range(100)]))
+        loop.run_until_complete(asyncio.gather(*[return_value_coro() for _ in range(100)]))  # type: ignore
 
     time_ms = time_operation(run_gather_100, iterations=1000)
     results.append(BenchmarkResult('gather() 100 coroutines', time_ms, category=CATEGORY))
@@ -324,7 +325,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results)  # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

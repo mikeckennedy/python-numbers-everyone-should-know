@@ -5,6 +5,7 @@ Provides timing, memory measurement, colored output, and result formatting.
 """
 
 import gc
+import importlib
 import statistics
 import sys
 import timeit
@@ -70,7 +71,7 @@ class BenchmarkResult:
         if self.category:
             result['category'] = self.category
         if self.details:
-            result['details'] = self.details
+            result['details'] = self.details # type: ignore
         return result
 
 
@@ -127,7 +128,7 @@ def time_operation(
     gc.disable()
     try:
         # Time multiple runs
-        times = []
+        times: list[float] = []
         for _ in range(repeat):
             start = perf_counter_ns()
             for _ in range(iterations):
@@ -141,6 +142,7 @@ def time_operation(
     finally:
         # Re-enable GC
         gc.enable()
+        gc.collect()
 
 
 def time_operation_ns(
@@ -166,7 +168,7 @@ def time_operation_ns(
     # Disable GC during timing to prevent interference
     gc.disable()
     try:
-        times = []
+        times: list[float] = []
         for _ in range(repeat):
             start = perf_counter_ns()
             for _ in range(iterations):
@@ -190,7 +192,7 @@ def time_with_timeit(
     stmt: str,
     setup: str = 'pass',
     globals_dict: Optional[dict] = None,
-    number: int = 1000,
+    number: int = 1_000,
     repeat: int = 5,
 ) -> float:
     """
@@ -407,8 +409,6 @@ def try_import(module_name: str) -> Optional[Any]:
             # use orjson
     """
     try:
-        import importlib
-
         return importlib.import_module(module_name)
     except ImportError:
         return None
@@ -445,7 +445,7 @@ def run_benchmarks(
     Returns:
         List of BenchmarkResult objects
     """
-    results = []
+    results: list[BenchmarkResult] = []
     for name, func in benchmarks:
         try:
             time_ms = time_operation(func, iterations=iterations)

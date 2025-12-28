@@ -24,7 +24,7 @@ def run_benchmarks() -> dict:
     """Run arithmetic operation benchmarks."""
     print_header('Arithmetic Operations')
 
-    results = []
+    results: list[BenchmarkResult] = []
 
     # Integer addition
     a_int, b_int = 123, 456

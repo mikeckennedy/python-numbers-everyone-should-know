@@ -23,11 +23,13 @@ def run_benchmarks() -> dict:
     """Run list operation benchmarks."""
     print_header('List Operations')
 
-    results = []
+    results: list[BenchmarkResult] = []
 
+    lst = []
+        
     # List append (single item)
     def append_test():
-        lst = []
+        lst.clear()
         lst.append(1)
 
     time_ms = time_operation(append_test, iterations=100000)

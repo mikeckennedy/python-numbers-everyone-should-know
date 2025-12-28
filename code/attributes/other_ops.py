@@ -139,14 +139,14 @@ def run_benchmarks() -> list[BenchmarkResult]:
     print_subheader('getattr()')
 
     def getattr_regular():
-        return getattr(simple_obj, 'a')
+        return simple_obj.a
 
     time_ms = time_operation(getattr_regular, iterations=10000)
     results.append(BenchmarkResult("getattr(obj, 'attr')", time_ms, category=CATEGORY))
     print_result("getattr(obj, 'attr')", time_ms)
 
     def getattr_slots():
-        return getattr(slots_obj, 'a')
+        return slots_obj.a
 
     time_ms = time_operation(getattr_slots, iterations=10000)
     results.append(BenchmarkResult("getattr(slots_obj, 'attr')", time_ms, category=CATEGORY))
@@ -233,7 +233,7 @@ def run_benchmarks() -> list[BenchmarkResult]:
 def main():
     """Run benchmarks and output results."""
     results = run_benchmarks()
-    output = collect_results(CATEGORY, results)
+    output = collect_results(CATEGORY, results) # type: ignore
 
     print()
     print(f'Total benchmarks: {len(results)}')

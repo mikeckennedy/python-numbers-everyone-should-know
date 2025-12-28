@@ -90,9 +90,12 @@ A practical reference for understanding the cost of common Python operations. Al
 | | try/except (no exception) | 20.9 ns (47.8M ops/sec) | — |
 | | try/except (exception raised) | 152 ns (6.6M ops/sec) | — |
 | | `isinstance()` check | 18.5 ns (54.1M ops/sec) | — |
-| [**⏱️ Async**](#async-overhead) | `await` completed coroutine | 44.8 μs (22.3k ops/sec) | — |
-| | Create coroutine object | 44.7 ns (22.4M ops/sec) | — |
+| [**⏱️ Async**](#async-overhead) | Create coroutine object | 44.7 ns (22.4M ops/sec) | — |
+| | `run_until_complete(empty)` | 44.8 μs (22.3k ops/sec) | — |
 | | `asyncio.sleep(0)` | 57.0 μs (17.6k ops/sec) | — |
+| | `gather()` 10 coroutines | 67.9 μs (14.7k ops/sec) | — |
+| | `create_task()` + await | 71.5 μs (14.0k ops/sec) | — |
+| | `async with` (context manager) | 46.1 μs (21.7k ops/sec) | — |
 
 ---
 
@@ -480,12 +483,70 @@ The hidden cost of function calls, exceptions, and async.
 
 The cost of async machinery.
 
+### Coroutine Creation
+
 | Operation | Time |
 |-----------|------|
-| `await` already-completed coroutine | 44.8 μs (22.3k ops/sec) |
 | Create coroutine object (no await) | 44.7 ns (22.4M ops/sec) |
+| Create coroutine (with return value) | 45.9 ns (21.8M ops/sec) |
+
+---
+
+### Running Coroutines
+
+| Operation | Time |
+|-----------|------|
+| `run_until_complete(empty)` | 44.8 μs (22.3k ops/sec) |
+| `run_until_complete(return value)` | 45.7 μs (21.9k ops/sec) |
+| Run nested await | 45.3 μs (22.1k ops/sec) |
+| Run 3 sequential awaits | 46.3 μs (21.6k ops/sec) |
+
+---
+
+### asyncio.sleep()
+
+| Operation | Time |
+|-----------|------|
 | `asyncio.sleep(0)` | 57.0 μs (17.6k ops/sec) |
-| `asyncio.gather()` on 10 completed | 67.9 μs (14.7k ops/sec) |
+| Coroutine with `sleep(0)` | 58.6 μs (17.1k ops/sec) |
+
+---
+
+### asyncio.gather()
+
+| Operation | Time |
+|-----------|------|
+| `gather()` 5 coroutines | 65.8 μs (15.2k ops/sec) |
+| `gather()` 10 coroutines | 67.9 μs (14.7k ops/sec) |
+| `gather()` 100 coroutines | 129 μs (7.8k ops/sec) |
+
+---
+
+### Task Creation
+
+| Operation | Time |
+|-----------|------|
+| `create_task()` + await | 71.5 μs (14.0k ops/sec) |
+| Create 10 tasks + gather | 98.1 μs (10.2k ops/sec) |
+
+---
+
+### Async Context Managers & Iteration
+
+| Operation | Time |
+|-----------|------|
+| `async with` (context manager) | 46.1 μs (21.7k ops/sec) |
+| `async for` (5 items) | 47.7 μs (21.0k ops/sec) |
+| `async for` (100 items) | 55.3 μs (18.1k ops/sec) |
+
+---
+
+### Sync vs Async Comparison
+
+| Operation | Time |
+|-----------|------|
+| Sync function call | 19.8 ns (50.5M ops/sec) |
+| Async equivalent (`run_until_complete`) | 45.1 μs (22.2k ops/sec) |
 
 ---
 
