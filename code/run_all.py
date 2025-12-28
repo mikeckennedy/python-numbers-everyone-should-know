@@ -17,11 +17,16 @@ import json
 import platform
 import random
 import sys
+import warnings
 from pathlib import Path
 from typing import Any
 
 import psutil
 from colorama import Fore, Style, init
+
+# Suppress Pydantic V1 compatibility warning on Python 3.14+
+warnings.filterwarnings('ignore', message='Core Pydantic V1 functionality')
+
 
 # Initialize colorama
 init(autoreset=True)
