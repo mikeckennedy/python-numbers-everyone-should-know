@@ -206,12 +206,6 @@ def _(mo):
 def _(categories, utils):
     attr_results = categories['attributes']['results']
     utils.create_attribute_access_chart(attr_results)
-    return (attr_results,)
-
-
-@app.cell(hide_code=True)
-def _(attr_results, utils):
-    utils.create_other_attribute_ops_chart(attr_results)
     return
 
 
@@ -449,7 +443,7 @@ def _(categories, mo, utils):
                 - SQLite is fastest for reads (~4μs)
                 - diskcache is faster for writes (~30μs vs SQLite's ~200μs)
                 - MongoDB adds network overhead (~100-120μs for both operations)
-                
+
                 Choose based on your read/write patterns and whether you need distributed access.
                 """),
                     kind='info',
@@ -657,9 +651,9 @@ def _(memory_results, mo):
 
     # Determine if slots saves or costs memory per instance
     if slots_5attr <= regular_5attr:
-        per_instance_note = f"Memory saved per instance: **{regular_5attr - slots_5attr} bytes**"
+        per_instance_note = f'Memory saved per instance: **{regular_5attr - slots_5attr} bytes**'
     else:
-        per_instance_note = f"Per-instance overhead: **+{slots_5attr - regular_5attr} bytes** (but saves at scale!)"
+        per_instance_note = f'Per-instance overhead: **+{slots_5attr - regular_5attr} bytes** (but saves at scale!)'
 
     mo.md(f"""
     ### 3. 📦 Use __slots__ for Many Instances
