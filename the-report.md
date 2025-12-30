@@ -331,13 +331,13 @@ Each framework returns the same JSON payload from a minimal endpoint.
 
 ### Results
 
-| Framework | Requests/sec | Latency (p50) | Latency (p99) |
-|-----------|--------------|---------------|---------------|
-| Flask | 16.5 μs (60.7k req/sec) | {{WEB.FLASK_LATENCY_P50}} | 20.85 ms (48.0 ops/sec) |
-| Django | 18.1 μs (55.4k req/sec) | {{WEB.DJANGO_LATENCY_P50}} | 170.3 ms (5.9 ops/sec) |
-| FastAPI | 8.63 μs (115.9k req/sec) | {{WEB.FASTAPI_LATENCY_P50}} | 1.530 ms (653.6 ops/sec) |
-| Starlette | 8.01 μs (124.8k req/sec) | {{WEB.STARLETTE_LATENCY_P50}} | 930 μs (1.1k ops/sec) |
-| Litestar | 8.19 μs (122.1k req/sec) | {{WEB.LITESTAR_LATENCY_P50}} | 1.010 ms (990.1 ops/sec) |
+| Framework | Requests/sec | Latency (p99) |
+|-----------|--------------|---------------|
+| Flask | 16.5 μs (60.7k req/sec) | 20.85 ms (48.0 ops/sec) |
+| Django | 18.1 μs (55.4k req/sec) | 170.3 ms (5.9 ops/sec) |
+| FastAPI | 8.63 μs (115.9k req/sec) | 1.530 ms (653.6 ops/sec) |
+| Starlette | 8.01 μs (124.8k req/sec) | 930 μs (1.1k ops/sec) |
+| Litestar | 8.19 μs (122.1k req/sec) | 1.010 ms (990.1 ops/sec) |
 
 ---
 
