@@ -50,7 +50,7 @@ docutils==0.22.4
     # via marimo
 faker==39.0.0
     # via polyfactory
-fastapi==0.126.0
+fastapi==0.127.0
     # via -r requirements.piptools
 flask==3.1.2
     # via -r requirements.piptools
@@ -130,7 +130,7 @@ parso==0.8.5
     # via jedi
 plotly==6.5.0
     # via -r requirements.piptools
-polyfactory==3.1.0
+polyfactory==3.2.0
     # via litestar
 psutil==7.1.3
     # via
@@ -167,7 +167,7 @@ rich==14.2.0
     # via
     #   litestar
     #   rich-click
-rich-click==1.9.4
+rich-click==1.9.5
     # via litestar
 rpds-py==0.30.0
     # via
@@ -223,7 +223,7 @@ tzdata==2025.3
     #   pandas
 ujson==5.11.0
     # via -r requirements.piptools
-uvicorn==0.38.0
+uvicorn==0.40.0
     # via marimo
 uvloop==0.22.1
     # via -r requirements.piptools
