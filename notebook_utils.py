@@ -997,6 +997,7 @@ def create_attribute_access_chart(attr_results):
         and any(pattern in r['name'] for pattern in ['regular class', 'slots class'])
         and 'dataclass' not in r['name']
         and 'dict' not in r['name']
+        and '5 attrs' not in r['name']  # Exclude the "read 5 attrs" entries
     ]
 
     records = []
