@@ -50,7 +50,7 @@ def run_benchmarks() -> dict:
     print_memory_result('List with 1000 ints (including elements)', size)
     results.append(MemoryResult(name='list_1000_container', value=size, unit='bytes', category='memory'))
 
-    list_1000_floats = [float(i) for i in range(1_000)]
+    list_1000_floats = list(float(i) for i in range(1_000))
     size = measure_deep_size(list_1000_floats)
     print_memory_result('List with 1000 floats (including elements)', size)
     results.append(MemoryResult(name='list_1000_floats_container', value=size, unit='bytes', category='memory'))
