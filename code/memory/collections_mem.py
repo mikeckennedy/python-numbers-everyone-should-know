@@ -14,7 +14,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.benchmark import (
     MemoryResult,
     measure_deep_size,
-    measure_size,
     print_header,
     print_memory_result,
     print_subheader,
