@@ -15,44 +15,62 @@
       "benchmark_count": 35,
       "results": [
         {
-          "name": "empty_string",
-          "value": 41,
+          "name": "empty_process",
+          "value": 15.609375,
+          "unit": "MB",
+          "category": "memory"
+        },
+        {
+          "name": "small_int",
+          "value": 28,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "1_char_string",
-          "value": 42,
+          "name": "boundary_int",
+          "value": 28,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "10_char_string",
-          "value": 51,
+          "name": "large_int",
+          "value": 28,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "100_char_string",
-          "value": 141,
+          "name": "very_large_int_20",
+          "value": 36,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "1000_char_string",
-          "value": 1041,
+          "name": "huge_int_100",
+          "value": 72,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "float",
+          "value": 24,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_float",
+          "value": 24,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "regular_class_empty",
-          "value": 48,
+          "value": 344,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "regular_class_5attr",
-          "value": 48,
+          "value": 694,
           "unit": "bytes",
           "category": "memory"
         },
@@ -64,25 +82,25 @@
         },
         {
           "name": "slots_class_5attr",
-          "value": 72,
+          "value": 212,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "dataclass_5attr",
-          "value": 48,
+          "value": 694,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "slots_dataclass_5attr",
-          "value": 72,
+          "value": 212,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "namedtuple_5attr",
-          "value": 88,
+          "value": 228,
           "unit": "bytes",
           "category": "memory"
         },
@@ -177,50 +195,32 @@
           "category": "memory"
         },
         {
-          "name": "empty_process",
-          "value": 15.703125,
-          "unit": "MB",
-          "category": "memory"
-        },
-        {
-          "name": "small_int",
-          "value": 28,
+          "name": "empty_string",
+          "value": 41,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "boundary_int",
-          "value": 28,
+          "name": "1_char_string",
+          "value": 42,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "large_int",
-          "value": 28,
+          "name": "10_char_string",
+          "value": 51,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "very_large_int_20",
-          "value": 36,
+          "name": "100_char_string",
+          "value": 141,
           "unit": "bytes",
           "category": "memory"
         },
         {
-          "name": "huge_int_100",
-          "value": 72,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "float",
-          "value": 24,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "large_float",
-          "value": 24,
+          "name": "1000_char_string",
+          "value": 1041,
           "unit": "bytes",
           "category": "memory"
         }
