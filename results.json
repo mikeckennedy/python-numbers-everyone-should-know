@@ -7,7 +7,7 @@
     "ram_gb": 24.0,
     "cpu_cores_physical": 14,
     "cpu_cores_logical": 14,
-    "timestamp": "2025-12-30T09:28:09.961150"
+    "timestamp": "2026-01-01T10:58:36.293105"
   },
   "categories": {
     "memory": {
@@ -41,48 +41,6 @@
         {
           "name": "1000_char_string",
           "value": 1041,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "small_int",
-          "value": 28,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "boundary_int",
-          "value": 28,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "large_int",
-          "value": 28,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "very_large_int_20",
-          "value": 36,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "huge_int_100",
-          "value": 72,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "float",
-          "value": 24,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "large_float",
-          "value": 24,
           "unit": "bytes",
           "category": "memory"
         },
@@ -141,12 +99,6 @@
           "category": "memory"
         },
         {
-          "name": "empty_process",
-          "value": 15.734375,
-          "unit": "MB",
-          "category": "memory"
-        },
-        {
           "name": "empty_list",
           "value": 56,
           "unit": "bytes",
@@ -154,25 +106,25 @@
         },
         {
           "name": "list_10_container",
-          "value": 136,
+          "value": 416,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "list_100_container",
-          "value": 856,
+          "value": 3656,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "list_1000_container",
-          "value": 8056,
+          "value": 36056,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "list_1000_floats_container",
-          "value": 8856,
+          "value": 32856,
           "unit": "bytes",
           "category": "memory"
         },
@@ -184,19 +136,19 @@
         },
         {
           "name": "dict_10_container",
-          "value": 352,
+          "value": 632,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "dict_100_container",
-          "value": 4688,
+          "value": 7488,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "dict_1000_container",
-          "value": 36952,
+          "value": 64952,
           "unit": "bytes",
           "category": "memory"
         },
@@ -208,19 +160,67 @@
         },
         {
           "name": "set_10_container",
-          "value": 728,
+          "value": 1008,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "set_100_container",
-          "value": 8408,
+          "value": 11208,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "set_1000_container",
-          "value": 32984,
+          "value": 60984,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_process",
+          "value": 15.703125,
+          "unit": "MB",
+          "category": "memory"
+        },
+        {
+          "name": "small_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "boundary_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_int",
+          "value": 28,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "very_large_int_20",
+          "value": 36,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "huge_int_100",
+          "value": 72,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "float",
+          "value": 24,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "large_float",
+          "value": 24,
           "unit": "bytes",
           "category": "memory"
         }

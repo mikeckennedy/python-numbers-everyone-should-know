@@ -17,12 +17,12 @@ A practical reference for understanding the cost of common Python operations. Al
 | | Large int | — | 28 bytes |
 | | Float | — | 24 bytes |
 | | Empty list | — | 56 bytes |
-| | List with 1,000 ints | — | 7.87 KB |
-| | List with 1,000 floats | — | 8.65 KB |
+| | List with 1,000 ints | — | 35.2 KB |
+| | List with 1,000 floats | — | 32.1 KB |
 | | Empty dict | — | 64 bytes |
-| | Dict with 1,000 items | — | 36.1 KB |
+| | Dict with 1,000 items | — | 63.4 KB |
 | | Empty set | — | 216 bytes |
-| | Set with 1,000 items | — | 32.2 KB |
+| | Set with 1,000 items | — | 59.6 KB |
 | | Regular class instance (5 attrs) | — | 48 bytes |
 | | `__slots__` class instance (5 attrs) | — | 72 bytes |
 | | List of 1,000 regular class instances | — | 165.2 KB |
