@@ -16,7 +16,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.benchmark import (
     MemoryResult,
     measure_deep_size,
-    measure_size,
     print_header,
     print_memory_result,
     print_subheader,
@@ -89,32 +88,32 @@ def run_benchmarks() -> dict:
     print_subheader('Regular Class')
 
     empty_regular = RegularClassEmpty()
-    size = measure_size(empty_regular)
+    size = measure_deep_size(empty_regular)
     print_memory_result('Regular class (empty)', size)
     results.append(MemoryResult(name='regular_class_empty', value=size, unit='bytes', category='memory'))
 
     # Need to also measure __dict__
-    dict_size = measure_size(empty_regular.__dict__)
+    dict_size = measure_deep_size(empty_regular.__dict__)
     print_memory_result('  └─ __dict__ overhead', dict_size)
 
     regular_5attr = RegularClass(1, 2, 3, 4, 5)
-    size = measure_size(regular_5attr)
+    size = measure_deep_size(regular_5attr)
     print_memory_result('Regular class (5 attrs)', size)
     results.append(MemoryResult(name='regular_class_5attr', value=size, unit='bytes', category='memory'))
 
-    dict_size = measure_size(regular_5attr.__dict__)
+    dict_size = measure_deep_size(regular_5attr.__dict__)
     print_memory_result('  └─ __dict__ overhead', dict_size)
 
     # Slots class
     print_subheader('__slots__ Class')
 
     empty_slots = SlotsClassEmpty()
-    size = measure_size(empty_slots)
+    size = measure_deep_size(empty_slots)
     print_memory_result('Slots class (empty)', size)
     results.append(MemoryResult(name='slots_class_empty', value=size, unit='bytes', category='memory'))
 
     slots_5attr = SlotsClass(1, 2, 3, 4, 5)
-    size = measure_size(slots_5attr)
+    size = measure_deep_size(slots_5attr)
     print_memory_result('Slots class (5 attrs)', size)
     results.append(MemoryResult(name='slots_class_5attr', value=size, unit='bytes', category='memory'))
 
@@ -122,18 +121,18 @@ def run_benchmarks() -> dict:
     print_subheader('Dataclass')
 
     dataclass_5attr = RegularDataclass(1, 2, 3, 4, 5)
-    size = measure_size(dataclass_5attr)
+    size = measure_deep_size(dataclass_5attr)
     print_memory_result('Dataclass (5 attrs)', size)
     results.append(MemoryResult(name='dataclass_5attr', value=size, unit='bytes', category='memory'))
 
-    dict_size = measure_size(dataclass_5attr.__dict__)
+    dict_size = measure_deep_size(dataclass_5attr.__dict__)
     print_memory_result('  └─ __dict__ overhead', dict_size)
 
     # Slots dataclass
     print_subheader('Slots Dataclass')
 
     slots_dataclass_5attr = SlotsDataclass(1, 2, 3, 4, 5)
-    size = measure_size(slots_dataclass_5attr)
+    size = measure_deep_size(slots_dataclass_5attr)
     print_memory_result('Slots dataclass (5 attrs)', size)
     results.append(MemoryResult(name='slots_dataclass_5attr', value=size, unit='bytes', category='memory'))
 
@@ -141,7 +140,7 @@ def run_benchmarks() -> dict:
     print_subheader('Named Tuple')
 
     named_tuple_5attr = PersonTuple(1, 2, 3, 4, 5)
-    size = measure_size(named_tuple_5attr)
+    size = measure_deep_size(named_tuple_5attr)
     print_memory_result('Named tuple (5 attrs)', size)
     results.append(MemoryResult(name='namedtuple_5attr', value=size, unit='bytes', category='memory'))
 

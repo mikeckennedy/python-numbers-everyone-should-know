@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+code/basic_ops/vs_dotnet/obj/Debug/net10.0/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+code/basic_ops/vs_dotnet/obj/Debug/net10.0/BasicOpsBenchmark.AssemblyInfo.cs
+code/basic_ops/vs_dotnet/obj/Debug/net10.0/BasicOpsBenchmark.AssemblyInfoInputs.cache
+code/basic_ops/vs_dotnet/obj/Debug/net10.0/BasicOpsBenchmark.assets.cache
+code/basic_ops/vs_dotnet/obj/Debug/net10.0/BasicOpsBenchmark.GeneratedMSBuildEditorConfig.editorconfig
+code/basic_ops/vs_dotnet/obj/Debug/net10.0/BasicOpsBenchmark.GlobalUsings.g.cs
