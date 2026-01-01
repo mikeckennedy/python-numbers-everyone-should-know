@@ -82,6 +82,8 @@ def clean_label(name, context=None):
             return 'Regular class'
         if 'slots_class_5attr' in name:
             return '__slots__ class'
+        if 'slots_dataclass_5attr' in name:
+            return 'dataclass (slots=True)'
         if 'dataclass_5attr' in name:
             return 'dataclass'
         if 'frozen_dataclass_5attr' in name:
@@ -378,9 +380,25 @@ def create_collection_growth_chart(memory_results):
 
 def create_class_memory_chart(memory_results):
     """Create class instance memory chart"""
-    data = [r for r in memory_results if 'class' in r['name'] and '5attr' in r['name'] or 'namedtuple' in r['name']]
+    data = [r for r in memory_results if ('class' in r['name'] and '5attr' in r['name']) or 'namedtuple' in r['name']]
     df = pd.DataFrame(data)
-    df['clean_name'] = df['name'].apply(clean_label)
+
+    # Update the clean_label logic to handle both dataclass types
+    def clean_class_label(name):
+        if name == 'regular_class_5attr':
+            return 'Regular class'
+        elif name == 'slots_class_5attr':
+            return '__slots__ class'
+        elif name == 'dataclass_5attr':
+            return 'dataclass'
+        elif name == 'slots_dataclass_5attr':
+            return 'dataclass (slots=True)'
+        elif name == 'namedtuple_5attr':
+            return 'Namedtuple 5Attr'
+        else:
+            return clean_label(name)
+
+    df['clean_name'] = df['name'].apply(clean_class_label)
 
     fig = px.bar(
         df,

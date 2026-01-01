@@ -23,12 +23,12 @@ A practical reference for understanding the cost of common Python operations. Al
 | | Dict with 1,000 items | — | 63.4 KB |
 | | Empty set | — | 216 bytes |
 | | Set with 1,000 items | — | 59.6 KB |
-| | Regular class instance (5 attrs) | — | 48 bytes |
-| | `__slots__` class instance (5 attrs) | — | 72 bytes |
+| | Regular class instance (5 attrs) | — | 694 bytes |
+| | `__slots__` class instance (5 attrs) | — | 212 bytes |
 | | List of 1,000 regular class instances | — | 165.2 KB |
 | | List of 1,000 `__slots__` class instances | — | 79.1 KB |
-| | dataclass instance | — | 48 bytes |
-| | namedtuple instance | — | 88 bytes |
+| | dataclass instance | — | 694 bytes |
+| | namedtuple instance | — | 228 bytes |
 | [**⚙️ Basic Ops**](#basic-operations) | Add two integers | 19.0 ns (52.7M ops/sec) | — |
 | | Add two floats | 18.4 ns (54.4M ops/sec) | — |
 | | String concatenation (small) | 39.1 ns (25.6M ops/sec) | — |
@@ -134,10 +134,10 @@ Understanding how much memory different Python objects consume.
 
 | Collection | Empty | 1,000 items |
 |------------|-------|------------|
-| List (ints) | 56 bytes | 7.87 KB |
-| List (floats) | 56 bytes | 8.65 KB |
-| Dict | 64 bytes | 36.1 KB |
-| Set | 216 bytes | 32.2 KB |
+| List (ints) | 56 bytes | 35.2 KB |
+| List (floats) | 56 bytes | 32.1 KB |
+| Dict | 64 bytes | 63.4 KB |
+| Set | 216 bytes | 59.6 KB |
 
 ---
 
@@ -145,11 +145,11 @@ Understanding how much memory different Python objects consume.
 
 | Type | Empty | 5 attributes |
 |------|-------|--------------|
-| Regular class | 48 bytes | 48 bytes |
-| `__slots__` class | 32 bytes | 72 bytes |
-| dataclass | — | 48 bytes |
-| `@dataclass(slots=True)` | — | 72 bytes |
-| namedtuple | — | 88 bytes |
+| Regular class | 344 bytes | 694 bytes |
+| `__slots__` class | 32 bytes | 212 bytes |
+| dataclass | — | 694 bytes |
+| `@dataclass(slots=True)` | — | 212 bytes |
+| namedtuple | — | 228 bytes |
 
 **Aggregate Memory Usage (1,000 instances):**
 
@@ -588,4 +588,4 @@ Inspired by [Latency Numbers Every Programmer Should Know](https://gist.github.c
 
 ---
 
-*Last updated: 2025-12-30*
+*Last updated: 2026-01-01*
