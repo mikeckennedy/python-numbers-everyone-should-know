@@ -18,7 +18,9 @@
       "Bash(tee:*)",
       "Bash(uv pip compile:*)",
       "Bash(venv/bin/uv pip install:*)",
-      "Bash(/Users/michaelkennedy/.local/bin/uv pip install:*)"
+      "Bash(/Users/michaelkennedy/.local/bin/uv pip install:*)",
+      "Bash(dotnet build:*)",
+      "Bash(../../../venv/bin/python:*)"
     ]
   }
 }

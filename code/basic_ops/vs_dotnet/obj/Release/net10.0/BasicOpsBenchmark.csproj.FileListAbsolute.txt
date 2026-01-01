@@ -1,0 +1,15 @@
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/bin/Release/net10.0/BasicOpsBenchmark
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/bin/Release/net10.0/BasicOpsBenchmark.deps.json
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/bin/Release/net10.0/BasicOpsBenchmark.runtimeconfig.json
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/bin/Release/net10.0/BasicOpsBenchmark.dll
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/bin/Release/net10.0/BasicOpsBenchmark.pdb
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.AssemblyInfoInputs.cache
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.AssemblyInfo.cs
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.csproj.CoreCompileInputs.cache
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.sourcelink.json
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.dll
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/refint/BasicOpsBenchmark.dll
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.pdb
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/BasicOpsBenchmark.genruntimeconfig.cache
+/Volumes/owc-envoy-ultra/github/mk/python-numbers-everyone-should-know/code/basic_ops/vs_dotnet/obj/Release/net10.0/ref/BasicOpsBenchmark.dll
