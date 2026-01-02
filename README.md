@@ -82,7 +82,7 @@ python3 code/run_all.py --category memory
 python3 code/run_all.py --category json_bench
 
 # Run only web framework benchmarks
-python3 code/run_all.py --category web_frameworks
+python3 code/run_all.py --category web
 ```
 
 Available categories:
@@ -91,7 +91,7 @@ Available categories:
 - `collections_bench` - Collection access, iteration, length operations
 - `attributes` - Attribute access patterns and performance
 - `json_bench` - JSON serialization/deserialization (stdlib, orjson, ujson, msgspec, pydantic)
-- `web_frameworks` - Request handling (Flask, Django, FastAPI, Starlette, Litestar)
+- `web` - Request handling (Flask, Django, FastAPI, Starlette, Litestar)
 - `file_io` - File read/write operations, pickle vs JSON
 - `database` - SQLite, diskcache, MongoDB operations
 - `functions` - Function call overhead, exceptions, type checking
