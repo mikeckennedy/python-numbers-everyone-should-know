@@ -80,8 +80,8 @@ def get_granian_command(server: ServerConfig, port: int, workers: int) -> list[s
         '--workers',
         str(workers),
         '--no-ws',  # Disable websockets for simpler benchmarking
-        # '--loop',
-        # 'uvloop',
+        '--loop',
+        'uvloop',
         server.module,
     ]
 
