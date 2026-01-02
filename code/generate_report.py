@@ -33,7 +33,10 @@ def normalize_name(name: str) -> str:
               "dict[key] (existing)" → "DICT_KEY_EXISTING"
               "try/except (no exception)" → "TRY_EXCEPT_NO_EXCEPTION"
               "regular class: read attr" → "REGULAR_CLASS_READ_ATTR"
+              "for i in range(1_000)" → "FOR_I_IN_RANGE_1000"
     """
+    # Remove underscores from numeric literals (e.g., 1_000 → 1000)
+    name = re.sub(r'(\d)_(\d)', r'\1\2', name)
     # Replace common separators and special chars with underscores
     name = name.replace('()', '')
     name = name.replace(' - ', '_')

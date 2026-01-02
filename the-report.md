@@ -10,10 +10,10 @@ A practical reference for understanding the cost of common Python operations. Al
 
 | Category | Operation | Time | Memory |
 |----------|-----------|------|--------|
-| [**💾 Memory**](#memory-costs) | Empty Python process | — | 15.73 MB |
+| [**💾 Memory**](#memory-costs) | Empty Python process | — | 15.77 MB |
 | | Empty string | — | 41 bytes |
 | | 100-char string | — | 141 bytes |
-| | Small int (0-256) | — | 28 bytes |
+| | Small int (-5 to 256) | — | 28 bytes |
 | | Large int | — | 28 bytes |
 | | Float | — | 24 bytes |
 | | Empty list | — | 56 bytes |
@@ -45,7 +45,7 @@ A practical reference for understanding the cost of common Python operations. Al
 | | `len()` on list | 18.8 ns (53.3M ops/sec) | — |
 | | Iterate 1,000-item list | 7.87 μs (127.0k ops/sec) | — |
 | | Iterate 1,000-item dict | 8.74 μs (114.5k ops/sec) | — |
-| | `range(1000)` iteration | {{COLLECTIONS.FOR_I_IN_RANGE_1000}} | — |
+| | `range(1000)` iteration | 9.91 μs (100.9k ops/sec) | — |
 | | `sum()` of 1,000 ints | 1.87 μs (534.8k ops/sec) | — |
 | [**🏷️ Attributes**](#class-and-object-attributes) | Read from regular class | 14.1 ns (70.9M ops/sec) | — |
 | | Write to regular class | 15.7 ns (63.6M ops/sec) | — |
@@ -105,7 +105,7 @@ Understanding how much memory different Python objects consume.
 
 ### Empty Python Process
 
-**Result:** 15.73 MB
+**Result:** 15.77 MB
 
 ---
 
@@ -123,7 +123,7 @@ Understanding how much memory different Python objects consume.
 
 | Type | Size |
 |------|------|
-| Small int (0-256, cached) | 28 bytes |
+| Small int (-5 to 256, cached) | 28 bytes |
 | Large int (1000) | 28 bytes |
 | Very large int (10**100) | 72 bytes |
 | Float | 24 bytes |
@@ -197,7 +197,7 @@ The cost of fundamental Python operations.
 
 ## Collection Access and Iteration
 
-How fast can you get data out of Python's built-in collections?
+How fast can you get data out of Python's built-in collections? Note: `item in set` or `item in dict` is **~200x faster** than `item in list` for 1,000 items due to O(1) hash lookups vs O(n) linear scans.
 
 ### Access by Key/Index
 
@@ -226,7 +226,7 @@ How fast can you get data out of Python's built-in collections?
 |-----------|------|
 | Iterate 1,000-item list | 7.87 μs (127.0k ops/sec) |
 | Iterate 1,000-item dict (keys) | 8.74 μs (114.5k ops/sec) |
-| Iterate `range(1000)` | {{COLLECTIONS.FOR_I_IN_RANGE_1000}} |
+| Iterate `range(1000)` | 9.91 μs (100.9k ops/sec) |
 | `sum()` of 1,000 integers | 1.87 μs (534.8k ops/sec) |
 
 ---
@@ -357,7 +357,9 @@ Reading and writing files of various sizes.
 
 ---
 
-### Pickle vs JSON to Disk
+### Pickle vs JSON (Serialization)
+
+For more serialization options including `orjson`, `msgspec`, and `pydantic`, see [JSON and Serialization](#json-and-serialization) above.
 
 | Operation | Time |
 |-----------|------|
@@ -504,6 +506,8 @@ The cost of async machinery.
 ---
 
 ### asyncio.sleep()
+
+Note: `asyncio.sleep(0)` is a special case in Python's event loop—it yields control but schedules an immediate callback, making it faster than typical sleeps but not representative of general event loop overhead.
 
 | Operation | Time |
 |-----------|------|

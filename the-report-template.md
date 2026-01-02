@@ -13,7 +13,7 @@ A practical reference for understanding the cost of common Python operations. Al
 | [**💾 Memory**](#memory-costs) | Empty Python process | — | {{MEMORY.EMPTY_PROCESS}} |
 | | Empty string | — | {{MEMORY.EMPTY_STRING}} |
 | | 100-char string | — | {{MEMORY.100_CHAR_STRING}} |
-| | Small int (0-256) | — | {{MEMORY.SMALL_INT}} |
+| | Small int (-5 to 256) | — | {{MEMORY.SMALL_INT}} |
 | | Large int | — | {{MEMORY.LARGE_INT}} |
 | | Float | — | {{MEMORY.FLOAT}} |
 | | Empty list | — | {{MEMORY.EMPTY_LIST}} |
@@ -123,7 +123,7 @@ Understanding how much memory different Python objects consume.
 
 | Type | Size |
 |------|------|
-| Small int (0-256, cached) | {{MEMORY.SMALL_INT}} |
+| Small int (-5 to 256, cached) | {{MEMORY.SMALL_INT}} |
 | Large int (1000) | {{MEMORY.LARGE_INT}} |
 | Very large int (10**100) | {{MEMORY.HUGE_INT_100}} |
 | Float | {{MEMORY.FLOAT}} |
@@ -197,7 +197,7 @@ The cost of fundamental Python operations.
 
 ## Collection Access and Iteration
 
-How fast can you get data out of Python's built-in collections?
+How fast can you get data out of Python's built-in collections? Note: `item in set` or `item in dict` is **~200x faster** than `item in list` for 1,000 items due to O(1) hash lookups vs O(n) linear scans.
 
 ### Access by Key/Index
 
@@ -357,7 +357,9 @@ Reading and writing files of various sizes.
 
 ---
 
-### Pickle vs JSON to Disk
+### Pickle vs JSON (Serialization)
+
+For more serialization options including `orjson`, `msgspec`, and `pydantic`, see [JSON and Serialization](#json-and-serialization) above.
 
 | Operation | Time |
 |-----------|------|
@@ -504,6 +506,8 @@ The cost of async machinery.
 ---
 
 ### asyncio.sleep()
+
+Note: `asyncio.sleep(0)` is a special case in Python's event loop—it yields control but schedules an immediate callback, making it faster than typical sleeps but not representative of general event loop overhead.
 
 | Operation | Time |
 |-----------|------|
