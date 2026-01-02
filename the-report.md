@@ -17,16 +17,16 @@ A practical reference for understanding the cost of common Python operations. Al
 | | Large int | — | 28 bytes |
 | | Float | — | 24 bytes |
 | | Empty list | — | 56 bytes |
-| | List with 1,000 ints | — | 35.2 KB |
+| | List with 1,000 ints | — | 36.0 KB |
 | | List with 1,000 floats | — | 32.1 KB |
 | | Empty dict | — | 64 bytes |
-| | Dict with 1,000 items | — | 63.4 KB |
+| | Dict with 1,000 items | — | 90.7 KB |
 | | Empty set | — | 216 bytes |
 | | Set with 1,000 items | — | 59.6 KB |
 | | Regular class instance (5 attrs) | — | 694 bytes |
 | | `__slots__` class instance (5 attrs) | — | 212 bytes |
-| | List of 1,000 regular class instances | — | 165.2 KB |
-| | List of 1,000 `__slots__` class instances | — | 79.1 KB |
+| | List of 1,000 regular class instances | — | 301.8 KB |
+| | List of 1,000 `__slots__` class instances | — | 215.7 KB |
 | | dataclass instance | — | 694 bytes |
 | | namedtuple instance | — | 228 bytes |
 | [**⚙️ Basic Ops**](#basic-operations) | Add two integers | 19.0 ns (52.7M ops/sec) | — |
@@ -134,9 +134,9 @@ Understanding how much memory different Python objects consume.
 
 | Collection | Empty | 1,000 items |
 |------------|-------|------------|
-| List (ints) | 56 bytes | 35.2 KB |
+| List (ints) | 56 bytes | 36.0 KB |
 | List (floats) | 56 bytes | 32.1 KB |
-| Dict | 64 bytes | 63.4 KB |
+| Dict | 64 bytes | 90.7 KB |
 | Set | 216 bytes | 59.6 KB |
 
 ---
@@ -155,8 +155,8 @@ Understanding how much memory different Python objects consume.
 
 | Type | Total Memory |
 |------|--------------|
-| List of 1,000 regular class instances | 165.2 KB |
-| List of 1,000 `__slots__` class instances | 79.1 KB |
+| List of 1,000 regular class instances | 301.8 KB |
+| List of 1,000 `__slots__` class instances | 215.7 KB |
 
 ---
 
@@ -331,13 +331,13 @@ Each framework returns the same JSON payload from a minimal endpoint.
 
 ### Results
 
-| Framework | Requests/sec | Latency (p99) |
-|-----------|--------------|---------------|
-| Flask | 16.5 μs (60.7k req/sec) | 20.85 ms (48.0 ops/sec) |
-| Django | 18.1 μs (55.4k req/sec) | 170.3 ms (5.9 ops/sec) |
-| FastAPI | 8.63 μs (115.9k req/sec) | 1.530 ms (653.6 ops/sec) |
-| Starlette | 8.01 μs (124.8k req/sec) | 930 μs (1.1k ops/sec) |
-| Litestar | 8.19 μs (122.1k req/sec) | 1.010 ms (990.1 ops/sec) |
+| Framework | Requests/sec | Latency (p50) | Latency (p99) |
+|-----------|--------------|---------------|---------------|
+| Flask | 16.5 μs (60.7k req/sec) | {{WEB.FLASK_LATENCY_P50}} | 20.85 ms (48.0 ops/sec) |
+| Django | 18.1 μs (55.4k req/sec) | {{WEB.DJANGO_LATENCY_P50}} | 170.3 ms (5.9 ops/sec) |
+| FastAPI | 8.63 μs (115.9k req/sec) | {{WEB.FASTAPI_LATENCY_P50}} | 1.530 ms (653.6 ops/sec) |
+| Starlette | 8.01 μs (124.8k req/sec) | {{WEB.STARLETTE_LATENCY_P50}} | 930 μs (1.1k ops/sec) |
+| Litestar | 8.19 μs (122.1k req/sec) | {{WEB.LITESTAR_LATENCY_P50}} | 1.010 ms (990.1 ops/sec) |
 
 ---
 
