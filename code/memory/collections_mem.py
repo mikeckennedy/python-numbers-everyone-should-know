@@ -34,17 +34,20 @@ def run_benchmarks() -> dict:
     print_memory_result('Empty list []', size)
     results.append(MemoryResult(name='empty_list', value=size, unit='bytes', category='memory'))
 
-    list_10 = list(range(10))
+    # We are using dynamically created numbers outside of [-5, 255] to avoid 
+    # Python's caching and reuse of these ints.
+
+    list_10 = list(i*int("1000") for i in range(10))
     size = measure_deep_size(list_10)
     print_memory_result('List with 10 ints (including elements)', size)
     results.append(MemoryResult(name='list_10_container', value=size, unit='bytes', category='memory'))
 
-    list_100 = list(range(100))
+    list_100 = list(i*int("2000") for i in range(100))
     size = measure_deep_size(list_100)
     print_memory_result('List with 100 ints (including elements)', size)
     results.append(MemoryResult(name='list_100_container', value=size, unit='bytes', category='memory'))
 
-    list_1000 = list(range(1_000))
+    list_1000 = list(i*int("3000") for i in range(1_000))
     size = measure_deep_size(list_1000)
     print_memory_result('List with 1000 ints (including elements)', size)
     results.append(MemoryResult(name='list_1000_container', value=size, unit='bytes', category='memory'))
@@ -62,17 +65,17 @@ def run_benchmarks() -> dict:
     print_memory_result('Empty dict {}', size)
     results.append(MemoryResult(name='empty_dict', value=size, unit='bytes', category='memory'))
 
-    dict_10 = {i: i for i in range(10)}
+    dict_10 = {i*int("5000"): i*int("6000") for i in range(10)}
     size = measure_deep_size(dict_10)
     print_memory_result('Dict with 10 items (including elements)', size)
     results.append(MemoryResult(name='dict_10_container', value=size, unit='bytes', category='memory'))
 
-    dict_100 = {i: i for i in range(100)}
+    dict_100 = {i*int("7000"): i*int("7000") for i in range(100)}
     size = measure_deep_size(dict_100)
     print_memory_result('Dict with 100 items (including elements)', size)
     results.append(MemoryResult(name='dict_100_container', value=size, unit='bytes', category='memory'))
 
-    dict_1000 = {i: i for i in range(1_000)}
+    dict_1000 = {i*int("7000"): i*int("7000") for i in range(1_000)}
     size = measure_deep_size(dict_1000)
     print_memory_result('Dict with 1000 items (including elements)', size)
     results.append(MemoryResult(name='dict_1000_container', value=size, unit='bytes', category='memory'))
@@ -85,17 +88,17 @@ def run_benchmarks() -> dict:
     print_memory_result('Empty set()', size)
     results.append(MemoryResult(name='empty_set', value=size, unit='bytes', category='memory'))
 
-    set_10 = set(range(10))
+    set_10 = set(i*int("8000") for i in range(10))
     size = measure_deep_size(set_10)
     print_memory_result('Set with 10 items (including elements)', size)
     results.append(MemoryResult(name='set_10_container', value=size, unit='bytes', category='memory'))
 
-    set_100 = set(range(100))
+    set_100 = set(i*int("9000") for i in range(100))
     size = measure_deep_size(set_100)
     print_memory_result('Set with 100 items (including elements)', size)
     results.append(MemoryResult(name='set_100_container', value=size, unit='bytes', category='memory'))
 
-    set_1000 = set(range(1_000))
+    set_1000 = set(i*int("10000") for i in range(1_000))
     size = measure_deep_size(set_1000)
     print_memory_result('Set with 1000 items (including elements)', size)
     results.append(MemoryResult(name='set_1000_container', value=size, unit='bytes', category='memory'))

@@ -82,7 +82,7 @@ def run_benchmarks() -> dict:
     """Run class memory benchmarks."""
     print_header('Class Instance Memory Sizes')
 
-    results = []
+    results: list[MemoryResult] = []
 
     # Regular class
     print_subheader('Regular Class')
@@ -96,7 +96,10 @@ def run_benchmarks() -> dict:
     dict_size = measure_deep_size(empty_regular.__dict__)
     print_memory_result('  └─ __dict__ overhead', dict_size)
 
-    regular_5attr = RegularClass(1, 2, 3, 4, 5)
+    # We are using dynamically created numbers outside of [-5, 255] to avoid 
+    # Python's caching and reuse of these ints.
+
+    regular_5attr = RegularClass(int('1000'), int('1001'), int('1002'), int('1003'), int('1004'))
     size = measure_deep_size(regular_5attr)
     print_memory_result('Regular class (5 attrs)', size)
     results.append(MemoryResult(name='regular_class_5attr', value=size, unit='bytes', category='memory'))
@@ -112,7 +115,7 @@ def run_benchmarks() -> dict:
     print_memory_result('Slots class (empty)', size)
     results.append(MemoryResult(name='slots_class_empty', value=size, unit='bytes', category='memory'))
 
-    slots_5attr = SlotsClass(1, 2, 3, 4, 5)
+    slots_5attr = SlotsClass(int('1000'), int('1001'), int('1002'), int('1003'), int('1004'))
     size = measure_deep_size(slots_5attr)
     print_memory_result('Slots class (5 attrs)', size)
     results.append(MemoryResult(name='slots_class_5attr', value=size, unit='bytes', category='memory'))
@@ -120,7 +123,7 @@ def run_benchmarks() -> dict:
     # Dataclass
     print_subheader('Dataclass')
 
-    dataclass_5attr = RegularDataclass(1, 2, 3, 4, 5)
+    dataclass_5attr = RegularDataclass(int('1000'), int('1001'), int('1002'), int('1003'), int('1004'))
     size = measure_deep_size(dataclass_5attr)
     print_memory_result('Dataclass (5 attrs)', size)
     results.append(MemoryResult(name='dataclass_5attr', value=size, unit='bytes', category='memory'))
@@ -131,7 +134,7 @@ def run_benchmarks() -> dict:
     # Slots dataclass
     print_subheader('Slots Dataclass')
 
-    slots_dataclass_5attr = SlotsDataclass(1, 2, 3, 4, 5)
+    slots_dataclass_5attr = SlotsDataclass(int('1000'), int('1001'), int('1002'), int('1003'), int('1004'))
     size = measure_deep_size(slots_dataclass_5attr)
     print_memory_result('Slots dataclass (5 attrs)', size)
     results.append(MemoryResult(name='slots_dataclass_5attr', value=size, unit='bytes', category='memory'))
@@ -139,7 +142,7 @@ def run_benchmarks() -> dict:
     # Named tuple
     print_subheader('Named Tuple')
 
-    named_tuple_5attr = PersonTuple(1, 2, 3, 4, 5)
+    named_tuple_5attr = PersonTuple(int('1000'), int('1001'), int('1002'), int('1003'), int('1004'))
     size = measure_deep_size(named_tuple_5attr)
     print_memory_result('Named tuple (5 attrs)', size)
     results.append(MemoryResult(name='namedtuple_5attr', value=size, unit='bytes', category='memory'))
@@ -147,12 +150,22 @@ def run_benchmarks() -> dict:
     # Lists of 1000 instances
     print_subheader('Lists of 1000 Instances')
 
-    regular_list = [RegularClass(1, 2, 3, 4, 5) for _ in range(1_000)]
+    regular_list = [
+        RegularClass(
+            int('1000') + 5 * i, int('1001') + 5 * i, int('1002') + 5 * i, int('1003') + 5 * i, int('1004') + 5 * i
+        )
+        for i in range(1_000)
+    ]
     size = measure_deep_size(regular_list)
     print_memory_result('List of 1000 regular class instances', size)
     results.append(MemoryResult(name='list_1000_regular_class', value=size, unit='bytes', category='memory'))
 
-    slots_list = [SlotsClass(1, 2, 3, 4, 5) for _ in range(1_000)]
+    slots_list = [
+        SlotsClass(
+            int('1000') + 5 * i, int('1001') + 5 * i, int('1002') + 5 * i, int('1003') + 5 * i, int('1004') + 5 * i
+        )
+        for i in range(1_000)
+    ]
     size = measure_deep_size(slots_list)
     print_memory_result('List of 1000 __slots__ class instances', size)
     results.append(MemoryResult(name='list_1000_slots_class', value=size, unit='bytes', category='memory'))

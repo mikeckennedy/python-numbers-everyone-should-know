@@ -15,8 +15,116 @@
       "benchmark_count": 35,
       "results": [
         {
+          "name": "empty_list",
+          "value": 56,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_10_container",
+          "value": 464,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_100_container",
+          "value": 3720,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_container",
+          "value": 36856,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "list_1000_floats_container",
+          "value": 32856,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_dict",
+          "value": 64,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_10_container",
+          "value": 884,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_100_container",
+          "value": 10260,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "dict_1000_container",
+          "value": 92924,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_set",
+          "value": 216,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_10_container",
+          "value": 1008,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_100_container",
+          "value": 11208,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "set_1000_container",
+          "value": 60984,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "empty_string",
+          "value": 41,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "1_char_string",
+          "value": 42,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "10_char_string",
+          "value": 51,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "100_char_string",
+          "value": 141,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
+          "name": "1000_char_string",
+          "value": 1041,
+          "unit": "bytes",
+          "category": "memory"
+        },
+        {
           "name": "empty_process",
-          "value": 15.609375,
+          "value": 15.765625,
           "unit": "MB",
           "category": "memory"
         },
@@ -106,121 +214,13 @@
         },
         {
           "name": "list_1000_regular_class",
-          "value": 169206,
+          "value": 309066,
           "unit": "bytes",
           "category": "memory"
         },
         {
           "name": "list_1000_slots_class",
-          "value": 80996,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_list",
-          "value": 56,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_10_container",
-          "value": 416,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_100_container",
-          "value": 3656,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_1000_container",
-          "value": 36056,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "list_1000_floats_container",
-          "value": 32856,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_dict",
-          "value": 64,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "dict_10_container",
-          "value": 632,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "dict_100_container",
-          "value": 7488,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "dict_1000_container",
-          "value": 64952,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_set",
-          "value": 216,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "set_10_container",
-          "value": 1008,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "set_100_container",
-          "value": 11208,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "set_1000_container",
-          "value": 60984,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "empty_string",
-          "value": 41,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "1_char_string",
-          "value": 42,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "10_char_string",
-          "value": 51,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "100_char_string",
-          "value": 141,
-          "unit": "bytes",
-          "category": "memory"
-        },
-        {
-          "name": "1000_char_string",
-          "value": 1041,
+          "value": 220856,
           "unit": "bytes",
           "category": "memory"
         }
