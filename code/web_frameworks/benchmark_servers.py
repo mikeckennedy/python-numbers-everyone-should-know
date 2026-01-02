@@ -50,7 +50,8 @@ class ServerConfig:
 
 SERVERS = [
     ServerConfig(name='flask', module='flask_app:app', interface='wsgi'),
-    ServerConfig(name='django', module='django_app:application', interface='wsgi'),
+    ServerConfig(name='django', module='django_wsgi_app:application', interface='wsgi'),
+    ServerConfig(name='django', module='django_asgi_app:application', interface='asgi'),
     ServerConfig(name='fastapi', module='fastapi_app:app', interface='asgi'),
     ServerConfig(name='starlette', module='starlette_app:app', interface='asgi'),
     ServerConfig(name='litestar', module='litestar_app:app', interface='asgi'),

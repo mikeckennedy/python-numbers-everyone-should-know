@@ -16,12 +16,13 @@
 #   - Starlette (ASGI)
 #   - Litestar  (ASGI)
 
-from . import django_app, fastapi_app, flask_app, litestar_app, run_server, starlette_app
+from . import django_asgi_app, django_wsgi_app, fastapi_app, flask_app, litestar_app, run_server, starlette_app
 from .benchmarks import run_benchmarks
 
 __all__ = [
     'run_benchmarks',
-    'django_app',
+    'django_asgi_app',
+    'django_wsgi_app',
     'fastapi_app',
     'flask_app',
     'litestar_app',
