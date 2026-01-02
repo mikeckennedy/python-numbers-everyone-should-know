@@ -25,7 +25,7 @@ This project provides comprehensive performance benchmarks for Python 3.14, meas
 pip install -r requirements.txt
 
 # Using uv (faster)
-uv pip install -r requirements.txt
+uv venv && uv pip install -r requirements.txt
 ```
 
 ### Optional: MongoDB (for database benchmarks)
