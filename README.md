@@ -4,6 +4,12 @@ Benchmark suite measuring common Python operation costs - inspired by "Latency N
 
 This project provides comprehensive performance benchmarks for Python 3.14, measuring everything from basic arithmetic operations to web framework request handling, helping developers understand the real-world performance characteristics of Python code.
 
+## Full article, table, and write up
+
+See the full write up associated with this project at: 
+
+[Python Numbers Every Programmer Should Know @ mkennedy.codes](https://mkennedy.codes/posts/python-numbers-every-programmer-should-know/)
+
 ## Features
 
 - **Comprehensive Coverage**: Memory sizes, basic operations, collections, attributes, JSON serialization, web frameworks, file I/O, databases, functions, async overhead, and import times
