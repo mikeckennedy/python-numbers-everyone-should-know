@@ -31,7 +31,7 @@ See the full write up associated with this project at:
 pip install -r requirements.txt
 
 # Using uv (faster)
-uv pip install -r requirements.txt
+uv venv && uv pip install -r requirements.txt
 ```
 
 ### Optional: MongoDB (for database benchmarks)
